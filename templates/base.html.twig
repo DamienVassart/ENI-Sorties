@@ -2,9 +2,19 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        {# <title>{% block title %}Welcome!{% endblock %}</title> #}
+        <title>{% block title %}ENI-Sorties{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+
+        {# fonts google ajoutés par Dorothée lundi soir #}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Roboto:wght@100&display=swap" rel="stylesheet">
+
+        {# liens vers le css ajoutés par Dorothee #}
+        <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
@@ -13,7 +23,24 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
+
+    {# body ajouté par Dorothee lundi soir #}
     <body>
-        {% block body %}{% endblock %}
+        <div class="container">
+            <header>
+                {# todo include logo #}
+                <h1>Sorties ENI</h1>
+                {# todo include navigation #}
+                {% include("inc/nav.html.twig") %}
+            </header>
+
+            <main>
+                {% block body %}{% endblock %}
+            </main>
+
+            <footer>
+                <div>&copy; ENI {{ "now" | date("Y") }}</div>
+            </footer>
+        </div>
     </body>
 </html>
