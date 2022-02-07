@@ -47,6 +47,24 @@ class Sortie
      */
     private $infosSortie;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Etat::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $idEtat;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Lieu::class, inversedBy="sorties")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $idLieu;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="sorties")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $idCampus;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -123,4 +141,41 @@ class Sortie
 
         return $this;
     }
+
+    public function getIdEtat(): ?Etat
+    {
+        return $this->idEtat;
+    }
+
+    public function setIdEtat(?Etat $idEtat): self
+    {
+        $this->idEtat = $idEtat;
+
+        return $this;
+    }
+
+    public function getIdLieu(): ?Lieu
+    {
+        return $this->idLieu;
+    }
+
+    public function setIdLieu(?Lieu $idLieu): self
+    {
+        $this->idLieu = $idLieu;
+
+        return $this;
+    }
+
+    public function getIdCampus(): ?Campus
+    {
+        return $this->idCampus;
+    }
+
+    public function setIdCampus(?Campus $idCampus): self
+    {
+        $this->idCampus = $idCampus;
+
+        return $this;
+    }
+
 }
