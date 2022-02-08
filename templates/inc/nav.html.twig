@@ -2,7 +2,7 @@
     <ul>
         {% if app.user %}
             <li><a href="#" title="Accueil">Accueil</a></li>
-            <li><a href="#" title="Mon profil">Mon profil</a></li>
+            <li><a href="{{ path('app_profil', {'id': app.user.id}) }}" title="Mon profil">Mon profil</a></li>
             <li><a href="{{ path("app_logout") }}" title="Se déconnecter">Se déconnecter</a></li>
 
             {% if is_granted('ROLE_ADMIN') %}

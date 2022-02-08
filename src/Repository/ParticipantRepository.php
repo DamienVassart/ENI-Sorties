@@ -3,19 +3,23 @@
 namespace App\Repository;
 
 use App\Entity\Participant;
+use App\Form\ModifProfilType;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @method Participant|null find($id, $lockMode = null, $lockVersion = null)
  * @method Participant|null findOneBy(array $criteria, array $orderBy = null)
  * @method Participant[]    findAll()
  * @method Participant[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method null loadUserByIdentifier(string $identifier)
  */
-class ParticipantRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
+class ParticipantRepository extends ServiceEntityRepository implements PasswordUpgraderInterface, UserLoaderInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -64,4 +68,20 @@ class ParticipantRepository extends ServiceEntityRepository implements PasswordU
         ;
     }
     */
+    /**
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function loadUserByUsername(string $usernameOrEmail)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.pseudo = :query OR u.email = :query')
+            ->setParameter('query', $usernameOrEmail)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public function __call($name, $arguments)
+    {
+        // TODO: Implement @method null loadUserByIdentifier(string $identifier)
+    }
 }

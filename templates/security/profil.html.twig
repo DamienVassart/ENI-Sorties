@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if app.user %}
+        <p>Formulaire d'update à afficher</p>
+
+        <p>Prénom: {{ app.user.prenom }}</p>
+        <p>Nom: {{ app.user.nom }}</p>
+        <p>Téléphone: {{ app.user.telephone }}</p>
+        <p>Email: {{ app.user.email }}</p>
+        <p>Campus: {{ app.user.campus.nom }}</p>
+
+    {% else %}
+        <p>Prénom: {{ participant.prenom }}</p>
+
+        <p>Nom: {{ participant.nom }}</p>
+
+        <p>Téléphone: {{ participant.telephone }}</p>
+
+        <p>Email: {{ participant.email }}</p>
+
+        <p>Campus: {{ participant.campus.nom }}</p>
+    {% endif %}
+{% endblock %}
+
+{% block title %}
+    {% if app.user %}
+        Mon profil
+    {% else %}
+        {{ participant.pseudo }}
+    {% endif %}
+{% endblock %}
+
