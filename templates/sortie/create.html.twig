@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div>
+        {{  form_start(sortieForm) }}
+
+        {{  form_widget(sortieForm) }}
+
+        <button>Enregistrer une sortie</button>
+
+        {{  form_end(sortieForm) }}
+    </div>
+{% endblock %}
+
+{% block title %}
+    Création nouvelle sortie {{ parent() }}
+{% endblock %}
+
