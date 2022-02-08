@@ -34,8 +34,9 @@ class SortieType extends AbstractType
             ])
             ->add('infosSortie')
             ->add('campus', EntityType::class, [
+                'label' => 'Campus: ',
                 'class' => Campus::class,
-                'choice_label' => 'Campus: ',
+                'choice_label' => 'nom',
                 'query_builder' => function(CampusRepository $campusRepository) {
                     return $campusRepository->createQueryBuilder('c')->orderBy('c.nom', 'ASC');
                 }

@@ -45,7 +45,7 @@ class SortieController extends AbstractController
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
         $sortie = new Sortie();
-        $userId = $this->getUser()->getUserIdentifier();
+        $userId = $this->getUser();
         $sortie ->setIdOrganisateur($userId);
 
         $sortieForm = $this->createForm(SortieType::class, $sortie);
