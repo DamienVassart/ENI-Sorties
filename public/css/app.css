@@ -5,8 +5,7 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap'); */
 
 
-body
-{
+body {
     background-color: whitesmoke;
     font-family: 'Abril Fatface', cursive;
     font-family: 'Roboto', sans-serif;
@@ -18,12 +17,12 @@ body
     padding: 5px;
 }
 
-header
-{
+header {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 header img {
     height: 70px;
 }
@@ -43,9 +42,27 @@ html {
     padding: 0;
 }
 
-footer
-{
+footer {
     display: flex;
     flex-direction: column;
     text-align: center;
+}
+
+#lieu-sortie {
+    display: flex;
+    flex-direction: row;
+}
+
+label {
+    display: block;
+}
+
+
+input,
+textarea,
+select {
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+    width: 150px;
+    max-width: 50%;
 }
