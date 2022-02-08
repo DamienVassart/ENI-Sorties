@@ -4,11 +4,28 @@
 
 /* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap'); */
 
+
 body
 {
-    background-color: lightgrey;
+    background-color: whitesmoke;
     font-family: 'Abril Fatface', cursive;
     font-family: 'Roboto', sans-serif;
+}
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 5px;
+}
+
+header
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header img {
+    height: 70px;
 }
 
 nav ul {
@@ -21,10 +38,14 @@ nav li {
     margin-right: 1rem;
 }
 
-
-
 html {
     margin: 0;
     padding: 0;
 }
 
+footer
+{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
