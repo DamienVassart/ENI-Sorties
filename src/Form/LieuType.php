@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Lieu;
+use App\Entity\Ville;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -20,7 +21,7 @@ class LieuType extends AbstractType
             ->add('idVille', EntityType::class, [
                 'label' => 'Ville: ',
                 'class' => Ville::class,
-                'choice_label' => ['nom', 'codePostal']
+                'choice_label' => 'nom'
             ])
         ;
     }

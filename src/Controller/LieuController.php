@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Lieu;
+use App\Form\LieuType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,7 +30,7 @@ class LieuController extends AbstractController
             return $this->redirectToRoute('sortie_create');
         }
 
-        return $this->render('lieu/index.html.twig', [
+        return $this->render('lieu/create.html.twig', [
             'lieuForm' => $lieuForm->createView()
         ]);
     }
