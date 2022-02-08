@@ -3,7 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Campus;
+use App\Entity\Lieu;
 use App\Entity\Sortie;
+use App\Entity\Ville;
 use App\Repository\CampusRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -33,7 +35,7 @@ class SortieType extends AbstractType
                 'label' => 'Nombre de places'
             ])
             ->add('infosSortie')
-            ->add('campus', EntityType::class, [
+            ->add('idCampus', EntityType::class, [
                 'label' => 'Campus: ',
                 'class' => Campus::class,
                 'choice_label' => 'nom',
@@ -41,11 +43,11 @@ class SortieType extends AbstractType
                     return $campusRepository->createQueryBuilder('c')->orderBy('c.nom', 'ASC');
                 }
             ])
-            ->add('ville')
-            ->add('rue')
-            ->add('codePostal')
-            ->add('latitude')
-            ->add('longitude')
+            ->add('idLieu', EntityType::class, [
+                'label' => 'Lieu: ',
+                'class' => Lieu::class,
+                'choice_label' => 'nom'
+            ])
         ;
     }
 
