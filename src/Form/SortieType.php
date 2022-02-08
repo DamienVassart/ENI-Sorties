@@ -9,6 +9,7 @@ use App\Entity\Ville;
 use App\Repository\CampusRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -43,10 +44,10 @@ class SortieType extends AbstractType
                     return $campusRepository->createQueryBuilder('c')->orderBy('c.nom', 'ASC');
                 }
             ])
-            ->add('idLieu', EntityType::class, [
-                'label' => 'Lieu: ',
-                'class' => Lieu::class,
-                'choice_label' => 'nom'
+            ->add('idLieu', CollectionType::class, [
+                'entry_type' => LieuType::class,
+                'allow_add' => true,
+                'entry_options' => ['label' => false]
             ])
         ;
     }

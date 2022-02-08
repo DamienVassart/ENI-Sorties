@@ -12,7 +12,13 @@
         {{ form_row(sortieForm.infosSortie) }}
         {{ form_row(sortieForm.idCampus) }}
         <div id="lieu-sortie">
-            {{ form_row(sortieForm.idLieu) }} <a href="#">+</a>
+            {{ form_label(sortieForm.idLieu, 'Lieu: ') }}
+            {{ form_widget(sortieForm.idLieu) }}
+            {{ form_errors(sortieForm.idLieu) }}
+
+                {{ form_start(lieuForm) }}
+                {{ form_widget(lieuForm) }}
+                {{ form_end(lieuForm) }}
         </div>
 
         <button>Enregistrer une sortie</button>

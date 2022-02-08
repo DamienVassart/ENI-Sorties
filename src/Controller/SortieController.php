@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Lieu;
 use App\Entity\Sortie;
+use App\Form\LieuType;
 use App\Form\SortieType;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -51,9 +53,16 @@ class SortieController extends AbstractController
         $sortieForm = $this->createForm(SortieType::class, $sortie);
 
         $sortieForm->handleRequest($request);
+        $lieu = new Lieu();
 
-        if ($sortieForm->isSubmitted()){
+        $lieuForm = $this->createForm(LieuType::class, $lieu);
+
+        $lieuForm->handleRequest($request);
+
+        if($lieuForm->isSubmitted() && $sortieForm->isSubmitted()) {
             $entityManager->persist($sortie);
+            $entityManager->flush();
+            $entityManager->persist($lieu);
             $entityManager->flush();
 
             $this->addFlash('success', 'Sortie ajoutée!');
@@ -62,7 +71,8 @@ class SortieController extends AbstractController
         }
 
         return $this->render('sortie/create.html.twig', [
-            'sortieForm' =>$sortieForm->createview()
+            'sortieForm' =>$sortieForm->createview(),
+            'lieuForm' =>$lieuForm->createView()
         ]);
     }
     /**
