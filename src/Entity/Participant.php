@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ParticipantRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -62,6 +64,22 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\JoinColumn(nullable=false)
      */
     private $campus;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Sortie::class, mappedBy="idOrganisateur")
+     */
+    private $sortiesOrganisateur;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Sortie::class, mappedBy="participants")
+     */
+    private $sortiesParticipants;
+
+    public function __construct()
+    {
+        $this->sortiesOrganisateur = new ArrayCollection();
+        $this->sortiesParticipants = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -208,6 +226,63 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCampus(?Campus $campus): self
     {
         $this->campus = $campus;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Sortie[]
+     */
+    public function getSortiesOrganisateur(): Collection
+    {
+        return $this->sortiesOrganisateur;
+    }
+
+    public function addSortiesOrganisateur(Sortie $sortiesOrganisateur): self
+    {
+        if (!$this->sortiesOrganisateur->contains($sortiesOrganisateur)) {
+            $this->sortiesOrganisateur[] = $sortiesOrganisateur;
+            $sortiesOrganisateur->setIdOrganisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSortiesOrganisateur(Sortie $sortiesOrganisateur): self
+    {
+        if ($this->sortiesOrganisateur->removeElement($sortiesOrganisateur)) {
+            // set the owning side to null (unless already changed)
+            if ($sortiesOrganisateur->getIdOrganisateur() === $this) {
+                $sortiesOrganisateur->setIdOrganisateur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Sortie[]
+     */
+    public function getSortiesParticipants(): Collection
+    {
+        return $this->sortiesParticipants;
+    }
+
+    public function addSortiesParticipant(Sortie $sortiesParticipant): self
+    {
+        if (!$this->sortiesParticipants->contains($sortiesParticipant)) {
+            $this->sortiesParticipants[] = $sortiesParticipant;
+            $sortiesParticipant->addParticipant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSortiesParticipant(Sortie $sortiesParticipant): self
+    {
+        if ($this->sortiesParticipants->removeElement($sortiesParticipant)) {
+            $sortiesParticipant->removeParticipant($this);
+        }
 
         return $this;
     }

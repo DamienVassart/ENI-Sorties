@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\SortieRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -64,6 +66,22 @@ class Sortie
      * @ORM\JoinColumn(nullable=false)
      */
     private $idCampus;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Participant::class, inversedBy="sortiesOrganisateur")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $idOrganisateur;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Participant::class, inversedBy="sortiesParticipants")
+     */
+    private $participants;
+
+    public function __construct()
+    {
+        $this->participants = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -174,6 +192,42 @@ class Sortie
     public function setIdCampus(?Campus $idCampus): self
     {
         $this->idCampus = $idCampus;
+
+        return $this;
+    }
+
+    public function getIdOrganisateur(): ?Participant
+    {
+        return $this->idOrganisateur;
+    }
+
+    public function setIdOrganisateur(?Participant $idOrganisateur): self
+    {
+        $this->idOrganisateur = $idOrganisateur;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Participant[]
+     */
+    public function getParticipants(): Collection
+    {
+        return $this->participants;
+    }
+
+    public function addParticipant(Participant $participant): self
+    {
+        if (!$this->participants->contains($participant)) {
+            $this->participants[] = $participant;
+        }
+
+        return $this;
+    }
+
+    public function removeParticipant(Participant $participant): self
+    {
+        $this->participants->removeElement($participant);
 
         return $this;
     }
