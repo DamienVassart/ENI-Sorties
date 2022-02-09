@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/lieu", name="lieu_")
+ * @Route("/ville", name="ville_")
  */
 class VilleController extends AbstractController
 {

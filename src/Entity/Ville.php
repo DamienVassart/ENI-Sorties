@@ -55,4 +55,16 @@ class Ville
 
         return $this;
     }
+
+    public function getIdlieu(): ?lieu
+    {
+        return $this->idLieu;
+    }
+
+    public function setIdLieu(?Lieu $idLieu): self
+    {
+        $this->idLieu = $idLieu;
+
+        return $this;
+    }
 }
