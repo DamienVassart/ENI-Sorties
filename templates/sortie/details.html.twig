@@ -6,7 +6,34 @@
 
 {% block body %}
 <div class="sortie-details">
-    <div>
+
+    <div class="sortie-details-infos">
+        <h2>{{ sortie.nom }}</h2>
+        <div>Date et heure de sortie{{ sortie.dateHeureDebut|dateTime("Y-m-d") }}</div>
+        <div>Note organisateur : {{ sortie.duree }}</div>
+        <div>Date limite d'inscription: {{ sortie.dateLimiteInscription }}</div>
+        <div>Nombre maximum de participant: {{ sortie.nbInscriptionsMax }}</div>
+        <div>Informations sortie: {{ sortie.infosSortie }}</div>
+        <div>Campus: {{ sortie.idCampus }} to {{ sortie.idLieu }}</div>
+
+        <div>{{ sortie.overview | nl2br }}</div>
+
+
+        <section class="Lieu">
+            <h3>Lieu</h3>
+            {% for lieu in sortie.idLieu %}
+                <article>
+                    <div>
+                        <h4>Lieu {{ lieu.nom }}</h4>
+                        {% if lieu.overview %}
+                            <div>{{ lieu.overview }}</div>
+                        {% endif %}
+                    </div>
+                </article>
+            {% endfor %}
+        </section>
+    </div>
+</div>
 {% endblock %}
 
 
