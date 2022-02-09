@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% if app.user %}
+    {% if app.user !== participant %}
         <p>Formulaire d'update à afficher</p>
 
         <p>Prénom: {{ app.user.prenom }}</p>
