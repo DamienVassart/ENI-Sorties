@@ -5,6 +5,9 @@
 
         {{ form_start(profilUpdateForm) }}
         <div id="container">
+
+            <img src="{{ asset('public/photosProfil/'~ participant.champ) }}" alt="image profil">
+
             <div class="profil">
                 {{ form_label(profilUpdateForm.pseudo, 'Pseudo: ') }}
                 {{ form_widget(profilUpdateForm.pseudo) }}
@@ -46,7 +49,12 @@
                 {{ form_widget(profilUpdateForm.password) }}
                 {{ form_errors(profilUpdateForm.password) }}
             </div>
-            {# todo: upload de la photo #}
+
+            <div class="profil">
+                {{ form_label(profilUpdateForm.champ, 'Uploader votre photo de profil: ') }}
+                {{ form_widget(profilUpdateForm.champ) }}
+                {{ form_errors(profilUpdateForm.champ) }}
+            </div>
 
         </div>
 
@@ -56,8 +64,8 @@
             var boutonCreer = false;
 
             clicChamp.addEventListener('change', updateValue);
-
             clicSelect.addEventListener('change', updateValue);
+            clicButton.addEventListener('click', updateValue);
 
             function updateValue(e) {
                 if (boutonCreer==false) {
