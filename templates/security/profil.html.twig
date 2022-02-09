@@ -4,12 +4,58 @@
     {% if app.user %}
         <p>Formulaire d'update à afficher</p>
 
-        <p>Prénom: {{ app.user.prenom }}</p>
-        <p>Nom: {{ app.user.nom }}</p>
-        <p>Téléphone: {{ app.user.telephone }}</p>
-        <p>Email: {{ app.user.email }}</p>
-        <p>Campus: {{ app.user.campus.nom }}</p>
+        {{ form_start(profilUpdateForm) }}
+            <div class="profil">
+                {{ form_label(profilUpdateForm.pseudo, 'Pseudo: ') }}
+                {{ form_widget(profilUpdateForm.pseudo) }}
+                {{ form_errors(profilUpdateForm.pseudo) }}
+            </div>
 
+            <div class="profil">
+                {{ form_label(profilUpdateForm.nom, 'Nom: ') }}
+                {{ form_widget(profilUpdateForm.nom) }}
+                {{ form_errors(profilUpdateForm.nom) }}
+            </div>
+
+            <div class="profil">
+                {{ form_label(profilUpdateForm.prenom, 'Prénom: ') }}
+                {{ form_widget(profilUpdateForm.prenom) }}
+                {{ form_errors(profilUpdateForm.prenom) }}
+            </div>
+
+            <div class="profil">
+                {{ form_label(profilUpdateForm.telephone, 'Téléphone: ') }}
+                {{ form_widget(profilUpdateForm.telephone) }}
+                {{ form_errors(profilUpdateForm.telephone) }}
+            </div>
+
+            <div class="profil">
+                {{ form_label(profilUpdateForm.email, 'Email: ') }}
+                {{ form_widget(profilUpdateForm.email) }}
+                {{ form_errors(profilUpdateForm.email) }}
+            </div>
+
+            <div class="profil">
+                {{ form_label(profilUpdateForm.campus, 'Campus: ') }}
+                {{ form_widget(profilUpdateForm.campus) }}
+                {{ form_errors(profilUpdateForm.campus) }}
+            </div>
+
+            <div class="profil">
+                {{ form_label(profilUpdateForm.password, 'Mot de passe: ') }}
+                {{ form_widget(profilUpdateForm.password) }}
+                {{ form_errors(profilUpdateForm.password) }}
+            </div>
+
+        {# todo: upload de la photo #}
+
+        <button class="btn" type="submit">
+            Valider
+        </button>
+
+        {# todo: voir s'il est nécessaire d'avoir le mot de passe pour valider le changement #}
+
+        {{ form_end(profilUpdateForm) }}
     {% endif %}
 {% endblock %}
 
