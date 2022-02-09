@@ -8,7 +8,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UtilisateurController extends AbstractController
 {
@@ -16,14 +18,26 @@ class UtilisateurController extends AbstractController
      * @Route("/profil", name="app_profil")
      */
     public function profil(EntityManagerInterface $entityManager,
-                           Request $request): Response
+                           Request $request,
+                           UserPasswordHasherInterface $userPasswordHasher): Response
     {
         // récupère l'utilisateur courant
         $user = $this->getUser();
 
         // création formulaire d'edition
         $form = $this->createForm(UtilisateurType::class, $user);
+
+        $form->handleRequest($request);
+
         if ($form->isSubmitted()) {
+
+            $user->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $user,
+                    $form->get('password')->getData()
+                )
+            );
+
             $entityManager->persist($user);
             $entityManager->flush();
 

@@ -2,7 +2,8 @@
 
 {% block body %}
     {% if app.user %}
-        <p>Formulaire d'update à afficher</p>
+        {# todo: erreur si mdp pas renseigné et message de succès s'affiche #}
+        {# todo: toujours même si on a juste validé avec les mêmes infos qu'avant #}
 
         {{ form_start(profilUpdateForm) }}
             <div class="profil">
