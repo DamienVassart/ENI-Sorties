@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Lieu;
 use App\Form\LieuType;
+use App\Repository\VilleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,7 +21,8 @@ class LieuController extends AbstractController
      */
     public function create(
         Request $request,
-        EntityManagerInterface $entityManager): Response
+        EntityManagerInterface $entityManager,
+        VilleRepository $villeRepository): Response
     {
         $lieu = new Lieu();
 
@@ -29,6 +31,10 @@ class LieuController extends AbstractController
         $lieuForm->handleRequest($request);
 
         if($lieuForm->isSubmitted() && $lieuForm->isValid()) {
+            $nomVille = $lieuForm["Ville"]->getData()->getNom();
+            $ville = $villeRepository->findOneBy(['nom' => $nomVille]);
+            $lieu->setIdVille($ville);
+//            dd($lieu);
             $entityManager->persist($lieu);
             $entityManager->flush();
 
