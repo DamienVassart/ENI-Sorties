@@ -34,7 +34,6 @@ class LieuController extends AbstractController
             $nomVille = $lieuForm["Ville"]->getData()->getNom();
             $ville = $villeRepository->findOneBy(['nom' => $nomVille]);
             $lieu->setIdVille($ville);
-//            dd($lieu);
             $entityManager->persist($lieu);
             $entityManager->flush();
 
