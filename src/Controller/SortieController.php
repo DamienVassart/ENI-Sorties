@@ -59,16 +59,9 @@ class SortieController extends AbstractController
         $sortieForm = $this->createForm(SortieType::class, $sortie);
 
         $sortieForm->handleRequest($request);
-        $lieu = new Lieu();
 
-        $lieuForm = $this->createForm(LieuType::class, $lieu);
-
-        $lieuForm->handleRequest($request);
-
-        if($lieuForm->isSubmitted() && $sortieForm->isSubmitted()) {
+        if($sortieForm->isSubmitted()) {
             $entityManager->persist($sortie);
-            $entityManager->flush();
-            $entityManager->persist($lieu);
             $entityManager->flush();
 
             $this->addFlash('success', 'Sortie ajoutée!');
@@ -77,8 +70,7 @@ class SortieController extends AbstractController
         }
 
         return $this->render('sortie/create.html.twig', [
-            'sortieForm' =>$sortieForm->createview(),
-            'lieuForm' =>$lieuForm->createView()
+            'sortieForm' =>$sortieForm->createview()
         ]);
     }
     /**

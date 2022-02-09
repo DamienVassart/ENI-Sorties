@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Lieu;
 use App\Entity\Ville;
+use App\Repository\VilleRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,10 +19,13 @@ class LieuType extends AbstractType
             ->add('rue')
             ->add('latitude')
             ->add('longitude')
-            ->add('idVille', EntityType::class, [
-                'label' => 'Ville: ',
+            ->add('Ville', EntityType::class, [
                 'class' => Ville::class,
-                'choice_label' => 'nom'
+                'choice_label' => 'nom',
+                'mapped' => false,
+                'query_builder' => function(VilleRepository $villeRepository) {
+                    return $villeRepository->createQueryBuilder('v')->orderBy('v.nom', 'ASC');
+                }
             ])
         ;
     }

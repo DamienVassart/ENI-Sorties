@@ -7,9 +7,9 @@ use App\Entity\Lieu;
 use App\Entity\Sortie;
 use App\Entity\Ville;
 use App\Repository\CampusRepository;
+use App\Repository\VilleRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -36,18 +36,30 @@ class SortieType extends AbstractType
                 'label' => 'Nombre de places'
             ])
             ->add('infosSortie')
-            ->add('idCampus', EntityType::class, [
-                'label' => 'Campus: ',
+            ->add('Campus', EntityType::class, [
                 'class' => Campus::class,
                 'choice_label' => 'nom',
+                'mapped' => false,
                 'query_builder' => function(CampusRepository $campusRepository) {
                     return $campusRepository->createQueryBuilder('c')->orderBy('c.nom', 'ASC');
                 }
             ])
-            ->add('idLieu', CollectionType::class, [
-                'entry_type' => LieuType::class,
-                'allow_add' => true,
-                'entry_options' => ['label' => false]
+            ->add('Ville', EntityType::class, [
+                'class' => Ville::class,
+                'choice_label' => 'nom',
+                'property_path' => 'nom',
+                'placeholder' => '---Choisir une ville---',
+                'mapped' => false,
+                'query_builder' => function(VilleRepository $villeRepository) {
+                    return $villeRepository->createQueryBuilder('v')->orderBy('v.nom', 'ASC');
+                }
+            ])
+            ->add('Lieu', EntityType::class, [
+                'class' => Lieu::class,
+                'choice_label' => 'nom',
+                'property_path' => 'nom',
+                'placeholder' => '---Choisir un lieu---',
+                'mapped' => false
             ])
         ;
     }
