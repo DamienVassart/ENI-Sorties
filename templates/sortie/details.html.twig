@@ -5,10 +5,10 @@
 {% endblock %}
 
 {% block body %}
-{#<div class="sortie-details">#}
+<div class="sortie-details">
 
-{#    <div class="sortie-details-infos">#}
-{#        <h2>{{ sortie.nom }}</h2>#}
+    <div class="sortie-details-infos">
+        <h2>{{ sortie.nom }}</h2>
 {#        <div>Date et heure de sortie{{ sortie.dateHeureDebut|dateTime("Y-m-d") }}</div>#}
 {#        <div>Note organisateur : {{ sortie.duree }}</div>#}
 {#        <div>Date limite d'inscription: {{ sortie.dateLimiteInscription }}</div>#}
@@ -19,8 +19,8 @@
 {#        <div>{{ sortie.overview | nl2br }}</div>#}
 
 
-{#        <section class="Lieu">#}
-{#            <h3>Lieu</h3>#}
+        <section class="Lieu">
+            <h3>Lieu</h3>
 {#            {% for lieu in sortie.idLieu %}#}
 {#                <article>#}
 {#                    <div>#}
@@ -31,7 +31,7 @@
 {#                    </div>#}
 {#                </article>#}
 {#            {% endfor %}#}
-{#        </section>#}
+        </section>
     </div>
 </div>
 {% endblock %}
