@@ -5,6 +5,8 @@
         {# todo: erreur si mdp pas renseigné et message de succès s'affiche #}
         {# todo: toujours même si on a juste validé avec les mêmes infos qu'avant #}
 
+
+
         {{ form_start(profilUpdateForm) }}
             <div class="profil">
                 {{ form_label(profilUpdateForm.pseudo, 'Pseudo: ') }}
@@ -50,11 +52,11 @@
 
         {# todo: upload de la photo #}
 
-        <button class="btn" type="submit">
-            Valider
-        </button>
+
 
         {# todo: voir s'il est nécessaire d'avoir le mot de passe pour valider le changement #}
+        <button class="btn" type="submit">Valider</button>
+
 
         {{ form_end(profilUpdateForm) }}
     {% endif %}
