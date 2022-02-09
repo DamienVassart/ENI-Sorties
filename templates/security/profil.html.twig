@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% if app.user !== participant %}
+    {% if app.user %}
         <p>Formulaire d'update à afficher</p>
 
         <p>Prénom: {{ app.user.prenom }}</p>
@@ -10,16 +10,6 @@
         <p>Email: {{ app.user.email }}</p>
         <p>Campus: {{ app.user.campus.nom }}</p>
 
-    {% else %}
-        <p>Prénom: {{ participant.prenom }}</p>
-
-        <p>Nom: {{ participant.nom }}</p>
-
-        <p>Téléphone: {{ participant.telephone }}</p>
-
-        <p>Email: {{ participant.email }}</p>
-
-        <p>Campus: {{ participant.campus.nom }}</p>
     {% endif %}
 {% endblock %}
 

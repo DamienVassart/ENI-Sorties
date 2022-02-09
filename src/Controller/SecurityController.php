@@ -37,25 +37,4 @@ class SecurityController extends AbstractController
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 
-    /**
-     * @Route("/profil/{id}", name="app_profil")
-     */
-    public function profil(int $id, ParticipantRepository $participantRepository, EntityManagerInterface $entityManager): Response
-    {
-        // récupérer l'id de l'utilisateur dont on regarde les informations
-        $participant = $participantRepository->find($id);
-
-        // récupère l'utilisateur courant
-        $user = $this->getUser();
-
-        // création formulaire d'edition
-
-
-        // vers la page de profil avec les infos de l'utilisateur sur lequel on a cliqué (au besoin)
-        return $this->render('security/profil.html.twig', [
-            "participant"=> $participant
-
-        ]);
-    }
-
 }

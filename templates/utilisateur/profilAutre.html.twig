@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h2>{{ participant.pseudo }}</h2>
+
+    <p>Prénom: {{ participant.prenom }}</p>
+
+    <p>Nom: {{ participant.nom }}</p>
+
+    <p>Téléphone: {{ participant.telephone }}</p>
+
+    <p>Email: {{ participant.email }}</p>
+
+    <p>Campus: {{ participant.campus.nom }}</p>
+
+    {# todo: affichage de photos #}
+
+{% endblock %}
+
+{% block title %}
+
+    {{ participant.pseudo }} | Profil
+
+{% endblock %}
+
