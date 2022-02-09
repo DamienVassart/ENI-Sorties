@@ -31,12 +31,14 @@ class UtilisateurController extends AbstractController
 
         if ($form->isSubmitted()) {
 
-            $user->setPassword(
-                $userPasswordHasher->hashPassword(
-                    $user,
-                    $form->get('password')->getData()
-                )
-            );
+            if (!$user->getPassword() ) {
+                $user->setPassword(
+                    $userPasswordHasher->hashPassword(
+                        $user,
+                        $form->get('password')->getData()
+                    )
+                );
+            }
 
             $entityManager->persist($user);
             $entityManager->flush();
