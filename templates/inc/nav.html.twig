@@ -6,8 +6,8 @@
             <li><a href="{{ path("app_logout") }}" title="Se déconnecter">Se déconnecter</a></li>
 
             {% if is_granted('ROLE_ADMIN') %}
-                <li><a href="#" title="Villes">Villes</a></li>
-                <li><a href="#" title="Campus">Campus</a></li>
+                <li><a href="{{ path('admin_villes') }}" title="Villes">Villes</a></li>
+                <li><a href="{{ path('admin_campus') }}" title="Campus">Campus</a></li>
                 <li><a href="{{ path('app_register') }}" title="Inscrire utilisateurs">Inscrire des utilisateurs</a></li>
             {% endif %}
 
