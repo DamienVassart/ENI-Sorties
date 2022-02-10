@@ -50,15 +50,15 @@ class UtilisateurController extends AbstractController
 
 
 
-//            if ($file) {
-//                // on renomme le fichier
-//                $newFileName = $participant->getPseudo()."-".$participant->getId().".".$file->guessExtension();
-//
-//                // traitement du fichier
-//                $file->move($this->getParameter('upload_champ_entite_dir', $newFileName));
-//
-//                $participant->setChamp($newFileName);
-//            }
+            if ($file) {
+                // on renomme le fichier
+                $newFileName = $participant->getPseudo()."-".$participant->getId().".".$file->guessExtension();
+
+                // traitement du fichier
+                $file->move($this->getParameter('upload_champ_entite_dir'), $newFileName);
+
+                $participant->setChamp($newFileName);
+            }
 
             $entityManager->persist($user);
             $entityManager->flush();

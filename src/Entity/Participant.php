@@ -60,11 +60,6 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $champ;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="participants")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -79,6 +74,11 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\ManyToMany(targetEntity=Sortie::class, mappedBy="participants")
      */
     private $sortiesParticipants;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $champ;
 
     public function __construct()
     {
@@ -99,18 +99,6 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPseudo(string $pseudo): self
     {
         $this->pseudo = $pseudo;
-
-        return $this;
-    }
-
-    public function getChamp(): ?string
-    {
-        return $this->champ;
-    }
-
-    public function setChamp(string $champ): self
-    {
-        $this->champ = $champ;
 
         return $this;
     }
@@ -296,6 +284,18 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
         if ($this->sortiesParticipants->removeElement($sortiesParticipant)) {
             $sortiesParticipant->removeParticipant($this);
         }
+
+        return $this;
+    }
+
+    public function getChamp(): ?string
+    {
+        return $this->champ;
+    }
+
+    public function setChamp(?string $champ): self
+    {
+        $this->champ = $champ;
 
         return $this;
     }

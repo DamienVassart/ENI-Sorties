@@ -6,7 +6,9 @@
         {{ form_start(profilUpdateForm) }}
         <div id="container">
 
-            <img src="{{ asset('public/photosProfil/'~ participant.champ) }}" alt="image profil">
+            {% if app.user.champ != null %}
+            <img src="{{ asset('photosProfil/'~ app.user.champ) }}" alt="image profil">
+            {% endif %}
 
             <div class="profil">
                 {{ form_label(profilUpdateForm.pseudo, 'Pseudo: ') }}
@@ -65,7 +67,6 @@
 
             clicChamp.addEventListener('change', updateValue);
             clicSelect.addEventListener('change', updateValue);
-            clicButton.addEventListener('click', updateValue);
 
             function updateValue(e) {
                 if (boutonCreer==false) {
