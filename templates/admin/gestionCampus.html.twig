@@ -1,7 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Ajouter un campus</h1>
+<div>
+    {% for campus in listeCampus %}
+    <ul>
+        <li>{{ campus.nom }}</li>
+    </ul>
+    {% endfor %}
+</div>
     {{ form_start(campusForm) }}
     {{ form_widget(campusForm) }}
     <button>Ajouter</button>
@@ -9,6 +15,6 @@
 {% endblock %}
 
 {% block title %}
-    Ajouter un campus {{ parent() }}
+
 {% endblock %}
 

@@ -24,26 +24,6 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/villes", name="villes")
-     */
-    public function afficherVilles(): Response
-    {
-        return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
-        ]);
-    }
-
-    /**
-     * @Route("/campus", name="campus")
-     */
-    public function afficherCampus(): Response
-    {
-        return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
-        ]);
-    }
-
-    /**
      * @Route("/supprimerUser", name="supprimerUser")
      */
     public function deleteUser(EntityManagerInterface $entityManager,
