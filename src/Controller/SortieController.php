@@ -69,21 +69,25 @@ class SortieController extends AbstractController
 
         $sortieForm->handleRequest($request);
 
-        if($sortieForm->isSubmitted()) {
+        if($sortieForm->isSubmitted() && $sortieForm->isValid()) {
             $nomCampus = $sortieForm["Campus"]->getData()->getNom();
             $campus = $campusRepository->findOneBy(['nom' => $nomCampus]);
             $sortie->setIdCampus($campus);
 
-            $nomLieu = $sortieForm["Lieu"]->getData()->getNom();
-            $lieu = $lieuRepository->findOneBy(['nom' => $nomLieu]);
-            $sortie->setIdLieu($lieu);
+            if($sortieForm["Lieu"]->getData()) {
+                $nomLieu = $sortieForm["Lieu"]->getData()->getNom();
+                $lieu = $lieuRepository->findOneBy(['nom' => $nomLieu]);
 
-            $entityManager->persist($sortie);
-            $entityManager->flush();
+                $sortie->setIdLieu($lieu);
 
-            $this->addFlash('success', 'Sortie ajoutée!');
+                $entityManager->persist($sortie);
+                $entityManager->flush();
 
-            return $this->redirectToRoute('sortie_details', ['id'=> $sortie->getId()]);
+                $this->addFlash('success', 'Sortie ajoutée!');
+
+                return $this->redirectToRoute('sortie_details', ['id'=> $sortie->getId()]);
+            }
+
         }
 
         return $this->render('sortie/create.html.twig', [

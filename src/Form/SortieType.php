@@ -7,6 +7,7 @@ use App\Entity\Lieu;
 use App\Entity\Sortie;
 use App\Entity\Ville;
 use App\Repository\CampusRepository;
+use App\Repository\LieuRepository;
 use App\Repository\VilleRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -14,6 +15,8 @@ use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SortieType extends AbstractType
@@ -50,18 +53,33 @@ class SortieType extends AbstractType
                 'property_path' => 'nom',
                 'placeholder' => '---Choisir une ville---',
                 'mapped' => false,
-                'query_builder' => function(VilleRepository $villeRepository) {
-                    return $villeRepository->createQueryBuilder('v')->orderBy('v.nom', 'ASC');
-                }
+                'required' => false,
+//                'query_builder' => function(VilleRepository $villeRepository) {
+//                    return $villeRepository->createQueryBuilder('v')->orderBy('v.nom', 'ASC');
+//                }
             ])
-            ->add('Lieu', EntityType::class, [
-                'class' => Lieu::class,
-                'choice_label' => 'nom',
-                'property_path' => 'nom',
-                'placeholder' => '---Choisir un lieu---',
-                'mapped' => false
-            ])
+//            ->add('Lieu', EntityType::class, [
+//                'class' => Lieu::class,
+//                'choice_label' => 'nom',
+//                'property_path' => 'nom',
+//                'placeholder' => '---Choisir un lieu---',
+//                'mapped' => false
+//            ])
         ;
+        $builder
+            ->get('Ville')->addEventListener(
+                FormEvents::POST_SUBMIT,
+                function (FormEvent $event) {
+                    $form = $event->getForm();
+                    $form->getParent()->add('Lieu', EntityType::class, [
+                        'class' => Lieu::class,
+                        'choice_label' => 'nom',
+                        'placeholder' => '---Choisir un lieu---',
+                        'mapped' => false,
+                        'choices' => $form->getData()->getLieux()
+                    ]);
+                }
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver): void

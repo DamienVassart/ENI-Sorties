@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\VilleRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * @ORM\Entity(repositoryClass=VilleRepository::class)
@@ -26,6 +27,11 @@ class Ville
      * @ORM\Column(type="string", length=5)
      */
     private $codePostal;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Lieu::class, mappedBy="idVille")
+     */
+    private $lieux;
 
     public function getId(): ?int
     {
@@ -66,5 +72,13 @@ class Ville
         $this->idLieu = $idLieu;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Lieu[]
+     */
+    public function getLieux(): Collection
+    {
+        return $this->lieux;
     }
 }

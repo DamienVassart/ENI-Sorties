@@ -3,21 +3,21 @@
 {% block body %}
     <h1>Créer un sortie</h1>
     {{  form_start(sortieForm) }}
-    {{ form_row(sortieForm.nom) }}
-    {{ form_row(sortieForm.dateHeureDebut) }}
-    {{ form_row(sortieForm.duree) }}
-    {{ form_row(sortieForm.dateLimiteInscription) }}
-    {{ form_row(sortieForm.nbInscriptionsMax) }}
-    {{ form_row(sortieForm.infosSortie) }}
-    {{ form_row(sortieForm.Campus) }}
-    {{ form_row(sortieForm.Ville) }}
-    <div id="lieu-sortie">
-        {{ form_row(sortieForm.Lieu) }}
-        <button>
-            <a href="{{ path('lieu_create') }}">Ajouter</a>
-        </button>
-    </div>
-
+{#    {{ form_row(sortieForm.nom) }}#}
+{#    {{ form_row(sortieForm.dateHeureDebut) }}#}
+{#    {{ form_row(sortieForm.duree) }}#}
+{#    {{ form_row(sortieForm.dateLimiteInscription) }}#}
+{#    {{ form_row(sortieForm.nbInscriptionsMax) }}#}
+{#    {{ form_row(sortieForm.infosSortie) }}#}
+{#    {{ form_row(sortieForm.Campus) }}#}
+{#    {{ form_row(sortieForm.Ville) }}#}
+{#    <div id="lieu-sortie">#}
+{#        {{ form_row(sortieForm.Lieu) }}#}
+{#        <button>#}
+{#            <a href="{{ path('lieu_create') }}">Ajouter</a>#}
+{#        </button>#}
+{#    </div>#}
+    {{ form_widget(sortieForm) }}
     <button>Publier</button>
     {{  form_end(sortieForm) }}
 {% endblock %}
