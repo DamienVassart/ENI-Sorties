@@ -48,8 +48,6 @@ class UtilisateurController extends AbstractController
             // récupère les infos du formulaire dans un objet $file
             $file = $form->get('champ')->getData();
 
-
-
             if ($file) {
                 // on renomme le fichier
                 $newFileName = $participant->getPseudo()."-".$participant->getId().".".$file->guessExtension();

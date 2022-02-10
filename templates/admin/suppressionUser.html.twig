@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ form_start(suppressionUserForm) }}
+
+    {{ form_widget(suppressionUserForm) }}
+
+    <button type="submit" class="btn">Valider</button>
+    {{ form_end(suppressionUserForm) }}
+{% endblock %}
+
+{% block title %}
+    Suppression d'un utilisateur
+{% endblock %}
+
