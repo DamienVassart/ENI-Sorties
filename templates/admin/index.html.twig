@@ -13,8 +13,8 @@
         <li><a href="{{ path('app_register') }}" title="inscrire un utilisateur">Inscrire un utilisateur sur le site.</a></li>
         <li><a href="{{ path('admin_supprimerUser') }}" title="supprimer un utilisateur">Supprimer le compte d'un utilisateur.</a></li>
         <li><a href="{{ path('admin_desactiverUser') }}" title="désactiver un utilisateur">Désactiver les accès d'un utilisateur.</a></li>
-        <li><a href="#" title="gestion des Campus">Accéder à la page de gestion des Campus.</a></li>
-        <li><a href="#" title="gestion des Villes">Accéder à la page de gestion des Villes.</a></li>
+        <li><a href="{{ path('admin_campus') }}" title="gestion des Campus">Accéder à la page de gestion des Campus.</a></li>
+        <li><a href="{{ path('admin_villes') }}" title="gestion des Villes">Accéder à la page de gestion des Villes.</a></li>
     </ul>
 </div>
 {% endblock %}
