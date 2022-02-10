@@ -16,6 +16,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminController extends AbstractController
 {
     /**
+     * @Route("/index", name="index")
+     */
+    public function index(): Response
+    {
+        return $this->render('admin/index.html.twig');
+    }
+
+    /**
      * @Route("/villes", name="villes")
      */
     public function afficherVilles(): Response
@@ -77,7 +85,7 @@ class AdminController extends AbstractController
 
 
         return $this->render('admin/desactivationUser.html.twig', [
-            'controller_name' => 'AdminController',
+
         ]);
     }
 
