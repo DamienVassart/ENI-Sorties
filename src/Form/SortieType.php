@@ -54,17 +54,7 @@ class SortieType extends AbstractType
                 'placeholder' => '---Choisir une ville---',
                 'mapped' => false,
                 'required' => false,
-//                'query_builder' => function(VilleRepository $villeRepository) {
-//                    return $villeRepository->createQueryBuilder('v')->orderBy('v.nom', 'ASC');
-//                }
             ])
-//            ->add('Lieu', EntityType::class, [
-//                'class' => Lieu::class,
-//                'choice_label' => 'nom',
-//                'property_path' => 'nom',
-//                'placeholder' => '---Choisir un lieu---',
-//                'mapped' => false
-//            ])
         ;
         $builder
             ->get('Ville')->addEventListener(
