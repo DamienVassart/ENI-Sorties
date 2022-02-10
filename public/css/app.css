@@ -94,5 +94,11 @@ select {
     max-width: 50%;
 }
 
+input.submit {
+    text-decoration: underline;
+    background: transparent;
+    color: link; /* à changer */
+    border-width: 0;
+}
 
 
