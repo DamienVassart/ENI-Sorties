@@ -5,9 +5,11 @@ namespace App\Entity;
 use App\Repository\VilleRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=VilleRepository::class)
+ * @UniqueEntity(fields={"nom"}, message="Cette ville existe déjà!")
  */
 class Ville
 {

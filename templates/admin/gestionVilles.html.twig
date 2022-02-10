@@ -1,7 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Ajouter une ville</h1>
+
+    <div>
+        {% for ville in listeVilles %}
+            <ul>
+                <li>{{ ville.nom }} - {{ ville.codePostal }}</li>
+            </ul>
+        {% endfor %}
+    </div>
+
     {{ form_start(villeForm) }}
     {{ form_widget(villeForm) }}
     <button>Ajouter</button>
@@ -9,6 +17,6 @@
 {% endblock %}
 
 {% block title %}
-    Ajouter une ville {{ parent() }}
+    Gestion des villes
 {% endblock %}
 
