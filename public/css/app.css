@@ -81,7 +81,8 @@ footer {
 }
 
 label {
-    display: block;
+    display: inline-flex;
+    flex-direction: column;
 }
 
 input,
@@ -93,10 +94,5 @@ select {
     max-width: 50%;
 }
 
-.profil {
-    display: block;
-    text-align: center;
-    margin: auto;
-}
 
 
