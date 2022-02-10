@@ -2,10 +2,10 @@
 
 namespace App\Controller;
 
-use App\Entity\Lieu;
 use App\Entity\Ville;
 use App\Form\VilleType;
 use App\Repository\LieuRepository;
+use App\Repository\VilleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,6 +17,31 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class VilleController extends AbstractController
 {
+
+
+    /**
+     * @Route("", name="list")
+     */
+    public function list(VilleRepository $villeRepository): Response
+    {
+        $villes = $villeRepository->findAll();
+
+        return $this->render('ville/list.html.twig', [
+            "villes"=> $villes
+        ]);
+    }
+    /**
+     * @Route("/details/{id}", name="details")
+     */
+    public function details(int $id, VilleRepository $villeRepository): Response
+    {
+        $ville = $villeRepository->find($id);
+
+        return $this->render('ville/details.html.twig', [
+            "ville"=> $ville
+
+        ]);
+    }
     /**
      * @Route("/create", name="create")
      */
