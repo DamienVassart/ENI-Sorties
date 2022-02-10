@@ -25,7 +25,12 @@ header {
 }
 
 header img {
-    height: 70px;
+    float: left;
+    width: 20%;
+}
+
+header h1 {
+    position: relative;
 }
 
 nav ul {
