@@ -117,6 +117,36 @@ input.submit {
     border-width: 0;
 }
 
+#sortie-details section {
+    margin-top: 30px;
+}
+
+#tableau-participants thead {
+    background-color: #aaaaaa;
+    color: white;
+    font-weight: bold;
+}
+
+#tableau-participants thead td:first-of-type {
+    border-right: 1px solid #dddddd;
+}
+
+#tableau-participants tr:nth-child(2n) {
+    background-color: #dddddd;
+}
+
+#tableau-participants td:first-of-type {
+    padding: 0 10px;
+}
+
+#tableau-participants td:nth-of-type(2) {
+    padding: 0 5px;
+}
+
+#tableau-participants td {
+    border: 1px solid #aaaaaa;
+}
+
 
 
 

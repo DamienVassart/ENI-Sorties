@@ -5,49 +5,70 @@
 {% endblock %}
 
 {% block body %}
-<div class="sortie-details">
-    <h2>{{ sortie.nom }}</h2>
-    <section id="infos-sortie">
-        <h3>Infos</h3>
-        <div>Date et heure de sortie: le {{ sortie.dateHeureDebut.format('d/m/Y') }} à {{ sortie.dateHeureDebut.format('h:m') }}</div>
-        <div>Durée: {{ sortie.duree }} minutes</div>
-        <div>Date limite d'inscription: {{ sortie.dateLimiteInscription.format('d/m/Y') }}</div>
-        <div>Nombre maximum de participants: {{ sortie.nbInscriptionsMax }}</div>
-        <div>Informations sortie: {{ sortie.infosSortie }}</div>
-        <div>Campus: {#{{ nomCampus }}#}</div>
-    </section>
+    <div id="sortie-details">
+        <h2>{{ sortie.nom }}</h2>
+        <section id="infos-sortie">
+            <h3>Infos</h3>
+            <div>Date et heure de sortie: le {{ sortie.dateHeureDebut.format('d/m/Y') }} à {{ sortie.dateHeureDebut.format('h:m') }}</div>
+            <div>Durée: {{ sortie.duree }} minutes</div>
+            <div>Date limite d'inscription: {{ sortie.dateLimiteInscription.format('d/m/Y') }}</div>
+            <div>Nombre maximum de participants: {{ sortie.nbInscriptionsMax }}</div>
+            <div>Informations sortie: {{ sortie.infosSortie }}</div>
+            <div>Campus: {#{{ nomCampus }}#}</div>
+        </section>
 
-    <section id="lieu">
-        <h3>Lieu</h3>
-        <div>Nom du lieu: {{ lieu.nom }}</div>
-        <div>Rue: {{ lieu.rue }}</div>
-        <div>Code Postal: {{ ville.codePostal }}</div>
-        <div>Ville: {{ ville.nom }}</div>
-        <div>Latitude: {{ lieu.latitude }}</div>
-        <div>Longitude: {{ lieu.longitude }}</div>
-    </section>
+        <section id="lieu">
+            <h3>Lieu</h3>
+            <div>Nom du lieu: {{ lieu.nom }}</div>
+            <div>Rue: {{ lieu.rue }}</div>
+            <div>Code Postal: {{ ville.codePostal }}</div>
+            <div>Ville: {{ ville.nom }}</div>
+            <div>Latitude: {{ lieu.latitude }}</div>
+            <div>Longitude: {{ lieu.longitude }}</div>
+        </section>
 
-    <section id="participants">
-        <h3>Participants</h3>
-        <table id="tableau-participants">
-            <thead>
-                <tr>
-                    <td>Pseudo</td>
-                    <td>Nom</td>
-                </tr>
-            </thead>
-            <tbody>
-{#                {% for participant in participants %}#}
-{#                    <tr>#}
-{#                        <td>{{ participant.pseudo }}</td>#}
-{#                        <td>{{ participant.prenom}} {{ participant.nom }}</td>#}
-{#                    </tr>#}
-{#                {% endfor %}#}
-            </tbody>
-        </table>
-    </section>
-</div>
+        <section id="participants">
+            <h3>Participants</h3>
+            {% if participants is defined %}
+                <table id="tableau-participants">
+                    <thead>
+                    <tr>
+                        <td>Pseudo</td>
+                        <td>Nom</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {# DEBUT lignes échantillons codées en dur pour création du CSS #}
+                    {#                <tr>#}
+                    {#                    <td>JBL</td>#}
+                    {#                    <td>Jean Baptiste LAMARCK</td>#}
+                    {#                </tr>#}
+                    {#                <tr>#}
+                    {#                    <td>YC44</td>#}
+                    {#                    <td>Yves Cousteau</td>#}
+                    {#                </tr>#}
+                    {#                <tr>#}
+                    {#                    <td>MC</td>#}
+                    {#                    <td>Michel CONSTANT</td>#}
+                    {#                </tr>#}
+                    {#                <tr>#}
+                    {#                    <td>JLB</td>#}
+                    {#                    <td>Juste LEBLANC</td>#}
+                    {#                </tr>#}
+                    {# FIN lignes échantillons codées en dur pour création du CSS #}
+
+                    {% for participant in participants %}
+                        <tr>
+                            <td>{{ participant.pseudo }}</td>
+                            <td>{{ participant.prenom}} {{ participant.nom }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>Personne ne s'est encore inscrit à cette sortie</p>
+            {% endif %}
+        </section>
+    </div>
 {% endblock %}
-
-
-
