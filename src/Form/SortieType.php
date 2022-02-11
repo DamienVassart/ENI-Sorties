@@ -56,7 +56,10 @@ class SortieType extends AbstractType
                 'property_path' => 'nom',
                 'placeholder' => '---Choisir une ville---',
                 'mapped' => false,
-                'required' => false,
+                'query_builder' => function(VilleRepository $villeRepository) {
+                    return $villeRepository->findCitiesWithPlaces();
+                },
+                'required' => false
             ])
             ->add('select', SubmitType::class, [
                 'label' =>  'Valider'

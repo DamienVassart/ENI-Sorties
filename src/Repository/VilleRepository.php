@@ -19,6 +19,13 @@ class VilleRepository extends ServiceEntityRepository
         parent::__construct($registry, Ville::class);
     }
 
+    public function findCitiesWithPlaces() {
+        $qb = $this->createQueryBuilder('v');
+        $qb->join('v.lieux', 'l', 'WITH', 'v.id = l.idVille');
+
+        return $qb;
+    }
+
     // /**
     //  * @return Ville[] Returns an array of Ville objects
     //  */
