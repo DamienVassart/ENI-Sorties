@@ -20,12 +20,13 @@
         </button>
         <p>Ou sélectionner un lieu existant: </p>
         {{ form_row(sortieForm.Ville) }}
+        {% if sortieForm.select is defined %}
+            {{ form_row(sortieForm.select) }}
+        {% endif %}
         {% if sortieForm.Lieu is defined %}
             {{ form_row(sortieForm.Lieu) }}
         {% endif %}
     </fieldset>
-
-    <button>Valider</button>
     {{  form_end(sortieForm) }}
 {% endblock %}
 

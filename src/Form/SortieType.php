@@ -14,6 +14,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -55,18 +56,25 @@ class SortieType extends AbstractType
                 'mapped' => false,
                 'required' => false,
             ])
+            ->add('select', SubmitType::class, [
+                'label' =>  'Valider'
+            ])
         ;
         $builder
             ->get('Ville')->addEventListener(
                 FormEvents::POST_SUBMIT,
                 function (FormEvent $event) {
                     $form = $event->getForm();
+                    $form->getParent()->remove('select');
                     $form->getParent()->add('Lieu', EntityType::class, [
                         'class' => Lieu::class,
                         'choice_label' => 'nom',
                         'placeholder' => '---Choisir un lieu---',
                         'mapped' => false,
                         'choices' => $form->getData()->getLieux()
+                    ]);
+                    $form->getParent()->add('create', SubmitType::class, [
+                        'label' => 'Ajouter'
                     ]);
                 }
             );
