@@ -6,7 +6,6 @@ use App\Entity\Campus;
 use App\Form\CampusType;
 use App\Repository\CampusRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -69,40 +68,15 @@ class CampusController extends AbstractController
     }
 
     /**
-     * @Route("/admin/campus/delete/{id}", name="admin_campus_delete")
+     * @Route("/admin/campus/delete{id}", name="admin_campus_delete")
      */
-    public function delete(int $id, CampusRepository $campusRepository, Request $request, EntityManagerInterface $entityManager): Response
+    public function delete(Campus $campus, CampusRepository $campusRepository, Request $request, EntityManagerInterface $entityManager): Response
     {
-            $campusASupprimer = $campusRepository->find($id);
-
-            $campusSupprForm = $this->createForm(CampusType::class, $campusASupprimer);
-
-            $campusSupprForm->remove('nom');
-            $campusSupprForm->add('submit', SubmitType::class, [
-                'label' => 'Supprimer ce campus ?'
-            ]);
-
-            $campusSupprForm->handleRequest($request);
-
-            try{
-                if($campusSupprForm->isSubmitted() && $campusSupprForm->isValid())
-                {
-                    $entityManager->remove($campusASupprimer);
-                    $entityManager->flush();
-                    return $this->redirectToRoute('admin_campus');
-                }
-            } catch (\Exception $e){
-                $this->addFlash('success', 'Le campus est associé à une/des sortie(s), veuillez
-                                                supprimer celle(s)-ci en premier');
-                return $this->redirectToRoute('sortie_list');
-            }
-
-            return $this->render('admin/campusDelete.html.twig', [
-                'campus' => $campusASupprimer,
-                'campusSupprForm' => $campusSupprForm->createView()
-            ]);
-
-        }
+        $entityManager->remove($campus);
+        $entityManager->flush();
+        $this->addFlash('success', 'Le campus a bien été supprimé');
+        return $this->redirectToRoute('admin_campus');
+    }
 }
 
 
