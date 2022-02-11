@@ -27,7 +27,9 @@ class SortieType extends AbstractType
         $builder
             ->add('nom')
             ->add('dateHeureDebut', DateTimeType::class, [
-                'date_label' => 'Date et Heure de la Sortie: '
+                'date_label' => 'Date et Heure de la Sortie: ',
+                'html5' => true,
+                'widget' => 'single_text'
             ])
             ->add('duree', NumberType::class, [
                 'label' => 'Durée: '
