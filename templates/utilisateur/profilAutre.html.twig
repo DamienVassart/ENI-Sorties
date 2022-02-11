@@ -3,20 +3,29 @@
 {% block body %}
 
     <h2>{{ participant.pseudo }}</h2>
+    {# todo: centrer le pseudo du participant #}
+    {# todo: ajouter la taille de la police des li #}
 
-    <ul>
-        <li>Prénom: {{ participant.prenom }}</li>
+    <div class="container">
 
-        <li>Nom: {{ participant.nom }}</li>
+            <div class="profil_photo">
+                <img src="{{ asset('photosProfil/' ~ participant.champ) }}" alt="{{ participant.champ }}" />
+            </div>
 
-        <li>Téléphone: {{ participant.telephone }}</li>
+            <div class="profil">
+                <ul>
+                    <li>Prénom: {{ participant.prenom }}</li>
 
-        <li>Email: {{ participant.email }}</li>
+                    <li>Nom: {{ participant.nom }}</li>
 
-        <li>Campus: {{ participant.campus.nom }}</li>
-    </ul>
+                    <li>Téléphone: {{ participant.telephone }}</li>
 
-    {# todo: affichage de photos #}
+                    <li>Email: {{ participant.email }}</li>
+
+                    <li>Campus: {{ participant.campus.nom }}</li>
+                </ul>
+            </div>
+    </div>
 
 {% endblock %}
 

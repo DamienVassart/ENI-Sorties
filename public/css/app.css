@@ -11,6 +11,28 @@ body {
     background-color: whitesmoke;
 }
 
+.container {
+    display: flex;
+}
+
+.profil {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+
+
+.profil_form {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.profil_photo {
+    margin-right: 20px;
+}
+
 main {
     font-family: 'Roboto', sans-serif;
     max-width: 1000px;
@@ -94,6 +116,7 @@ input.submit {
     color: link; /* à changer */
     border-width: 0;
 }
+
 
 
 
