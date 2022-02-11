@@ -7,6 +7,7 @@ use App\Entity\Lieu;
 use App\Entity\Sortie;
 use App\Entity\Participant;
 use App\Form\LieuType;
+use App\Form\SortieAnnulerType;
 use App\Form\SortieType;
 use App\Repository\CampusRepository;
 use App\Repository\EtatRepository;
@@ -102,5 +103,34 @@ class SortieController extends AbstractController
         $entityManager->remove($sortie);
         $entityManager->flush();
         return $this->redirectToRoute('sortie_list');
+    }
+
+    /**
+     * @Route("/annuler{id}", name="annuler")
+     */
+    public function annuler(Sortie $sortie, EntityManagerInterface $entityManager, Request $request, EtatRepository $etatRepository) : Response
+    {
+
+        $sortieForm = $this->createForm(SortieAnnulerType::class, $sortie);
+
+        $sortieForm->handleRequest($request);
+
+        if($sortieForm->isSubmitted() && $sortieForm->isValid())
+        {
+
+            $idEtatAnnuler = $etatRepository->find(6);
+
+            $sortie->setIdEtat($idEtatAnnuler);
+            $this->addFlash('success', 'La sortie a bien été annulée !');
+            $entityManager->persist($sortie);
+            $entityManager->flush();
+            return $this->redirectToRoute('sortie_list');
+        }
+
+
+        return $this->render('sortie/annulerSortie.html.twig', [
+            'annulationSortieForm' =>$sortieForm->createview(),
+            'sortie' => $sortie
+        ]);
     }
 }
