@@ -17,7 +17,7 @@
                <li>Inscrits -> {{ sortie.participants.count }} / places -> {{ sortie.nbInscriptionsMax }}</li>
                <li>État : {{ sortie.idEtat.libelle }}</li>
                <li>Inscrit : {# todo: afficher une croix si inscrit, un vide si non inscrit #}</li>
-               <li>Organisateur : {{ sortie.idOrganisateur.nom }}</li>
+               <li>Organisateur : <a href="{{ path('app_profilAutre', {'id': sortie.idOrganisateur.id}) }}" title="{{ sortie.idOrganisateur.nom }}">{{ sortie.idOrganisateur.nom }}</a></li>
                <li>Options :
                   {# todo: afficher une liste de conditions #}
                   <a href="{{ path('sortie_details', {'id': sortie.id}) }}">Afficher</a>
