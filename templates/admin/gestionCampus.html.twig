@@ -12,14 +12,15 @@
             </ul>
         {% endfor %}
     </div>
-<div>
-    <a href="{{ path('search_campus') }}">Recherche</a>
-</div>
+
     {{ form_start(campusForm) }}
     {{ form_widget(campusForm) }}
     <button type="submit">Ajouter</button>
     {{ form_end(campusForm) }}
-
+    <br>
+    <div>
+        <a href="{{ path('search_campus') }}"><button>Recherche</button></a>
+    </div>
 {% endblock %}
 
 {% block title %}
