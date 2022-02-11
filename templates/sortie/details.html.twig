@@ -6,33 +6,46 @@
 
 {% block body %}
 <div class="sortie-details">
+    <h2>{{ sortie.nom }}</h2>
+    <section id="infos-sortie">
+        <h3>Infos</h3>
+        <div>Date et heure de sortie: le {{ sortie.dateHeureDebut.format('d/m/Y') }} à {{ sortie.dateHeureDebut.format('h:m') }}</div>
+        <div>Durée: {{ sortie.duree }} minutes</div>
+        <div>Date limite d'inscription: {{ sortie.dateLimiteInscription.format('d/m/Y') }}</div>
+        <div>Nombre maximum de participants: {{ sortie.nbInscriptionsMax }}</div>
+        <div>Informations sortie: {{ sortie.infosSortie }}</div>
+        <div>Campus: {#{{ nomCampus }}#}</div>
+    </section>
 
-    <div class="sortie-details-infos">
-        <h2>{{ sortie.nom }}</h2>
-{#        <div>Date et heure de sortie{{ sortie.dateHeureDebut|dateTime("Y-m-d") }}</div>#}
-{#        <div>Note organisateur : {{ sortie.duree }}</div>#}
-{#        <div>Date limite d'inscription: {{ sortie.dateLimiteInscription }}</div>#}
-{#        <div>Nombre maximum de participant: {{ sortie.nbInscriptionsMax }}</div>#}
-{#        <div>Informations sortie: {{ sortie.infosSortie }}</div>#}
-{#        <div>Campus: {{ sortie.idCampus }} to {{ sortie.idLieu }}</div>#}
+    <section id="lieu">
+        <h3>Lieu</h3>
+        <div>Nom du lieu: {{ lieu.nom }}</div>
+        <div>Rue: {{ lieu.rue }}</div>
+        <div>Code Postal: {{ ville.codePostal }}</div>
+        <div>Ville: {{ ville.nom }}</div>
+        <div>Latitude: {{ lieu.latitude }}</div>
+        <div>Longitude: {{ lieu.longitude }}</div>
+    </section>
 
-{#        <div>{{ sortie.overview | nl2br }}</div>#}
-
-
-        <section class="Lieu">
-            <h3>Lieu</h3>
-{#            {% for lieu in sortie.idLieu %}#}
-{#                <article>#}
-{#                    <div>#}
-{#                        <h4>Lieu {{ lieu.nom }}</h4>#}
-{#                        {% if lieu.overview %}#}
-{#                            <div>{{ lieu.overview }}</div>#}
-{#                        {% endif %}#}
-{#                    </div>#}
-{#                </article>#}
-{#            {% endfor %}#}
-        </section>
-    </div>
+    <section id="participants">
+        <h3>Participants</h3>
+        <table id="tableau-participants">
+            <thead>
+                <tr>
+                    <td>Pseudo</td>
+                    <td>Nom</td>
+                </tr>
+            </thead>
+            <tbody>
+{#                {% for participant in participants %}#}
+{#                    <tr>#}
+{#                        <td>{{ participant.pseudo }}</td>#}
+{#                        <td>{{ participant.prenom}} {{ participant.nom }}</td>#}
+{#                    </tr>#}
+{#                {% endfor %}#}
+            </tbody>
+        </table>
+    </section>
 </div>
 {% endblock %}
 

@@ -14,6 +14,7 @@ use App\Repository\EtatRepository;
 use App\Repository\LieuRepository;
 use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
+use App\Repository\VilleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,13 +40,21 @@ class SortieController extends AbstractController
     /**
      * @Route("/details/{id}", name="details")
      */
-    public function details(int $id, SortieRepository $sortieRepository): Response
+    public function details(
+        int $id,
+        SortieRepository $sortieRepository,
+        LieuRepository $lieuRepository,
+        VilleRepository $villeRepository
+        ): Response
     {
         $sortie = $sortieRepository->find($id);
+        $lieu = $lieuRepository->find($sortie->getIdLieu());
+        $ville = $villeRepository->find($lieu->getIdVille());
 
         return $this->render('sortie/details.html.twig', [
-            "sortie"=> $sortie
-
+            "sortie"=> $sortie,
+            "lieu" => $lieu,
+            "ville" => $ville
         ]);
     }
     /**
