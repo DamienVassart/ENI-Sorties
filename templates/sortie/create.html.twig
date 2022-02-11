@@ -19,12 +19,10 @@
             <a href="{{ path('lieu_create') }}">Ajouter un lieu</a>
         </button>
         <p>Ou sélectionner un lieu existant: </p>
-        <div id="lieu-sortie">
-            {{ form_row(sortieForm.Ville) }}
-            {% if sortieForm.Lieu is defined %}
-                {{ form_row(sortieForm.Lieu) }}
-            {% endif %}
-        </div>
+        {{ form_row(sortieForm.Ville) }}
+        {% if sortieForm.Lieu is defined %}
+            {{ form_row(sortieForm.Lieu) }}
+        {% endif %}
     </fieldset>
 
     <button>Valider</button>
