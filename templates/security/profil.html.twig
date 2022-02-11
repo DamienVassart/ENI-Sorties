@@ -4,7 +4,7 @@
     {% if app.user %}
 
         {{ form_start(profilUpdateForm) }}
-        <div id="container">
+{#        <div id="container">#}
 
             {% if app.user.champ != null %}
             <img src="{{ asset('photosProfil/'~ app.user.champ) }}" alt="image profil">
@@ -15,58 +15,58 @@
                 {{ form_label(profilUpdateForm.pseudo) }}
                 {{ form_widget(profilUpdateForm.pseudo) }}
                 {{ form_errors(profilUpdateForm.pseudo) }}
-            </div>
+{#            </div>#}
 
-            <div class="profil">
+{#            <div class="profil">#}
              {#    {{ form_label(profilUpdateForm.nom, 'Nom: ') }} #}
                 {{ form_label(profilUpdateForm.nom) }}
                 {{ form_widget(profilUpdateForm.nom) }}
                 {{ form_errors(profilUpdateForm.nom) }}
-            </div>
+{#            </div>#}
 
-            <div class="profil">
+{#            <div class="profil">#}
             {#     {{ form_label(profilUpdateForm.prenom, 'Prénom: ') }} #}
                 {{ form_label(profilUpdateForm.prenom) }}
                 {{ form_widget(profilUpdateForm.prenom) }}
                 {{ form_errors(profilUpdateForm.prenom) }}
-            </div>
+{#            </div>#}
 
-            <div class="profil">
+{#            <div class="profil">#}
             {#     {{ form_label(profilUpdateForm.telephone, 'Téléphone: ') }} #}
                 {{ form_label(profilUpdateForm.telephone) }}
                 {{ form_widget(profilUpdateForm.telephone) }}
                 {{ form_errors(profilUpdateForm.telephone) }}
-            </div>
+{#            </div>#}
 
-            <div class="profil">
+{#            <div class="profil">#}
             {#     {{ form_label(profilUpdateForm.email, 'Email: ') }} #}
                 {{ form_label(profilUpdateForm.email) }}
                 {{ form_widget(profilUpdateForm.email) }}
                 {{ form_errors(profilUpdateForm.email) }}
-            </div>
+{#            </div>#}
 
-            <div class="profil"
+{#            <div class="profil"#}
             {#     {{ form_label(profilUpdateForm.campus, 'Campus: ') }} #}
                 {{ form_label(profilUpdateForm.campus) }}
                 {{ form_widget(profilUpdateForm.campus) }}
                 {{ form_errors(profilUpdateForm.campus) }}
-            </div>
+{#            </div>#}
 
-            <div class="profil">
+{#            <div class="profil">#}
                 {{ form_label(profilUpdateForm.password, 'Mot de passe') }}
-                {# {{ form_label(profilUpdateForm.password) }} #}
+{#                {{ form_label(profilUpdateForm.password) }}#}
                 {{ form_widget(profilUpdateForm.password) }}
                 {{ form_errors(profilUpdateForm.password) }}
-            </div>
+{#            </div>#}
 
-            <div class="profil">
+{#            <div class="profil">#}
                 {# {{ form_label(profilUpdateForm.champ, 'Uploader votre photo de profil: ') }} #}
                 {{ form_label(profilUpdateForm.champ) }}
                 {{ form_widget(profilUpdateForm.champ) }}
                 {{ form_errors(profilUpdateForm.champ) }}
             </div>
 
-        </div>
+{#        </div>#}
 
         <script>
             const clicChamp = document.querySelector("input");
@@ -88,8 +88,6 @@
                 }
             }
         </script>
-
-        <
 
         {{ form_end(profilUpdateForm) }}
     {% endif %}

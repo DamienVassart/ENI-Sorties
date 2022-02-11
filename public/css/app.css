@@ -4,26 +4,26 @@
 
 /* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap'); */
 
-
+/* note Dorothée: */
 body {
-    background-color: whitesmoke;
-    font-family: 'Abril Fatface', cursive;
-    font-family: 'Roboto', sans-serif;
-}
-
-.container {
+    margin: 0;
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
+    background-color: whitesmoke;
+    font-family: 'Roboto', sans-serif; /* j'ai mis l'autre font dans le header, les deux ne fonctionnaient pas ensemble ici */
     max-width: 1000px;
     margin: auto;
     padding: 5px;
 }
 
+/* vérifier cela */
 a {
     color: inherit;
     text-decoration: none;
 }
 
+/* vérifier cela */
 a:hover {
     color: #BC956B;
 }
@@ -33,6 +33,7 @@ header {
     justify-content: space-between;
     align-items: center;
     background-color: lightsteelblue;
+    padding: 1rem 0; /* ajout Dorothée */
 }
 
 header img {
@@ -42,6 +43,7 @@ header img {
 
 header h1 {
     position: relative;
+    font-family: 'Abril Fatface', cursive;
 }
 
 nav ul {
