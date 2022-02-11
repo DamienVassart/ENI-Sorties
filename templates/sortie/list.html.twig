@@ -9,11 +9,24 @@
       <!-- :affichage des sorties-->
 
       {% for sortie in sorties %}
-      <article>
-         <a href="{{ path('sortie_details', {'id':sortie.id}) }}"
-            title="Details d'une nouvelle sortie | {{ sortie.idLieu|length }}lieu">
-         </a>
-      </article>
+         <article>
+            <ul>
+               <li>Nom de la sortie : {{ sortie.nom }}</li>
+               <li>Date de la sortie : {{ sortie.dateHeureDebut.format('d/m/Y H:i:s') }} </li>
+               <li>Clôture : {{ sortie.dateLimiteInscription.format('d/m/Y') }}</li>
+               <li>Inscrits -> {{ sortie.participants.count }} / places -> {{ sortie.nbInscriptionsMax }}</li>
+               <li>État : {{ sortie.idEtat.libelle }}</li>
+               <li>Inscrit : {# todo: afficher une croix si inscrit, un vide si non inscrit #}</li>
+               <li>Organisateur : {{ sortie.idOrganisateur.nom }}</li>
+               <li>Options :
+                  {# todo: afficher une liste de conditions #}
+                  <a href="{{ path('sortie_details', {'id': sortie.id}) }}">Afficher</a>
+                  <a href="{{ path('sortie_inscription', {'id': sortie.id}) }}">S'inscrire</a>
+                  <a href="{{ path('sortie_desistement', {'id': sortie.id}) }}">Se désister</a>
+                  <a href="#">Modifier</a></li>
+                  <a href="{{ path('sortie_annuler', {'id': sortie.id}) }}">Annuler</a></li>
+            </ul>
+         </article>
       {% endfor %}
 
    </section>

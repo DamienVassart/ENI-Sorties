@@ -117,8 +117,12 @@ class SortieController extends AbstractController
     /**
      * @Route("/annuler{id}", name="annuler")
      */
-    public function annuler(Sortie $sortie, EntityManagerInterface $entityManager, Request $request, EtatRepository $etatRepository) : Response
+    public function annuler(int $id, EntityManagerInterface $entityManager, Request $request,
+                            EtatRepository $etatRepository,
+                            SortieRepository $sortieRepository) : Response
     {
+
+        $sortie = $sortieRepository->find($id);
 
         $sortieForm = $this->createForm(SortieAnnulerType::class, $sortie);
 
@@ -143,38 +147,63 @@ class SortieController extends AbstractController
         ]);
     }
 
-//    /**
-//     * @Route("/inscription", name="inscription")
-//     */
-//    public function inscription(Sortie $sortie,
-//                                EntityManagerInterface $entityManager,
-//                                Request $request,
-//                                EtatRepository $etatRepository,
-//                                ParticipantRepository $participantRepository) : Response
-//    {
-//
-//        $user = $this->getUser();
-//
-//        $sortieForm = $this->createForm(SortieAnnulerType::class, $sortie);
-//
-//        $sortieForm->handleRequest($request);
-//
-//        if($sortieForm->isSubmitted() && $sortieForm->isValid())
-//        {
-//
-//            $idEtatAnnuler = $etatRepository->find(6);
-//
-//            $sortie->setIdEtat($idEtatAnnuler);
-//            $this->addFlash('success', 'La sortie a bien été annulée !');
-//            $entityManager->persist($sortie);
-//            $entityManager->flush();
-//            return $this->redirectToRoute('sortie_list');
-//        }
-//
-//
-//        return $this->render('sortie/annulerSortie.html.twig', [
-//            'annulationSortieForm' =>$sortieForm->createview(),
-//            'sortie' => $sortie
-//        ]);
-//    }
+    /**
+     * @Route("/inscription{id}", name="inscription")
+     */
+    public function inscription(int $id,
+                                EntityManagerInterface $entityManager,
+                                Request $request,
+                                EtatRepository $etatRepository,
+                                ParticipantRepository $participantRepository,
+                                SortieRepository $sortieRepository) : Response
+    {
+
+        $sortie = $sortieRepository->find($id);
+
+        $user = $this->getUser();
+
+        $userPseudo = $user->getUserIdentifier();
+
+        $participant = $participantRepository->findOneBy(['pseudo' => $userPseudo], ['pseudo' => 'ASC']);
+
+        $sortie->addParticipant($participant);
+
+        $this->addFlash('success', 'Vous vous êtes bien inscrit à cette sortie !');
+
+        $entityManager->persist($sortie);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('sortie_list');
+    }
+
+    /**
+     * @Route("/desistement{id}", name="desistement")
+     */
+    public function desistement(int $id,
+                                EntityManagerInterface $entityManager,
+                                Request $request,
+                                EtatRepository $etatRepository,
+                                ParticipantRepository $participantRepository,
+                                SortieRepository $sortieRepository) : Response
+    {
+        $sortie = $sortieRepository->find($id);
+
+        $user = $this->getUser();
+
+        $userPseudo = $user->getUserIdentifier();
+
+        $participant = $participantRepository->findOneBy(['pseudo' => $userPseudo], ['pseudo' => 'ASC']);
+
+        $sortie->removeParticipant($participant);
+
+        $this->addFlash('success', 'Vous vous êtes bien désisté !');
+
+        $entityManager->persist($sortie);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('sortie_list');
+    }
+
+
+
 }
