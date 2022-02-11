@@ -76,8 +76,7 @@ footer {
 }
 
 #lieu-sortie button {
-    position: relative;
-    left: -190px;
+    width: 200px;
 }
 
 label {
