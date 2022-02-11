@@ -133,4 +133,39 @@ class SortieController extends AbstractController
             'sortie' => $sortie
         ]);
     }
+
+//    /**
+//     * @Route("/inscription", name="inscription")
+//     */
+//    public function inscription(Sortie $sortie,
+//                                EntityManagerInterface $entityManager,
+//                                Request $request,
+//                                EtatRepository $etatRepository,
+//                                ParticipantRepository $participantRepository) : Response
+//    {
+//
+//        $user = $this->getUser();
+//
+//        $sortieForm = $this->createForm(SortieAnnulerType::class, $sortie);
+//
+//        $sortieForm->handleRequest($request);
+//
+//        if($sortieForm->isSubmitted() && $sortieForm->isValid())
+//        {
+//
+//            $idEtatAnnuler = $etatRepository->find(6);
+//
+//            $sortie->setIdEtat($idEtatAnnuler);
+//            $this->addFlash('success', 'La sortie a bien été annulée !');
+//            $entityManager->persist($sortie);
+//            $entityManager->flush();
+//            return $this->redirectToRoute('sortie_list');
+//        }
+//
+//
+//        return $this->render('sortie/annulerSortie.html.twig', [
+//            'annulationSortieForm' =>$sortieForm->createview(),
+//            'sortie' => $sortie
+//        ]);
+//    }
 }
