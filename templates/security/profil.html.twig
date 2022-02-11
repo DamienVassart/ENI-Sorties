@@ -46,7 +46,7 @@
 {#            </div>#}
 
 {#            <div class="profil"#}
-            {#     {{ form_label(profilUpdateForm.campus, 'Campus: ') }} #}
+            {#     {{ form_label(profilUpdateForm.campus, 'Campus') }} #}
                 {{ form_label(profilUpdateForm.campus) }}
                 {{ form_widget(profilUpdateForm.campus) }}
                 {{ form_errors(profilUpdateForm.campus) }}
@@ -68,6 +68,7 @@
 
 {#        </div>#}
 
+{#        <button class="btn ptn-primary">#}
         <script>
             const clicChamp = document.querySelector("input");
             const clicSelect = document.querySelector("select");
@@ -88,6 +89,7 @@
                 }
             }
         </script>
+{#        </button>#}
 
         {{ form_end(profilUpdateForm) }}
     {% endif %}

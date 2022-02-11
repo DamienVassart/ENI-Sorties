@@ -4,15 +4,17 @@
 
     <h2>{{ participant.pseudo }}</h2>
 
-    <p>Prénom: {{ participant.prenom }}</p>
+    <ul>
+        <li>Prénom: {{ participant.prenom }}</li>
 
-    <p>Nom: {{ participant.nom }}</p>
+        <li>Nom: {{ participant.nom }}</li>
 
-    <p>Téléphone: {{ participant.telephone }}</p>
+        <li>Téléphone: {{ participant.telephone }}</li>
 
-    <p>Email: {{ participant.email }}</p>
+        <li>Email: {{ participant.email }}</li>
 
-    <p>Campus: {{ participant.campus.nom }}</p>
+        <li>Campus: {{ participant.campus.nom }}</li>
+    </ul>
 
     {# todo: affichage de photos #}
 

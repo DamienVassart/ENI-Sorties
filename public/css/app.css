@@ -6,15 +6,17 @@
 
 /* note Dorothée: */
 body {
-    margin: 0;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
     background-color: whitesmoke;
-    font-family: 'Roboto', sans-serif; /* j'ai mis l'autre font dans le header, les deux ne fonctionnaient pas ensemble ici */
+}
+
+main {
+    font-family: 'Roboto', sans-serif;
     max-width: 1000px;
-    margin: auto;
+    margin: auto; /* cela centre le corps du texte sur la page */
     padding: 5px;
+    min-height: 60vh; /* cela permet de dire quelle est la taille minimum du corps de texte, cela fait baisser le pied de page */
 }
 
 /* vérifier cela */
@@ -54,6 +56,11 @@ nav ul {
 
 nav li {
     margin-right: 1rem;
+    font-family: 'Roboto', sans-serif;
+}
+
+ul {
+    list-style: none;
 }
 
 html {
@@ -87,5 +94,7 @@ input.submit {
     color: link; /* à changer */
     border-width: 0;
 }
+
+
 
 
