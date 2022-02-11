@@ -1,19 +1,25 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
     <div>
         {% for ville in listeVilles %}
             <ul>
-                <li>{{ ville.nom }} - {{ ville.codePostal }}</li>
+                <li>
+                    {{ ville.nom }}
+                    {{ ville.codePostal }}
+                    <a href="{{ path('admin_villes_edit', {'id': ville.id}) }}">Modifier</a>
+                    <a href="{{ path('admin_villes_delete', {'id': ville.id}) }}">Supprimer</a>
+                 </li>
             </ul>
         {% endfor %}
     </div>
 
     {{ form_start(villeForm) }}
     {{ form_widget(villeForm) }}
-    <button>Ajouter</button>
+
+    <button type="submit">Ajouter</button>
     {{ form_end(villeForm) }}
+
 {% endblock %}
 
 {% block title %}

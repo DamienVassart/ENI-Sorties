@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ form_start(villeModifForm) }}
+    {{ form_widget(villeModifForm) }}
+
+    <button type="submit">Modifier</button>
+    {{ form_end(villeModifForm) }}
+{% endblock %}
+
+{% block title %}
+    Modification d'une ville
+{% endblock %}
+
