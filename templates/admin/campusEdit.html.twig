@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ form_start(campusModifForm) }}
+    {{ form_widget(campusModifForm) }}
+
+    <button type="submit">Modifier</button>
+    {{ form_end(campusModifForm) }}
+{% endblock %}
+
+{% block title %}
+    Modification d'un campus
+{% endblock %}
+

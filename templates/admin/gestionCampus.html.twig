@@ -1,22 +1,26 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div>
-    {% for campus in listeCampus %}
-    <ul>
-        <li>{{ campus.nom }}</li>
-    </ul>
-    {% endfor %}
-</div>
+    <div>
+        {% for campus in listeCampus %}
+            <ul>
+                <li>
+                    {{ campus.nom }}
+                    <a href="{{ path('admin_campus_edit', {'id': campus.id}) }}">Modifier</a>
+                    <a href="{{ path('admin_campus_delete', {'id': campus.id}) }}">Supprimer</a>
+                </li>
+            </ul>
+        {% endfor %}
+    </div>
+
     {{ form_start(campusForm) }}
     {{ form_widget(campusForm) }}
-    <button>Ajouter</button>
-    <button>Modifier</button>
-    <button>Supprimer</button>
+
+    <button type="submit">Ajouter</button>
     {{ form_end(campusForm) }}
+
 {% endblock %}
 
 {% block title %}
- Gestion des Campus
+    Gestion des Campus
 {% endblock %}
-
