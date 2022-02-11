@@ -70,39 +70,16 @@ class VilleController extends AbstractController
     }
 
     /**
-     * @Route("/admin/villes/delete/{id}", name="admin_villes_delete")
+     * @Route("/admin/villes/delete{id}", name="admin_villes_delete")
      */
-    public function delete(int $id, VilleRepository $villeRepository, Request $request, EntityManagerInterface $entityManager): Response
+    public function delete(Ville $ville, VilleRepository $villeRepository, Request $request, EntityManagerInterface $entityManager): Response
     {
-        $villeASupprimer = $villeRepository->find($id);
+        $entityManager->remove($ville);
+        $entityManager->flush();
+        $this->addFlash('success', 'La ville a bien été supprimée');
 
-        $villeSupprForm = $this->createForm(VilleType::class, $villeASupprimer);
+        return $this->redirectToRoute('admin_villes');
 
-        $villeSupprForm->remove('nom');
-        $villeSupprForm->remove('codePostal');
-        $villeSupprForm->add('submit', SubmitType::class, [
-            'label' => 'Supprimer cette ville ?'
-        ]);
-
-        $villeSupprForm->handleRequest($request);
-
-        try{
-            if($villeSupprForm->isSubmitted() && $villeSupprForm->isValid())
-            {
-                $entityManager->remove($villeASupprimer);
-                $entityManager->flush();
-                return $this->redirectToRoute('admin_villes');
-            }
-        } catch (\Exception $e){
-            $this->addFlash('success', 'La ville est associée à une/des sortie(s), veuillez
-                                                supprimer celle(s)-ci en premier');
-            return $this->redirectToRoute('sortie_list');
-        }
-
-        return $this->render('admin/villeDelete.html.twig', [
-            'ville' => $villeASupprimer,
-            'villeSupprForm' => $villeSupprForm->createView()
-        ]);
 
     }
 }
