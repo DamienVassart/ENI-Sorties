@@ -15,15 +15,15 @@ body {
     display: flex;
 }
 
-.profil {
+.profil,
+.campus {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
 }
 
-
-
-.profil_form {
+.profil_form,
+.campus {
     display: flex;
     flex-direction: row;
 
@@ -38,7 +38,7 @@ main {
     max-width: 1000px;
     margin: auto; /* cela centre le corps du texte sur la page */
     padding: 5px;
-    min-height: 60vh; /* cela permet de dire quelle est la taille minimum du corps de texte, cela fait baisser le pied de page */
+    min-height: 80vh; /* cela permet de dire quelle est la taille minimum du corps de texte, cela fait baisser le pied de page */
 }
 
 /* vérifier cela */

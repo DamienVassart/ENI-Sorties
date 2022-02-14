@@ -1,26 +1,30 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div id="blocRecherche">
-    {{ form_start(searchForm) }}
-    {{ form_widget(searchForm) }}
-    {{ form_end(searchForm) }}
-</div>
+    <div id="blocRecherche">
+        {{ form_start(searchForm) }}
+        {{ form_widget(searchForm) }}
+        {{ form_end(searchForm) }}
+    </div>
+
     <div>
         {% for campus in listeCampus %}
             <ul>
                 <li>
-                    {{ campus.nom }}
-                    <a href="{{ path('admin_campus_edit', {'id': campus.id}) }}">Modifier</a>
-                    <a href="{{ path('admin_campus_delete', {'id': campus.id}) }}">Supprimer</a>
+                    <div class="campus">
+                        {{ campus.nom }}
+                        <a href="{{ path('admin_campus_edit', {'id': campus.id}) }}"><button>Modifier</button></a>
+                        <a href="{{ path('admin_campus_delete', {'id': campus.id}) }}"><button>Supprimer</button></a>
+                    </div>
                 </li>
             </ul>
         {% endfor %}
     </div>
+
     <div id="container">
         {{ form_start(campusForm) }}
         {{ form_widget(campusForm) }}
-        <button type="submit">Ajouter</button>
+        <button type="submit" class="btn-primary btn-block">Ajouter</button>
         {{ form_end(campusForm) }}
     </div>
     <br>
