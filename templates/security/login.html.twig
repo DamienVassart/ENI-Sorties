@@ -8,12 +8,6 @@
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
-    {% if app.user %}
-        <div class="mb-3">
-            Vous êtes connecté en tant que {{ app.user.userIdentifier }}
-        </div>
-    {% endif %}
-
     <h1 class="h3 mb-3 font-weight-normal">Veuillez vous connecter :</h1>
     <label for="inputPseudo">Identifiant</label>
     <input type="text" value="{{ last_username }}" name="pseudo" id="inputPseudo" class="form-control" autocomplete="username" required autofocus>

@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Campus;
 use App\Entity\Ville;
 use App\Form\ModifierVilleType;
 use App\Form\VilleType;
+use App\Repository\CampusRepository;
 use App\Repository\VilleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -72,38 +74,13 @@ class VilleController extends AbstractController
     /**
      * @Route("/admin/villes/delete{id}", name="admin_villes_delete")
      */
-    public function delete(int $id, VilleRepository $villeRepository, Request $request, EntityManagerInterface $entityManager): Response
+    public function delete(Ville $ville, VilleRepository $villeRepository, Request $request, EntityManagerInterface $entityManager): Response
     {
-        $villeASupprimer = $villeRepository->find($id);
-
-        $villeSupprForm = $this->createForm(VilleType::class, $villeASupprimer);
-
-        $villeSupprForm->remove('nom');
-        $villeSupprForm->remove('codePostal');
-        $villeSupprForm->add('submit', SubmitType::class, [
-            'label' => 'Supprimer cette ville ?'
-        ]);
-
-        $villeSupprForm->handleRequest($request);
-
-        try{
-            if($villeSupprForm->isSubmitted() && $villeSupprForm->isValid())
-            {
-                $entityManager->remove($villeASupprimer);
-                $entityManager->flush();
-                return $this->redirectToRoute('admin_villes');
-            }
-        } catch (\Exception $e){
-            $this->addFlash('success', 'La ville est associée à une/des sortie(s), veuillez
-                                                supprimer celle(s)-ci en premier');
-            return $this->redirectToRoute('sortie_list');
-        }
-
-        return $this->render('admin/villeDelete.html.twig', [
-            'ville' => $villeASupprimer,
-            'villeSupprForm' => $villeSupprForm->createView()
-        ]);
-
+        $entityManager->remove($ville);
+        $entityManager->flush();
+        $this->addFlash('success', 'La ville a bien été supprimé');
+        return $this->redirectToRoute('admin_villes');
     }
+
 }
 
