@@ -15,11 +15,13 @@ use App\Repository\LieuRepository;
 use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
 use App\Repository\VilleRepository;
+use App\Services\SortieStateSetter;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use function Sodium\add;
 
 /**
  * @Route("/sortie", name="sortie_")
@@ -31,11 +33,6 @@ class SortieController extends AbstractController
      */
     public function list(
         SortieRepository $sortieRepository,
-<<<<<<< HEAD
-        ParticipantRepository $participantRepository): Response
-    {
-        $sorties = $sortieRepository->findAll();
-=======
         SortieStateSetter $sortieStateSetter,
         EtatRepository $etatRepository,
         EntityManagerInterface $entityManager): Response
@@ -49,9 +46,9 @@ class SortieController extends AbstractController
         }
 
         $entityManager->flush();
->>>>>>> 9ce6800 (mise à jour auto de l'état de la sortie en fonction de la date (à tester))
 
         return $this->render('sortie/list.html.twig', [
+//            "today" => $today,
             "sorties"=> $sorties
         ]);
     }
@@ -143,26 +140,36 @@ class SortieController extends AbstractController
                             EtatRepository $etatRepository,
                             SortieRepository $sortieRepository) : Response
     {
-
+        $user = $this->getUser();
+        $rolesUser = $user->getRoles();
+        $pseudoUserCourant = $user->getUserIdentifier();
         $sortie = $sortieRepository->find($id);
-
+        $sortieOrganisateur = $sortie->getIdOrganisateur();
+        $pseudoOrganisateur = $sortieOrganisateur->getPseudo();
         $sortieForm = $this->createForm(SortieAnnulerType::class, $sortie);
-
         $sortieForm->handleRequest($request);
-
         if($sortieForm->isSubmitted() && $sortieForm->isValid())
         {
-
-            $idEtatAnnuler = $etatRepository->find(6);
-
-            $sortie->setIdEtat($idEtatAnnuler);
-            $this->addFlash('success', 'La sortie a bien été annulée !');
-            $entityManager->persist($sortie);
-            $entityManager->flush();
-            return $this->redirectToRoute('sortie_list');
+            foreach ($rolesUser as $role)
+            {
+                if($role == "ROLE_ADMIN") {
+                    $idEtatAnnuler = $etatRepository->find(6);
+                    $sortie->setIdEtat($idEtatAnnuler);
+                    $this->addFlash('success', 'La sortie a bien été annulée !');
+                    $entityManager->persist($sortie);
+                    $entityManager->flush();
+                    return $this->redirectToRoute('sortie_list');
+                }
+            }
+            if($pseudoOrganisateur == $pseudoUserCourant) {
+                $idEtatAnnuler = $etatRepository->find(6);
+                $sortie->setIdEtat($idEtatAnnuler);
+                $this->addFlash('success', 'La sortie a bien été annulée !');
+                $entityManager->persist($sortie);
+                $entityManager->flush();
+                return $this->redirectToRoute('sortie_list');
+            }
         }
-
-
         return $this->render('sortie/annulerSortie.html.twig', [
             'annulationSortieForm' =>$sortieForm->createview(),
             'sortie' => $sortie
@@ -188,12 +195,16 @@ class SortieController extends AbstractController
 
         $participant = $participantRepository->findOneBy(['pseudo' => $userPseudo], ['pseudo' => 'ASC']);
 
-        $sortie->addParticipant($participant);
+        if ($sortie->getIdEtat()->getId() < 3) {
+            $sortie->addParticipant($participant);
 
-        $this->addFlash('success', 'Vous vous êtes bien inscrit à cette sortie !');
+            $this->addFlash('success', 'Vous vous êtes bien inscrit à cette sortie !');
 
-        $entityManager->persist($sortie);
-        $entityManager->flush();
+            $entityManager->persist($sortie);
+            $entityManager->flush();
+        } else {
+            $this->addFlash('notice', "Il n'est plus possible de s'inscrire à cette sortie !");
+        }
 
         return $this->redirectToRoute('sortie_list');
     }
@@ -216,12 +227,16 @@ class SortieController extends AbstractController
 
         $participant = $participantRepository->findOneBy(['pseudo' => $userPseudo], ['pseudo' => 'ASC']);
 
-        $sortie->removeParticipant($participant);
+        if($sortie->getIdEtat()->getId() < 4) {
+            $sortie->removeParticipant($participant);
 
-        $this->addFlash('success', 'Vous vous êtes bien désisté !');
+            $this->addFlash('success', 'Vous vous êtes bien désisté !');
 
-        $entityManager->persist($sortie);
-        $entityManager->flush();
+            $entityManager->persist($sortie);
+            $entityManager->flush();
+        } else {
+            $this->addFlash('notice', "Il n'est plus possible de se désister pour cette sortie !");
+        }
 
         return $this->redirectToRoute('sortie_list');
     }
