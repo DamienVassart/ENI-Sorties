@@ -36,16 +36,15 @@ class SortieController extends AbstractController
         SortieStateSetter $sortieStateSetter): Response
     {
         $sorties = $sortieRepository->findAll();
-        $today = new \DateTime('now');
-        $today = $today->add(new \DateInterval('P1M'));
+//        $today = new \DateTime('now');
 
         foreach ($sorties as $sortie) {
             $sortieStateSetter->updateState($sortie);
         }
 
         return $this->render('sortie/list.html.twig', [
-            "sorties"=> $sorties,
-            "today" => $today
+//            "today" => $today,
+            "sorties"=> $sorties
         ]);
     }
     /**
