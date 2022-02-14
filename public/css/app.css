@@ -23,10 +23,11 @@ body {
 }
 
 .profil_form,
-.campus {
+.campus,
+.ville {
     display: flex;
     flex-direction: row;
-
+    justify-content: space-between;
 }
 
 .profil_photo {
@@ -38,7 +39,7 @@ main {
     max-width: 1000px;
     margin: auto; /* cela centre le corps du texte sur la page */
     padding: 5px;
-    min-height: 80vh; /* cela permet de dire quelle est la taille minimum du corps de texte, cela fait baisser le pied de page */
+    min-height: 70vh; /* cela permet de dire quelle est la taille minimum du corps de texte, cela fait baisser le pied de page */
 }
 
 /* vérifier cela */
