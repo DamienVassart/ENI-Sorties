@@ -131,8 +131,9 @@ input.submit {
 
 .list-sorties {
     border-radius: 15px 50px;
-    background: lightsteelblue;
-    /*padding: 20px;*/
+    border: 2px lightsteelblue;
+    /*background: lightsteelblue;*/
+    /*padding: 20px; test*/
     width: 500px;
     height: auto;
 }
