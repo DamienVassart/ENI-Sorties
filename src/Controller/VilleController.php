@@ -48,12 +48,12 @@ class VilleController extends AbstractController
         $searchForm->handleRequest($request);
 
         $nomVille = $searchForm->get('nom')->getData();
-        $donneesVille = $villeRepository->searchCities($nomVille);
+        $listeVilles = $villeRepository->searchCities($nomVille);
 
        if ($searchForm->isSubmitted() && $searchForm->isValid())
         {
 
-            if ($donneesVille == null) {
+            if ($listeVilles == null) {
                 $this->addFlash('error', 'Aucune ville contenant ce mot clé dans son nom n\'a été trouvé, essayez en un autre.');
             }
         }
@@ -62,7 +62,6 @@ class VilleController extends AbstractController
             'listeVilles' => $listeVilles,
             'villeForm' => $villeForm->createView(),
             'searchForm' => $searchForm->createView(),
-            'donneesVille' => $donneesVille
         ]);
     }
 

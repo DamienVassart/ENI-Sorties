@@ -41,11 +41,11 @@ class CampusController extends AbstractController
 
         $searchForm->handleRequest($request);
         $nomCampus = $searchForm->get('nom')->getData();
-        $donneesCampus = $campusRepository->searchCampus($nomCampus);
+        $listeCampus = $campusRepository->searchCampus($nomCampus);
 
         if ($campusForm->isSubmitted()&&$campusForm->isValid())
         {
-            if ($donneesCampus==null)
+            if ($listeCampus==null)
             {
                 $this->addFlash('error', 'Aucun campus contenant ce mot clé dont ce nom n\'a été trouvé, essayez en un autre.');
             }
@@ -55,7 +55,6 @@ class CampusController extends AbstractController
             "listeCampus" => $listeCampus,
             "campusForm" => $campusForm->createView(),
             "searchForm" => $searchForm->createView(),
-            "donneesCampus" => $donneesCampus
         ]);
     }
     /**

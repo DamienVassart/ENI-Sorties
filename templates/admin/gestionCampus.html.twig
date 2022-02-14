@@ -25,29 +25,6 @@
     </div>
     <br>
 
-    <script>
-        const clickInput=document.querySelector("input");
-        var bouton=false;
-        clickInput.addEventListener("change", updateValue);
-
-        function updateValue(e){
-
-            if (bouton == false){
-
-                var recherche = document.createElement("p");
-                var rechercheValue = document.createTextNode("{% for campus in donneesCampus %}{{ campus.nom }}" + " " + "{%  endfor %}");
-
-                recherche.setAttribute("class", "pRecherche");
-                recherche.appendChild(rechercheValue);
-                document.getElementById("blocRecherche").insertAdjacentElement("afterend", recherche);
-                bouton = true;
-                e.preventDefault();
-            }
-        }
-    </script>
-
-
-
 {% endblock %}
 
 {% block title %}
