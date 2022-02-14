@@ -1,6 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    {{ form_start(searchForm) }}
+    {{ form_widget(searchForm) }}
+    {{ form_end(searchForm) }}
+
+    {% for ville in donneesVille %}
+
+    {{ ville.nom }} - {{ ville.codePostal }}
+
+    {% endfor %}
+
     <div>
         {% for ville in listeVilles %}
             <ul>

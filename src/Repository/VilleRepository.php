@@ -26,6 +26,14 @@ class VilleRepository extends ServiceEntityRepository
         return $qb;
     }
 
+    public function searchCities($nomVille) {
+        return $this->createQueryBuilder('v')
+            ->andWhere('v.nom LIKE :nomVille')
+            ->setParameter('nomVille', '%'.$nomVille.'%')
+            ->getQuery()
+            ->execute();
+    }
+
     // /**
     //  * @return Ville[] Returns an array of Ville objects
     //  */

@@ -5,10 +5,12 @@ namespace App\Controller;
 use App\Entity\Campus;
 use App\Entity\Ville;
 use App\Form\ModifierVilleType;
+use App\Form\SearchVilleType;
 use App\Form\VilleType;
 use App\Repository\CampusRepository;
 use App\Repository\VilleRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,6 +28,8 @@ class VilleController extends AbstractController
 
        $ville = new Ville();
        $villeForm = $this->createForm(VilleType::class, $ville);
+        $searchForm = $this->createForm(SearchVilleType::class);
+
        $villeForm->handleRequest($request);
 
        if($villeForm->isSubmitted()&&$villeForm->isValid())
@@ -41,9 +45,24 @@ class VilleController extends AbstractController
 
        }
 
+        $searchForm->handleRequest($request);
+
+        $nomVille = $searchForm->get('nom')->getData();
+        $donneesVille = $villeRepository->searchCities($nomVille);
+
+       if ($searchForm->isSubmitted() && $searchForm->isValid())
+        {
+
+            if ($donneesVille == null) {
+                $this->addFlash('error', 'Aucune ville contenant ce mot clé dans son nom n\'a été trouvé, essayez en un autre.');
+            }
+        }
+
         return $this->render('admin/gestionVilles.html.twig', [
             'listeVilles' => $listeVilles,
-            'villeForm' => $villeForm->createView()
+            'villeForm' => $villeForm->createView(),
+            'searchForm' => $searchForm->createView(),
+            'donneesVille' => $donneesVille
         ]);
     }
 
