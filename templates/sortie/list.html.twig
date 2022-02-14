@@ -17,7 +17,7 @@
          {% set participants = sortie.participants | map(p => p.id) %}
          <article>
             <ul>
-               <li>Nom de la sortie : {{ sortie.nom }}</li>
+               <li>Nom de la sortie: {{ sortie.nom }}</li>
                <li>Date de la sortie : {{ sortie.dateHeureDebut.format('d/m/Y H:i:s') }} </li>
                <li>Clôture : {{ sortie.dateLimiteInscription.format('d/m/Y') }}</li>
                <li>Inscrits -> {{ sortie.participants.count }} / places -> {{ sortie.nbInscriptionsMax }}</li>
