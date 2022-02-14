@@ -31,9 +31,25 @@ class SortieController extends AbstractController
      */
     public function list(
         SortieRepository $sortieRepository,
+<<<<<<< HEAD
         ParticipantRepository $participantRepository): Response
     {
         $sorties = $sortieRepository->findAll();
+=======
+        SortieStateSetter $sortieStateSetter,
+        EtatRepository $etatRepository,
+        EntityManagerInterface $entityManager): Response
+    {
+        $sorties = $sortieRepository->findAll();
+//        $today = new \DateTime('now');
+
+        foreach ($sorties as $sortie) {
+            $sortieStateSetter->updateState($sortie, $etatRepository);
+            $entityManager->persist($sortie);
+        }
+
+        $entityManager->flush();
+>>>>>>> 9ce6800 (mise à jour auto de l'état de la sortie en fonction de la date (à tester))
 
         return $this->render('sortie/list.html.twig', [
             "sorties"=> $sorties
