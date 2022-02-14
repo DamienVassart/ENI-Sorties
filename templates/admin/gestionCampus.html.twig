@@ -9,15 +9,16 @@
 
     <div>
         {% for campus in listeCampus %}
-            <ul>
-                <li>
+{#            <ul>#}
+{#                <li>#}
                     <div class="campus">
                         {{ campus.nom }}
                         <a href="{{ path('admin_campus_edit', {'id': campus.id}) }}"><button>Modifier</button></a>
                         <a href="{{ path('admin_campus_delete', {'id': campus.id}) }}"><button>Supprimer</button></a>
                     </div>
-                </li>
-            </ul>
+{#                </li>#}
+{#            </ul>#}
+            <br>
         {% endfor %}
     </div>
 

@@ -27,7 +27,8 @@ body {
 .ville {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    width: auto;
 }
 
 .profil_photo {
@@ -36,7 +37,7 @@ body {
 
 main {
     font-family: 'Roboto', sans-serif;
-    max-width: 1000px;
+    /*max-width: 1000px; comme on a surtout des formulaires, cela ne change rien*/
     margin: auto; /* cela centre le corps du texte sur la page */
     padding: 5px;
     min-height: 70vh; /* cela permet de dire quelle est la taille minimum du corps de texte, cela fait baisser le pied de page */

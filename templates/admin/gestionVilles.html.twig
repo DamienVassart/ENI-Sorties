@@ -7,8 +7,8 @@
 
     <div>
         {% for ville in listeVilles %}
-            <ul>
-                <li>
+{#            <ul>#}
+{#                <li>#}
                     <div class="ville">
                         {{ ville.nom }}
                         {{ ville.codePostal }}
@@ -16,8 +16,9 @@
                         <a href="{{ path('admin_villes_delete', {'id': ville.id}) }}"><button>Supprimer</button></a>
                     </div>
 
-                 </li>
-            </ul>
+{#                 </li>#}
+{#            </ul>#}
+            <br>
         {% endfor %}
     </div>
 
