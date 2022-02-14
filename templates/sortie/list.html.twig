@@ -15,6 +15,7 @@
    <section class="sorties-list">
       <!-- :affichage des sorties-->
       {% for sortie in sorties %}
+         {% set participants = sortie.participants | map(p => p.id) %}
          <article>
             <ul>
                <li>Nom de la sortie : {{ sortie.nom }}</li>
@@ -22,14 +23,21 @@
                <li>Clôture : {{ sortie.dateLimiteInscription.format('d/m/Y') }}</li>
                <li>Inscrits -> {{ sortie.participants.count }} / places -> {{ sortie.nbInscriptionsMax }}</li>
                <li>État : {{ sortie.idEtat.libelle }}</li>
-               <li>Inscrit : {# todo: afficher une croix si inscrit, un vide si non inscrit #}</li>
                <li>Organisateur : <a href="{{ path('app_profilAutre', {'id': sortie.idOrganisateur.id}) }}" title="{{ sortie.idOrganisateur.nom }}">{{ sortie.idOrganisateur.nom }}</a></li>
+               <li>Inscrit :
+                  {% if app.user.id in participants %}
+                     Oui
+                  {% else %}
+                     Non
+                  {% endif %}
+               </li>
                <li>Options :
-                  {# todo: afficher une liste de conditions #}
                   <a href="{{ path('sortie_details', {'id': sortie.id}) }}">Afficher</a>
-                  <a href="{{ path('sortie_inscription', {'id': sortie.id}) }}">S'inscrire</a>
-                  <a href="{{ path('sortie_desistement', {'id': sortie.id}) }}">Se désister</a>
-
+                  {% if app.user.id in participants %}
+                     <a href="{{ path('sortie_desistement', {'id': sortie.id}) }}">Se désister</a>
+                  {% else %}
+                     <a href="{{ path('sortie_inscription', {'id': sortie.id}) }}">S'inscrire</a>
+                  {% endif %}
                   {% if sortie.idOrganisateur.id == app.user.id %}
                      <a href="#">Modifier</a></li>
                      <a href="{{ path('sortie_annuler', {'id': sortie.id}) }}">Annuler</a></li>

@@ -29,9 +29,13 @@ class SortieController extends AbstractController
     /**
      * @Route("", name="list")
      */
-    public function list(SortieRepository $sortieRepository): Response
+    public function list(
+        SortieRepository $sortieRepository,
+        ParticipantRepository $participantRepository): Response
     {
         $sorties = $sortieRepository->findAll();
+
+//        dd($sorties);
 
         return $this->render('sortie/list.html.twig', [
             "sorties"=> $sorties
