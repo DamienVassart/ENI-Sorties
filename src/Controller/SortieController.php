@@ -38,9 +38,9 @@ class SortieController extends AbstractController
         $sorties = $sortieRepository->findAll();
 //        $today = new \DateTime('now');
 
-        foreach ($sorties as $sortie) {
-            $sortieStateSetter->updateState($sortie);
-        }
+//        foreach ($sorties as $sortie) {
+//            $sortieStateSetter->updateState($sortie, );
+//        }
 
         return $this->render('sortie/list.html.twig', [
 //            "today" => $today,
