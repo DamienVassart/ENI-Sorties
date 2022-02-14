@@ -44,8 +44,7 @@ class SortieController extends AbstractController
         int $id,
         SortieRepository $sortieRepository,
         LieuRepository $lieuRepository,
-        VilleRepository $villeRepository,
-        CampusRepository $campusRepository
+        VilleRepository $villeRepository
         ): Response
     {
         $sortie = $sortieRepository->find($id);

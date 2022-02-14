@@ -14,7 +14,6 @@
 
    <section class="sorties-list">
       <!-- :affichage des sorties-->
-
       {% for sortie in sorties %}
          <article>
             <ul>
@@ -30,8 +29,11 @@
                   <a href="{{ path('sortie_details', {'id': sortie.id}) }}">Afficher</a>
                   <a href="{{ path('sortie_inscription', {'id': sortie.id}) }}">S'inscrire</a>
                   <a href="{{ path('sortie_desistement', {'id': sortie.id}) }}">Se désister</a>
-                  <a href="#">Modifier</a></li>
-                  <a href="{{ path('sortie_annuler', {'id': sortie.id}) }}">Annuler</a></li>
+
+                  {% if sortie.idOrganisateur.id == app.user.id %}
+                     <a href="#">Modifier</a></li>
+                     <a href="{{ path('sortie_annuler', {'id': sortie.id}) }}">Annuler</a></li>
+                  {% endif %}
             </ul>
          </article>
       {% endfor %}
