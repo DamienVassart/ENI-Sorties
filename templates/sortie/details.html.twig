@@ -14,7 +14,7 @@
             <div>Date limite d'inscription: {{ sortie.dateLimiteInscription.format('d/m/Y') }}</div>
             <div>Nombre maximum de participants: {{ sortie.nbInscriptionsMax }}</div>
             <div>Informations sortie: {{ sortie.infosSortie }}</div>
-            <div>Campus: {#{{ nomCampus }}#}</div>
+            <div>Campus: {{ campus.nom }}</div>
         </section>
 
         <section id="lieu">
@@ -38,26 +38,6 @@
                     </tr>
                     </thead>
                     <tbody>
-
-                    {# DEBUT lignes échantillons codées en dur pour création du CSS #}
-                    {#                <tr>#}
-                    {#                    <td>JBL</td>#}
-                    {#                    <td>Jean Baptiste LAMARCK</td>#}
-                    {#                </tr>#}
-                    {#                <tr>#}
-                    {#                    <td>YC44</td>#}
-                    {#                    <td>Yves Cousteau</td>#}
-                    {#                </tr>#}
-                    {#                <tr>#}
-                    {#                    <td>MC</td>#}
-                    {#                    <td>Michel CONSTANT</td>#}
-                    {#                </tr>#}
-                    {#                <tr>#}
-                    {#                    <td>JLB</td>#}
-                    {#                    <td>Juste LEBLANC</td>#}
-                    {#                </tr>#}
-                    {# FIN lignes échantillons codées en dur pour création du CSS #}
-
                     {% for participant in participants %}
                         <tr>
                             <td>{{ participant.pseudo }}</td>

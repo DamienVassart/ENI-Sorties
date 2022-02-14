@@ -44,16 +44,19 @@ class SortieController extends AbstractController
         int $id,
         SortieRepository $sortieRepository,
         LieuRepository $lieuRepository,
-        VilleRepository $villeRepository
+        VilleRepository $villeRepository,
+        CampusRepository $campusRepository
         ): Response
     {
         $sortie = $sortieRepository->find($id);
         $lieu = $lieuRepository->find($sortie->getIdLieu());
         $ville = $villeRepository->find($lieu->getIdVille());
         $participants = $sortie->getParticipants();
+        $campus = $sortie->getIdCampus();
 
         return $this->render('sortie/details.html.twig', [
             "sortie"=> $sortie,
+            "campus" => $campus,
             "lieu" => $lieu,
             "ville" => $ville,
             "participants" => $participants
