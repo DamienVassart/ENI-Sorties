@@ -1,6 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+<div id="blocRecherche">
+    {{ form_start(searchForm) }}
+    {{ form_widget(searchForm) }}
+    {{ form_end(searchForm) }}
+</div>
     <div>
         {% for campus in listeCampus %}
             <ul>
@@ -12,15 +17,37 @@
             </ul>
         {% endfor %}
     </div>
-
-    {{ form_start(campusForm) }}
-    {{ form_widget(campusForm) }}
-    <button type="submit">Ajouter</button>
-    {{ form_end(campusForm) }}
-    <br>
-    <div>
-        <a href="{{ path('search_campus') }}"><button>Recherche</button></a>
+    <div id="container">
+        {{ form_start(campusForm) }}
+        {{ form_widget(campusForm) }}
+        <button type="submit">Ajouter</button>
+        {{ form_end(campusForm) }}
     </div>
+    <br>
+
+    <script>
+        const clickInput=document.querySelector("input");
+        var bouton=false;
+        clickInput.addEventListener("change", updateValue);
+
+        function updateValue(e){
+
+            if (bouton == false){
+
+                var recherche = document.createElement("p");
+                var rechercheValue = document.createTextNode("{% for campus in donneesCampus %}{{ campus.nom }}" + " " + "{%  endfor %}");
+
+                recherche.setAttribute("class", "pRecherche");
+                recherche.appendChild(rechercheValue);
+                document.getElementById("blocRecherche").insertAdjacentElement("afterend", recherche);
+                bouton = true;
+                e.preventDefault();
+            }
+        }
+    </script>
+
+
+
 {% endblock %}
 
 {% block title %}

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Campus;
 use App\Form\CampusType;
+use App\Form\SearchCampusType;
 use App\Repository\CampusRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,6 +25,7 @@ class CampusController extends AbstractController
 
         $campus = new Campus();
         $campusForm = $this->createForm(CampusType::class, $campus);
+        $searchForm = $this->createForm(SearchCampusType::class);
         $campusForm->handleRequest($request);
 
         if ($campusForm->isSubmitted()&&$campusForm->isValid())
@@ -36,9 +38,24 @@ class CampusController extends AbstractController
                     return $this->redirectToRoute('admin_campus');
                 }
         }
+
+        $searchForm->handleRequest($request);
+        $nomCampus = $searchForm->get('nom')->getData();
+        $donneesCampus = $campusRepository->searchCampus($nomCampus);
+
+        if ($campusForm->isSubmitted()&&$campusForm->isValid())
+        {
+            if ($donneesCampus==null)
+            {
+                $this->addFlash('error', 'Aucun campus contenant ce mot clé dont ce nom n\'a été trouvé, essayez en un autre.');
+            }
+        }
+
         return $this->render('admin/gestionCampus.html.twig', [
             "listeCampus" => $listeCampus,
-            "campusForm" => $campusForm->createView()
+            "campusForm" => $campusForm->createView(),
+            "searchForm" => $searchForm->createView(),
+            "donneesCampus" => $donneesCampus
         ]);
     }
     /**
