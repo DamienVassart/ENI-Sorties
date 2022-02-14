@@ -129,6 +129,14 @@ input.submit {
     border-width: 0;
 }
 
+.list-sorties {
+    border-radius: 15px 50px;
+    background: lightsteelblue;
+    /*padding: 20px;*/
+    width: 500px;
+    height: auto;
+}
+
 #sortie-details section {
     margin-top: 30px;
 }
