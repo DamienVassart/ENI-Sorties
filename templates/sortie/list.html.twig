@@ -11,11 +11,11 @@
          <h3>Vous êtes connecté en tant que {{ app.user.userIdentifier }}</h3>
       </div>
    {% endif %}
+   <button><a href="{{ path('sortie_create') }}">Ajouter une sortie</a></button>
    <section class="sorties-list">
       <!-- :affichage des sorties-->
       {% for sortie in sorties %}
          {% set participants = sortie.participants | map(p => p.id) %}
-         {{ sortie.idEtat.id < 2 }}
          <div class="list-sorties">
             <article>
                <ul>
