@@ -42,7 +42,7 @@
                         {% endif %}
                      {% endif %}
                      {% if sortie.idOrganisateur.id == app.user.id %}
-                        <a href="#"><button>Modifier</button></a></li>
+                        <a href="{{ path('sortie_update', {'id': sortie.id}) }}"><button>Modifier</button></a></li>
                         {% if sortie.idEtat.id < 4 %}
                            <a href="{{ path('sortie_annuler', {'id': sortie.id}) }}"><button>Annuler</button></a></li>
                         {% endif %}

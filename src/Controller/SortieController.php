@@ -123,6 +123,45 @@ class SortieController extends AbstractController
             'sortieForm' =>$sortieForm->createview()
         ]);
     }
+
+    /**
+     * @Route("/update{id}", name="update")
+     */
+    public function update(
+        Sortie $sortie,
+        Request $request,
+        EntityManagerInterface $entityManager,
+        LieuRepository $lieuRepository
+        ): Response
+    {
+        $sortieForm = $this->createForm(SortieType::class, $sortie);
+
+        $sortieForm->handleRequest($request);
+
+        if($sortieForm->isSubmitted() && $sortieForm->isValid()) {
+
+            if($sortieForm["Lieu"]->getData()) {
+                $nomLieu = $sortieForm["Lieu"]->getData()->getNom();
+                $lieu = $lieuRepository->findOneBy(['nom' => $nomLieu]);
+
+                $sortie->setIdLieu($lieu);
+
+                $entityManager->persist($sortie);
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Sortie ajoutée!');
+
+                return $this->redirectToRoute('sortie_details', ['id'=> $sortie->getId()]);
+            }
+
+        }
+
+        return $this->render('sortie/update.html.twig', [
+            "sortie" => $sortie,
+            "sortieForm" => $sortieForm->createView()
+        ]);
+    }
+
     /**
      * @Route("/delete{id}", name="delete")
      */

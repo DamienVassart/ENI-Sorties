@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Modifier la sortie {{ sortie.nom }}</h1>
+    <fieldset>
+        <legend>Détails Sortie</legend>
+        {{  form_start(sortieForm) }}
+        {{ form_row(sortieForm.nom) }}
+        {{ form_row(sortieForm.dateHeureDebut) }}
+        {{ form_row(sortieForm.duree) }}
+        {{ form_row(sortieForm.dateLimiteInscription) }}
+        {{ form_row(sortieForm.nbInscriptionsMax) }}
+        {{ form_row(sortieForm.infosSortie) }}
+        {{ form_row(sortieForm.Campus) }}
+    </fieldset>
+    <fieldset>
+        <legend>Sélection du lieu</legend>
+        <button>
+            <a href="{{ path('lieu_create') }}">Ajouter un lieu</a>
+        </button>
+        <p>Ou sélectionner un lieu existant: </p>
+        {{ form_row(sortieForm.Ville) }}
+        {% if sortieForm.select is defined %}
+            {{ form_row(sortieForm.select) }}
+        {% endif %}
+        {% if sortieForm.Lieu is defined %}
+            {{ form_row(sortieForm.Lieu) }}
+        {% endif %}
+    </fieldset>
+    {{  form_end(sortieForm) }}
+{% endblock %}
+
+{% block title %}
+    Modifier la sortie {{ sortie.nom}} {{ parent() }}
+{% endblock %}
+
