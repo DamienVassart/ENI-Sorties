@@ -6,8 +6,8 @@ use App\Entity\Etat;
 use App\Entity\Lieu;
 use App\Entity\Sortie;
 use App\Entity\Participant;
-use App\Entity\Ville;
 use App\Form\LieuType;
+use App\Form\SearchSortieType;
 use App\Form\SortieAnnulerType;
 use App\Form\SortieType;
 use App\Form\UpdateSortieType;
@@ -37,7 +37,8 @@ class SortieController extends AbstractController
         SortieRepository $sortieRepository,
         SortieStateSetter $sortieStateSetter,
         EtatRepository $etatRepository,
-        EntityManagerInterface $entityManager): Response
+        EntityManagerInterface $entityManager,
+        Request $request): Response
     {
         $sorties = $sortieRepository->findAll();
 //        $today = new \DateTime('now');
@@ -45,13 +46,30 @@ class SortieController extends AbstractController
         foreach ($sorties as $sortie) {
             $sortieStateSetter->updateState($sortie, $etatRepository);
             $entityManager->persist($sortie);
+            $entityManager->flush();
         }
 
-        $entityManager->flush();
+        $searchForm =$this->createForm(SearchSortieType::class);
+        $searchForm->handleRequest($request);
+
+        if ($searchForm->isSubmitted() && $searchForm->isValid())
+        {
+            $nomSortie = $searchForm->get('nom')->getData();
+
+            $campus = $searchForm->get('campus')->getData();
+            $campusSortie = $campus->getId();
+
+            $sorties = $sortieRepository->search($nomSortie,$campusSortie);
+
+            if ($sorties == null) {
+                $this->addFlash('error', 'Aucune ville contenant ce mot clé dans son nom n\'a été trouvé, essayez en un autre.');
+            }
+        }
 
         return $this->render('sortie/list.html.twig', [
 //            "today" => $today,
-            "sorties"=> $sorties
+            "sorties"=> $sorties,
+            'searchForm' => $searchForm->createView()
         ]);
     }
     /**
@@ -62,7 +80,7 @@ class SortieController extends AbstractController
         SortieRepository $sortieRepository,
         LieuRepository $lieuRepository,
         VilleRepository $villeRepository
-        ): Response
+    ): Response
     {
         $sortie = $sortieRepository->find($id);
         $lieu = $lieuRepository->find($sortie->getIdLieu());
@@ -134,13 +152,9 @@ class SortieController extends AbstractController
         Request $request,
         EntityManagerInterface $entityManager,
         LieuRepository $lieuRepository
-        ): Response
+    ): Response
     {
-
-        $lieu = $sortie->getIdLieu();
-        $ville = $lieu->getIdVille();
-
-        $sortieForm = $this->createForm(SortieType::class, $sortie);
+        $sortieForm = $this->createForm(UpdateSortieType::class, $sortie);
 
         $sortieForm->handleRequest($request);
 
@@ -155,7 +169,7 @@ class SortieController extends AbstractController
                 $entityManager->persist($sortie);
                 $entityManager->flush();
 
-                $this->addFlash('success', 'Sortie modifiée!');
+                $this->addFlash('success', 'Sortie ajoutée!');
 
                 return $this->redirectToRoute('sortie_details', ['id'=> $sortie->getId()]);
             }
