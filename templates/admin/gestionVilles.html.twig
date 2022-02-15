@@ -5,18 +5,33 @@
     {{ form_widget(searchForm) }}
     {{ form_end(searchForm) }}
 
+{# todo si le tableau-ville vous convient, on peut effacer le code ci-dessous #}
+{#    <div>#}
+{#        {% for ville in listeVilles %}#}
+{#                    <div class="ville">#}
+{#                        {{ ville.nom }}#}
+{#                        {{ ville.codePostal }}#}
+{#                        <a href="{{ path('admin_villes_edit', {'id': ville.id}) }}"><button>Modifier</button></a>#}
+{#                        <a href="{{ path('admin_villes_delete', {'id': ville.id}) }}"><button>Supprimer</button></a>#}
+{#                    </div>#}
+{#            <br>#}
+{#        {% endfor %}#}
+{#    </div>#}
 
-    <div>
+    <table id="tableau-ville">
+
         {% for ville in listeVilles %}
-                    <div class="ville">
-                        {{ ville.nom }}
-                        {{ ville.codePostal }}
-                        <a href="{{ path('admin_villes_edit', {'id': ville.id}) }}"><button>Modifier</button></a>
-                        <a href="{{ path('admin_villes_delete', {'id': ville.id}) }}"><button>Supprimer</button></a>
-                    </div>
-            <br>
+            <tbody>
+            <tr>
+                <td>{{ ville.nom }}</td>
+                <td>{{ ville.codePostal }}</td>
+                <td><a href="{{ path('admin_villes_edit', {'id': ville.id}) }}"><button>Modifier</button></a></td>
+                <td><a href="{{ path('admin_villes_delete', {'id': ville.id}) }}"><button>Supprimer</button></a></td>
+            </tr>
+            </tbody>
         {% endfor %}
-    </div>
+
+    </table>
 
     {{ form_start(villeForm) }}
     {{ form_widget(villeForm) }}

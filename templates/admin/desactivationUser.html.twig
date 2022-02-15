@@ -8,7 +8,7 @@
 
     {{ form_widget(desactiverForm) }}
 
-    <button type="submit" class="btn">Désactiver les accès du compte.</button>
+    <button type="submit" class="btn-secondary btn-block">Désactiver les accès du compte.</button>
     {{ form_end(desactiverForm) }}
 
     {% elseif is_granted('ROLE_DESACTIVATE') %}

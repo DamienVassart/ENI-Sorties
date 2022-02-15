@@ -180,8 +180,10 @@ input.submit {
     width: auto;
 }
 
-#tableau-campus td {
+#tableau-campus td,
+#tableau-ville td {
     padding: 10px;
+    width: 100%;
 }
 
 
