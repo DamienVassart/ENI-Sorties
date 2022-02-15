@@ -37,11 +37,12 @@ class AdminController extends AbstractController
 
         $form->handleRequest($request);
 
-        $utilisateur = $form['pseudo']->getData();
 
-        $userASupprimer = $participantRepository->find($utilisateur);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $utilisateur = $form['pseudo']->getData();
+
+            $userASupprimer = $participantRepository->find($utilisateur);
 
             $entityManager->remove($userASupprimer);
             $entityManager->flush();
@@ -54,7 +55,6 @@ class AdminController extends AbstractController
 
         return $this->render('admin/suppressionUser.html.twig', [
             'suppressionUserForm' => $form->createView(),
-            'userASupprimer' => $userASupprimer
         ]);
     }
 
@@ -69,11 +69,11 @@ class AdminController extends AbstractController
 
         $desactiverForm->handleRequest($request);
 
-        $utilisateurPseudo = $desactiverForm['pseudo']->getData();
-
-        $userADesactiver = $participantRepository->find($utilisateurPseudo);
-
         if ($desactiverForm->isSubmitted() && $desactiverForm->isValid()) {
+
+            $utilisateurPseudo = $desactiverForm['pseudo']->getData();
+
+            $userADesactiver = $participantRepository->find($utilisateurPseudo);
 
             $userADesactiver->setRoles(['ROLE_DESACTIVATE']);
             $entityManager->persist($userADesactiver);
@@ -87,7 +87,6 @@ class AdminController extends AbstractController
 
         return $this->render('admin/desactivationUser.html.twig', [
             'desactiverForm' => $desactiverForm->createView(),
-            'userADesactiver' => $userADesactiver
         ]);
 
     }

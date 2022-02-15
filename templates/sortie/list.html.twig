@@ -11,7 +11,7 @@
          <h3>Vous êtes connecté en tant que {{ app.user.userIdentifier }}</h3>
       </div>
    {% endif %}
-   <button class="btn-primary btn-block add-btn"><a href="{{ path('sortie_create') }}">Ajouter une sortie</a></button>
+
    <section class="sorties-list">
       <!-- :affichage des sorties-->
       {% for sortie in sorties %}
@@ -43,6 +43,8 @@
                      {% endif %}
                      {% if sortie.idOrganisateur.id == app.user.id %}
                         <a href="{{ path('sortie_update', {'id': sortie.id}) }}"><button>Modifier</button></a></li>
+                     {% endif %}
+                     {% if sortie.idOrganisateur.id == app.user.id or is_granted('ROLE_ADMIN') %}
                         {% if sortie.idEtat.id < 4 %}
                            <a href="{{ path('sortie_annuler', {'id': sortie.id}) }}"><button>Annuler</button></a></li>
                         {% endif %}
@@ -52,6 +54,8 @@
          </div>
          <br>
       {% endfor %}
+
+      <button class="btn-primary btn-block add-btn"><a href="{{ path('sortie_create') }}">Ajouter une sortie</a></button>
 
    </section>
 {% endblock %}

@@ -41,11 +41,9 @@ security:
          - { path: ^/admin, roles: ROLE_ADMIN }
          - { path: ^/register, roles: ROLE_ADMIN }
          - { path: ^/profile, roles: ROLE_USER }
-         #- { path: ^/, allow_if: "is_granted('ROLE_USER') and not is_granted('ROLE_DESACTIVATE')" }
 
     role_hierarchy:
         ROLE_ADMIN: ROLE_USER
-        #ROLE_USER: ROLE_DESACTIVATE
 
 when@test:
     security:

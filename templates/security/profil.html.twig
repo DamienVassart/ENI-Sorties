@@ -4,7 +4,7 @@
     {% if app.user %}
 
         {{ form_start(profilUpdateForm) }}
-        <div class="container">
+        <div id="container">
 
             <div class="profil_photo">
                 {% if app.user.champ != null %}
@@ -72,10 +72,10 @@
             clicSelect.addEventListener('change', updateValue);
 
             function updateValue(e) {
-                if (boutonCreer==false) {
+                if (boutonCreer===false) {
                     var button = document.createElement("button");
                     var buttonValue = document.createTextNode("Valider");
-                    button.setAttribute("class", "btn");
+                    button.setAttribute("class", "btn-primary btn-block add-btn");
                     button.setAttribute("type", "submit");
                     button.appendChild(buttonValue);
                     document.getElementById("container").insertAdjacentElement("afterend", button);

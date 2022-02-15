@@ -2,15 +2,21 @@
 
 namespace App\Controller;
 
+use App\Form\DeleteUserType;
 use App\Form\UtilisateurType;
 use App\Repository\ParticipantRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\File;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class UtilisateurController extends AbstractController
 {
@@ -84,6 +90,73 @@ class UtilisateurController extends AbstractController
         // vers profilAutre
         return $this->render('utilisateur/profilAutre.html.twig', [
             'participant' => $participant
+        ]);
+    }
+
+    /**
+     * @Route("/motDePasse", name="app_mdp")
+     */
+    public function motDePasse(ParticipantRepository $participantRepository,
+                            EntityManagerInterface $entityManager,
+                            Request $request,
+                           UserPasswordHasherInterface $userPasswordHasher): Response
+    {
+        $formForgotPassword = $this->createForm(DeleteUserType::class);
+        $formForgotPassword->remove('pseudo');
+
+        $formForgotPassword->add('pseudo', TextType::class, [
+            'label' => 'Pseudo: '
+        ]);
+        $formForgotPassword->add('password', RepeatedType::class, [
+            'type' => PasswordType::class,
+            'mapped' => false,
+            'attr' => ['autocomplete' => 'new-password'],
+            'constraints' => [
+                new NotBlank([
+                    'message' => 'Veuillez entrer un mot de passe',
+                ]),
+                new Length([
+                    'min' => 6,
+                    'minMessage' => 'Votre mot de passe doit faire au moins {{ limit }} caractères',
+                    // max length allowed by Symfony for security reasons
+                    'max' => 4096,
+                ]),
+            ],
+            'invalid_message' => 'Les mots de passe sont différents.',
+            'required' => false,
+            'first_options' => ['label' => ' '],
+            'second_options' => ['label' => 'Confirmation du mot de passe: ']
+        ]);
+        $formForgotPassword->add('verifMdp', IntegerType::class, [
+            'label' => 'Suite de chiffres de sécurité: '
+        ]);
+
+        $formForgotPassword->handleRequest($request);
+
+        if ($formForgotPassword->isSubmitted() && $formForgotPassword->isValid()) {
+
+            $utilisateurPseudo = $formForgotPassword['pseudo']->getData();
+
+            $utilisateurMdp = $formForgotPassword['password']->getData();
+
+            $verifMdp = $formForgotPassword['verifMdp']->getData();
+
+            $userMdpPerdu = $participantRepository->findOneBy(['pseudo' => $utilisateurPseudo], ['pseudo' => 'ASC']);
+
+            if ($userMdpPerdu->getVerifMdp() === $verifMdp)
+            {
+                $userMdpPerdu->setPassword($userPasswordHasher->hashPassword($userMdpPerdu, $utilisateurMdp));
+                $entityManager->persist($userMdpPerdu);
+                $entityManager->flush();
+
+                $this->addFlash('Succès!', 'Le mot de passe a bien été réinitialisé.');
+
+                return $this->redirectToRoute('app_login');
+            }
+        }
+
+        return $this->render('security/passwordForgotten.html.twig', [
+            'formForgotPassword' => $formForgotPassword->createView()
         ]);
     }
 

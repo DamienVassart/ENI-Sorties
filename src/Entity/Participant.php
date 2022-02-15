@@ -80,6 +80,11 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $champ;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $verifMdp;
+
     public function __construct()
     {
         $this->sortiesOrganisateur = new ArrayCollection();
@@ -296,6 +301,18 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     public function setChamp(?string $champ): self
     {
         $this->champ = $champ;
+
+        return $this;
+    }
+
+    public function getVerifMdp(): ?int
+    {
+        return $this->verifMdp;
+    }
+
+    public function setVerifMdp(int $verifMdp): self
+    {
+        $this->verifMdp = $verifMdp;
 
         return $this;
     }

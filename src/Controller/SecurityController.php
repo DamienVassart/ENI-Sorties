@@ -27,8 +27,16 @@ class SecurityController extends AbstractController
         $lastUsername = $authenticationUtils->getLastUsername();
 
         if($this->getUser()) {
+            foreach ($this->getUser()->getRoles() as $role) {
+                if($role == "ROLE_DESACTIVATE") {
+                    return $this->redirectToRoute('app_logout');
+                }
+            }
+
             return $this->redirectToRoute('sortie_list');
         }
+
+
 
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
