@@ -19,6 +19,16 @@ class SortieRepository extends ServiceEntityRepository
         parent::__construct($registry, Sortie::class);
     }
 
+    public function search($nomSortie, $campusSortie) {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.nom LIKE :nomSortie')
+            ->andWhere('s.idCampus = :campusSortie')
+            ->setParameter('nomSortie', '%'.$nomSortie.'%')
+            ->setParameter('campusSortie', $campusSortie)
+            ->getQuery()
+            ->execute();
+    }
+
     // /**
     //  * @return Sortie[] Returns an array of Sortie objects
     //  */
