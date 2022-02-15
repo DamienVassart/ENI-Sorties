@@ -84,7 +84,7 @@ ul {
 
 /* || Other */
 
-.container {
+#container {
     display: flex;
 }
 
@@ -173,7 +173,12 @@ input.submit {
     margin: 20px 0;
 }
 
-
+#ville, #search_ville {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: auto;
+}
 
 
 

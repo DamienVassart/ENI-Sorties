@@ -50,7 +50,7 @@
                 </div>
 
                 <div class="profil_form">
-                    {{ form_label(profilUpdateForm.password, 'Mot de passe') }}
+                    {{ form_label(profilUpdateForm.password, 'Mot de passe ') }}
                     {{ form_widget(profilUpdateForm.password) }}
                     {{ form_errors(profilUpdateForm.password) }}
                 </div>
@@ -67,6 +67,11 @@
             const clicChamp = document.querySelector("input");
             const clicSelect = document.querySelector("select");
             var boutonCreer = false;
+
+            do {
+
+            } while ()
+
 
             clicChamp.addEventListener('change', updateValue);
             clicSelect.addEventListener('change', updateValue);

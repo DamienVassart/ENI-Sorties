@@ -27,7 +27,7 @@ class UtilisateurType extends AbstractType
             ->add('telephone', TextType::class)
             ->add('email', TextType::class)
             ->add('campus', EntityType::class, [
-                'label' => 'Campus: ',
+                'label' => 'Campus',
                 'class' => Campus::class,
                 'choice_label' => 'nom'
             ])
@@ -49,7 +49,7 @@ class UtilisateurType extends AbstractType
                 'invalid_message' => 'Les mots de passe sont différents.',
                 'required' => false,
                 'first_options' => ['label' => ' '],
-                'second_options' => ['label' => 'Confirmation du mot de passe: ']
+                'second_options' => ['label' => 'Confirmation du mot de passe']
             ])
             ->add('champ', FileType::class, [
                 "mapped" => false, // désactive mappage avec champ dans l'entité qui attend une chaîne de caractère

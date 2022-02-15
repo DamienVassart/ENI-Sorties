@@ -49,14 +49,13 @@
                            <a href="{{ path('sortie_annuler', {'id': sortie.id}) }}"><button>Annuler</button></a></li>
                         {% endif %}
                      {% endif %}
-
                </ul>
             </article>
          </div>
          <br>
       {% endfor %}
 
-      <button class="btn-primary btn-block add-btn"><a href="{{ path('sortie_create') }}">Ajouter une sortie</a></button>
+      <button class="btn-secondary btn-block add-btn"><a href="{{ path('sortie_create') }}">Ajouter une sortie</a></button>
 
    </section>
 {% endblock %}

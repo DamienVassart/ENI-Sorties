@@ -16,6 +16,9 @@ class VilleType extends AbstractType
         $builder
             ->add('nom')
             ->add('codePostal')
+            ->add('ajouter', SubmitType::class, [
+                'attr' => ['class' => 'btn-secondary btn-block add-btn'],
+            ])
             ;
     }
 

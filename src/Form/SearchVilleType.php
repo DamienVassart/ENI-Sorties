@@ -15,7 +15,8 @@ class SearchVilleType extends AbstractType
         $builder
             ->add('nom')
             ->add('search', SubmitType::class, [
-                'attr' => ['placeholder' => 'Rechercher']
+                'attr' => ['class' => 'btn-secondary btn-block add-btn'],
+
             ])
         ;
     }
