@@ -105,7 +105,7 @@ ul {
 }
 
 .profil_photo {
-    margin-right: 20px;
+    margin-right: 50px;
 }
 
 label {
@@ -127,6 +127,10 @@ input.submit {
     background: transparent;
     color: gray;
     border-width: 0;
+}
+
+.add-btn {
+    margin: 20px 0;
 }
 
 /*Affichage des bordures sur la page /sortie, retirer si cela ne plaît pas*/
@@ -169,10 +173,6 @@ input.submit {
     border: 1px solid #aaaaaa;
 }
 
-.add-btn {
-    margin: 20px 0;
-}
-
 #ville, #search_ville {
     display: flex;
     flex-direction: row;
@@ -181,7 +181,8 @@ input.submit {
 }
 
 #tableau-campus td,
-#tableau-ville td {
+#tableau-ville td,
+#tableau-profil td {
     padding: 10px;
     width: 100%;
 }

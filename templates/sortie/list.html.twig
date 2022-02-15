@@ -22,6 +22,7 @@
       {% for sortie in sorties %}
          {% set participants = sortie.participants | map(p => p.id) %}
          <div class="list-sorties">
+            {# todo on pourrait mettre les infos sous forme de tableau pour que ce soit plus lisible #}
             <article>
                <ul>
                   <li><i>Nom de la sortie :</i> {{ sortie.nom }}</li>
@@ -37,7 +38,10 @@
                         Non
                      {% endif %}
                   </li>
-                  <li><i>Options :</i>
+{#                  <li><i>Options :</i>#}
+                  {# todo voir si on écrit Options ou pas - les boutons suivants sont peut-etre assez clairs #}
+                  {# todo modifier la largeur pour que les quatre boutons s'affichent sur une seule ligne #}
+                  <li>
                      <a href="{{ path('sortie_details', {'id': sortie.id}) }}"><button>Afficher</button></a>
                      {% if sortie.idEtat.id < 3 %}
                         {% if app.user.id in participants %}

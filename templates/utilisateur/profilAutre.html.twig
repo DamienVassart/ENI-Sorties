@@ -2,28 +2,56 @@
 
 {% block body %}
 
-    <h2>{{ participant.pseudo }}</h2>
-    {# todo: centrer le pseudo du participant #}
-    {# todo: ajouter la taille de la police des li #}
 
-    <div class="container">
+
+    <div id="container">
 
             <div class="profil_photo">
                 <img src="{{ asset('photosProfil/' ~ participant.champ) }}" alt="{{ participant.champ }}" />
             </div>
 
             <div class="profil">
-                <ul>
-                    <li>Prénom: {{ participant.prenom }}</li>
+                <h2>{{ participant.pseudo }}</h2>
+                {# todo: centrer le pseudo du participant #}
+                {# todo: ajouter la taille de la police des li #}
+                {# todo si le tableau vous convient, effacer le code ci-dessous #}
+{#                <ul>#}
+{#                    <li><i>Prénom :</i> {{ participant.prenom }}</li>#}
 
-                    <li>Nom: {{ participant.nom }}</li>
+{#                    <li><i>Nom :</i> {{ participant.nom }}</li>#}
 
-                    <li>Téléphone: {{ participant.telephone }}</li>
+{#                    <li><i>Téléphone :</i> {{ participant.telephone }}</li>#}
 
-                    <li>Email: {{ participant.email }}</li>
+{#                    <li><i>Email :</i> {{ participant.email }}</li>#}
 
-                    <li>Campus: {{ participant.campus.nom }}</li>
-                </ul>
+{#                    <li><i>Campus :</i> {{ participant.campus.nom }}</li>#}
+{#                </ul>#}
+
+                <table id="tableau-profil">
+                    <tbody>
+                        <tr>
+                            <td>Prénom</td>
+                            <td>{{ participant.prenom }}</td>
+                        </tr>
+                        <tr>
+                            <td>Nom</td>
+                            <td>{{ participant.nom }}</td>
+                        </tr>
+                        <tr>
+                            <td>Téléphone</td>
+                            <td>{{ participant.telephone }}</td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td>{{ participant.email }}</td>
+                        </tr>
+                        <tr>
+                            <td>Campus</td>
+                            <td>{{ participant.campus.nom }}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
             </div>
     </div>
 

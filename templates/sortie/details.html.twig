@@ -6,9 +6,10 @@
 
 {% block body %}
     <div id="sortie-details">
-        <h2>{{ sortie.nom }}</h2>
+        <h1>{{ sortie.nom }}</h1>
         <section id="infos-sortie">
-            <h3>Infos</h3>
+            <h2>Infos</h2>
+            {# todo on pourrait mettre les infos sous forme de tableau pour que ce soit plus lisible #}
             <div><i>Date et heure de sortie :</i> le {{ sortie.dateHeureDebut.format('d/m/Y') }} à {{ sortie.dateHeureDebut.format('h:m') }}</div>
             <div><i>Durée :</i> {{ sortie.duree }} minutes</div>
             <div><i>Date limite d'inscription :</i> {{ sortie.dateLimiteInscription.format('d/m/Y') }}</div>
@@ -18,7 +19,7 @@
         </section>
 
         <section id="lieu">
-            <h3>Lieu</h3>
+            <h2>Lieu</h2>
             <div><i>Nom du lieu :</i> {{ lieu.nom }}</div>
             <div><i>Rue :</i> {{ lieu.rue }}</div>
             <div><i>ode Postal :</i> {{ ville.codePostal }}</div>
@@ -28,7 +29,7 @@
         </section>
 
         <section id="participants">
-            <h3>Participants</h3>
+            <h2>Participants</h2>
             {% if participants | length > 0 %}
                 <table id="tableau-participants">
                     <thead>

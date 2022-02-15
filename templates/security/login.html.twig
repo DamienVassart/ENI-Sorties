@@ -8,16 +8,19 @@
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
+    {# todo mettre le label et input sur la même ligne #}
+
     <h1 class="h3 mb-3 font-weight-normal">Veuillez vous connecter :</h1>
     <label for="inputPseudo">Identifiant</label>
     <input type="text" value="{{ last_username }}" name="pseudo" id="inputPseudo" class="form-control" autocomplete="username" required autofocus>
-    <label for="inputPassword">Mot de passe :</label>
+    <label for="inputPassword">Mot de passe</label>
     <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
 
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"
     >
 
+    {# todo mettre le checkbox et le input sur la même ligne #}
         <div class="checkbox mb-3">
             <label>
                 <input type="checkbox" name="_remember_me"> Se souvenir de moi
@@ -29,7 +32,7 @@
     </div>
 
 
-    <button class="boutons" type="submit">
+    <button type="submit" class="btn-secondary btn-block add-btn">
         Sign in
     </button>
 </form>
