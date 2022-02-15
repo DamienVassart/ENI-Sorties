@@ -1,26 +1,44 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    {# todo mettre le bouton search à côté de la boîte de recherche #}
+    {# todo changer le nom du bouton search pour qu'il affiche recherche #}
+    {# todo revoir la largeur d'affichage des formulaires: est-ce que ça vient de bootstrap ou non? #}
     <div id="blocRecherche">
         {{ form_start(searchForm) }}
         {{ form_widget(searchForm) }}
         {{ form_end(searchForm) }}
     </div>
 
-    <div>
-        {% for campus in listeCampus %}
+    {# todo: si le tableau ci-dessous convient, on peut effacer ce code #}
+{#    <div>#}
+{#        {% for campus in listeCampus %}#}
 {#            <ul>#}
 {#                <li>#}
-                    <div class="campus">
-                        {{ campus.nom }}
-                        <a href="{{ path('admin_campus_edit', {'id': campus.id}) }}"><button>Modifier</button></a>
-                        <a href="{{ path('admin_campus_delete', {'id': campus.id}) }}"><button>Supprimer</button></a>
-                    </div>
+{#                    <div class="campus">#}
+{#                        {{ campus.nom }}#}
+{#                        <a href="{{ path('admin_campus_edit', {'id': campus.id}) }}"><button>Modifier</button></a>#}
+{#                        <a href="{{ path('admin_campus_delete', {'id': campus.id}) }}"><button>Supprimer</button></a>#}
+{#                    </div>#}
 {#                </li>#}
 {#            </ul>#}
-            <br>
+{#            <br>#}
+{#        {% endfor %}#}
+{#    </div>#}
+
+    <table id="tableau-campus">
+
+        {% for campus in listeCampus %}
+        <tbody>
+            <tr>
+                <td>{{ campus.nom }}</td>
+                <td><a href="{{ path('admin_campus_edit', {'id': campus.id}) }}"><button>Modifier</button></a></td>
+                <td><a href="{{ path('admin_campus_delete', {'id': campus.id}) }}"><button>Supprimer</button></a></td>
+            </tr>
+        </tbody>
         {% endfor %}
-    </div>
+
+    </table>
 
     <div id="container">
         {{ form_start(campusForm) }}

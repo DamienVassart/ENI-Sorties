@@ -180,5 +180,9 @@ input.submit {
     width: auto;
 }
 
+#tableau-campus td {
+    padding: 10px;
+}
+
 
 
