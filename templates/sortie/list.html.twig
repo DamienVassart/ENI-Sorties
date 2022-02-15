@@ -13,6 +13,10 @@
       </div>
    {% endif %}
 
+   {{ form_start(searchForm) }}
+   {{ form_widget(searchForm) }}
+   {{ form_end(searchForm) }}
+
    <section class="sorties-list">
       <!-- :affichage des sorties-->
       {% for sortie in sorties %}
