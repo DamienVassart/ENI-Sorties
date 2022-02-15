@@ -82,6 +82,27 @@ class SortieType extends AbstractType
                     ]);
                 }
             );
+
+        $builder->addEventListener(
+            FormEvents::POST_SET_DATA,
+            function(FormEvent $event) {
+                $form = $event->getForm();
+                $data = $event->getData();
+                $lieu = $data->getIdLieu();
+                if($lieu) {
+                    $ville = $lieu->getIdVille();
+                    $form->remove('select');
+                    $form->add('Lieu', EntityType::class, [
+                        'class' => Lieu::class,
+                        'choice_label' => 'nom',
+                        'placeholder' => '---Choisir un lieu---',
+                        'mapped' => false
+                    ]);
+                    $form->get('Ville')->setData($ville);
+                    $form->get('Lieu')->setData($lieu);
+                }
+            }
+        );
     }
 
     public function configureOptions(OptionsResolver $resolver): void

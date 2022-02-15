@@ -6,6 +6,7 @@ use App\Entity\Etat;
 use App\Entity\Lieu;
 use App\Entity\Sortie;
 use App\Entity\Participant;
+use App\Entity\Ville;
 use App\Form\LieuType;
 use App\Form\SortieAnnulerType;
 use App\Form\SortieType;
@@ -135,7 +136,11 @@ class SortieController extends AbstractController
         LieuRepository $lieuRepository
         ): Response
     {
-        $sortieForm = $this->createForm(UpdateSortieType::class, $sortie);
+
+        $lieu = $sortie->getIdLieu();
+        $ville = $lieu->getIdVille();
+
+        $sortieForm = $this->createForm(SortieType::class, $sortie);
 
         $sortieForm->handleRequest($request);
 
@@ -150,7 +155,7 @@ class SortieController extends AbstractController
                 $entityManager->persist($sortie);
                 $entityManager->flush();
 
-                $this->addFlash('success', 'Sortie ajoutée!');
+                $this->addFlash('success', 'Sortie modifiée!');
 
                 return $this->redirectToRoute('sortie_details', ['id'=> $sortie->getId()]);
             }
