@@ -33,14 +33,16 @@
                   </li>
                   <li><i>Options :</i>
                      <a href="{{ path('sortie_details', {'id': sortie.id}) }}"><button>Afficher</button></a>
-                     {% if app.user.id in participants %}
+                     {% if app.user.id in participants and sortie.idEtat.id < 3 %}
                         <a href="{{ path('sortie_desistement', {'id': sortie.id}) }}"><button>Se désister</button></a>
                      {% else %}
                         <a href="{{ path('sortie_inscription', {'id': sortie.id}) }}"><button>S'inscrire</button></a>
                      {% endif %}
                      {% if sortie.idOrganisateur.id == app.user.id %}
-                     <a href="#"><button>Modifier</button></a></li>
-                     <a href="{{ path('sortie_annuler', {'id': sortie.id}) }}"><button>Annuler</button></a></li>
+                        <a href="#"><button>Modifier</button></a></li>
+                        {% if sortie.idEtat.id < 4 %}
+                           <a href="{{ path('sortie_annuler', {'id': sortie.id}) }}"><button>Annuler</button></a></li>
+                        {% endif %}
                      {% endif %}
                </ul>
             </article>
