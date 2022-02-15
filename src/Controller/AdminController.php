@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Participant;
 use App\Form\DeleteUserType;
+use App\Form\DesactivateUserType;
 use App\Repository\ParticipantRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -35,11 +37,11 @@ class AdminController extends AbstractController
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
+        $utilisateur = $form['pseudo']->getData();
 
-            $utilisateur = $form['pseudo']->getData();
+        $userASupprimer = $participantRepository->find($utilisateur);
 
-            $userASupprimer = $participantRepository->find($utilisateur);
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $entityManager->remove($userASupprimer);
             $entityManager->flush();
@@ -52,21 +54,42 @@ class AdminController extends AbstractController
 
         return $this->render('admin/suppressionUser.html.twig', [
             'suppressionUserForm' => $form->createView(),
+            'userASupprimer' => $userASupprimer
         ]);
     }
 
     /**
      * @Route("/desactiverUser", name="desactiverUser")
      */
-    public function desactiverAccesCompteUser(): Response
+    public function desactiverAccesCompteUser(EntityManagerInterface $entityManager,
+                                              ParticipantRepository $participantRepository,
+                                              Request $request): Response
     {
+        $desactiverForm = $this->createForm(DesactivateUserType::class);
 
+        $desactiverForm->handleRequest($request);
 
+        $utilisateurPseudo = $desactiverForm['pseudo']->getData();
+
+        $userADesactiver = $participantRepository->find($utilisateurPseudo);
+
+        if ($desactiverForm->isSubmitted() && $desactiverForm->isValid()) {
+
+            $userADesactiver->setRoles(['ROLE_DESACTIVATE']);
+            $entityManager->persist($userADesactiver);
+            $entityManager->flush();
+
+            $this->addFlash('Succès!', 'Le compte de cet utilisateur a bien été désactivé.');
+
+            return $this->redirectToRoute('sortie_list');
+        }
 
 
         return $this->render('admin/desactivationUser.html.twig', [
-
+            'desactiverForm' => $desactiverForm->createView(),
+            'userADesactiver' => $userADesactiver
         ]);
+
     }
 
 }

@@ -15,7 +15,7 @@ class DeleteUserType extends AbstractType
         $builder
             ->add('pseudo', EntityType::class, [
                 'mapped' => false,
-                'label' => "Pseudo de l'utilisateur à supprimer: ",
+                'label' => "Pseudo de l'utilisateur: ",
                 'class' => Participant::class,
                 'choice_label' => 'pseudo'
             ]);

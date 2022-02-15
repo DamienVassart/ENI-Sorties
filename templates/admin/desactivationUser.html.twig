@@ -2,7 +2,24 @@
 
 {% block body %}
 
-    {# todo: page pour désactiver un utilisateur #}
+    {% if is_granted('ROLE_ADMIN') %}
+
+    {{ form_start(desactiverForm) }}
+
+    {{ form_widget(desactiverForm) }}
+
+    <button type="submit" class="btn">Désactiver les accès du compte.</button>
+    {{ form_end(desactiverForm) }}
+
+    {% elseif is_granted('ROLE_DESACTIVATE') %}
+
+        <h3>Votre compte a été désactivé.</h3>
+
+        <p>Merci de contacter l'administrateur du site à l'adresse mail suivante : admin@admin.com</p>
+
+    {% endif %}
+
+
 
 {% endblock %}
 
