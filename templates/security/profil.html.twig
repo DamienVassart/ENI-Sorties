@@ -59,42 +59,18 @@
                     {{ form_label(profilUpdateForm.champ) }}
                     {{ form_widget(profilUpdateForm.champ) }}
                     {{ form_errors(profilUpdateForm.champ) }}
+
                 </div>
+                <button type="submit" class="btn-secondary add-btn">Valider</button>
         </div>
 
-{#        <button class="btn ptn-primary">#}
-        <script>
-            const clicChamp = document.querySelector("input");
-            const clicSelect = document.querySelector("select");
-            var boutonCreer = false;
 
-            do {
-
-            } while ()
-
-
-            clicChamp.addEventListener('change', updateValue);
-            clicSelect.addEventListener('change', updateValue);
-
-            function updateValue(e) {
-                if (boutonCreer===false) {
-                    var button = document.createElement("button");
-                    var buttonValue = document.createTextNode("Valider");
-                    button.setAttribute("class", "btn-primary btn-block add-btn");
-                    button.setAttribute("type", "submit");
-                    button.appendChild(buttonValue);
-                    document.getElementById("container").insertAdjacentElement("afterend", button);
-                    boutonCreer = true;
-                }
-            }
-        </script>
-{#        </button>#}
 
         {{ form_end(profilUpdateForm) }}
+
     {% endif %}
 {% endblock %}
 
 {% block title %}
         Mon profil | {{ app.user.pseudo }}
 {% endblock %}
-

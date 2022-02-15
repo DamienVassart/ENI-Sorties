@@ -56,6 +56,7 @@ class UtilisateurType extends AbstractType
                 'attr' => ['onclick' => 'updateValue();'],
                 'constraints' => [new Image( ['mimeTypesMessage' => 'Le format de l\'image n\'est pas autorisé : gif/png/jpeg/bmp/webp uniquement.'])]
             ]);
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void
