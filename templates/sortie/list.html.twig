@@ -8,7 +8,8 @@
 
    {% if app.user %}
       <div class="mb-3">
-         <h3>Vous êtes connecté en tant que {{ app.user.userIdentifier }}</h3>
+         <h2>Vous êtes connecté en tant que {{ app.user.userIdentifier }}</h2>
+         {# todo: vérifier pourquoi le titre ne prend pas le format h2 #}
       </div>
    {% endif %}
 

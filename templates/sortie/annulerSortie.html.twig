@@ -3,14 +3,16 @@
 {% block body %}
     <h1>Annuler une sortie</h1>
     <ul>
-        <li>Nom de la sortie: {{ sortie.nom }}</li>
-        <li>Date et heure de la sortie: {{ sortie.dateHeureDebut.format('d/m/Y H:i:s') }}</li>
-        <li>Campus: {{ sortie.idCampus.nom }}</li>
-        <li>Lieu: {{ sortie.idLieu.nom }} {{ sortie.idLieu.rue }} {{ sortie.idLieu.idVille.codePostal }} {{ sortie.idLieu.idVille.nom }}</li>
+        <li><i>Nom de la sortie :</i> {{ sortie.nom }}</li>
+        <li><i>Date et heure de la sortie :</i> {{ sortie.dateHeureDebut.format('d/m/Y H:i:s') }}</li>
+        <li><i>Campus :</i> {{ sortie.idCampus.nom }}</li>
+        <li><i>Lieu :</i> {{ sortie.idLieu.nom }} {{ sortie.idLieu.rue }} {{ sortie.idLieu.idVille.codePostal }} {{ sortie.idLieu.idVille.nom }}</li>
         <li>{{ form_start(annulationSortieForm) }}{{ form_widget(annulationSortieForm) }}</li>
     </ul>
-    <button type="submit">Enregistrer</button>
-    <a href="{{ path('sortie_list') }}"><input type="button" value="Annuler"></a>
+    <button type="submit" class="btn-secondary btn-block">Enregistrer</button>
+    <br>
+    <a href="{{ path('sortie_list') }}"><input type="button" value="Annuler" class="btn-dark btn-block"></a>
+    {# todo: le bouton annuler ne s'affiche pas de la meême façon que le bouton enregister: lequel est préférable? #}
     {{ form_end(annulationSortieForm) }}
 
 

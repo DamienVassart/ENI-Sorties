@@ -9,22 +9,22 @@
         <h2>{{ sortie.nom }}</h2>
         <section id="infos-sortie">
             <h3>Infos</h3>
-            <div>Date et heure de sortie: le {{ sortie.dateHeureDebut.format('d/m/Y') }} à {{ sortie.dateHeureDebut.format('h:m') }}</div>
-            <div>Durée: {{ sortie.duree }} minutes</div>
-            <div>Date limite d'inscription: {{ sortie.dateLimiteInscription.format('d/m/Y') }}</div>
-            <div>Nombre maximum de participants: {{ sortie.nbInscriptionsMax }}</div>
-            <div>Informations sortie: {{ sortie.infosSortie }}</div>
-            <div>Campus: {{ campus.nom }}</div>
+            <div><i>Date et heure de sortie :</i> le {{ sortie.dateHeureDebut.format('d/m/Y') }} à {{ sortie.dateHeureDebut.format('h:m') }}</div>
+            <div><i>Durée :</i> {{ sortie.duree }} minutes</div>
+            <div><i>Date limite d'inscription :</i> {{ sortie.dateLimiteInscription.format('d/m/Y') }}</div>
+            <div><i>Nombre maximum de participants :</i> {{ sortie.nbInscriptionsMax }}</div>
+            <div><i>Informations sortie :</i> {{ sortie.infosSortie }}</div>
+            <div><i>Campus :</i> {{ campus.nom }}</div>
         </section>
 
         <section id="lieu">
             <h3>Lieu</h3>
-            <div>Nom du lieu: {{ lieu.nom }}</div>
-            <div>Rue: {{ lieu.rue }}</div>
-            <div>Code Postal: {{ ville.codePostal }}</div>
-            <div>Ville: {{ ville.nom }}</div>
-            <div>Latitude: {{ lieu.latitude }}</div>
-            <div>Longitude: {{ lieu.longitude }}</div>
+            <div><i>Nom du lieu :</i> {{ lieu.nom }}</div>
+            <div><i>Rue :</i> {{ lieu.rue }}</div>
+            <div><i>ode Postal :</i> {{ ville.codePostal }}</div>
+            <div><i>Ville :</i> {{ ville.nom }}</div>
+            <div><i>Latitude :</i> {{ lieu.latitude }}</div>
+            <div><i>Longitude :</i> {{ lieu.longitude }}</div>
         </section>
 
         <section id="participants">
