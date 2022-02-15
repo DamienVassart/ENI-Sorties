@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Archiver une sortie</h1>
+    <ul>
+        <li>Nom de la sortie: {{ sortie.nom }}</li>
+        <li>Date et heure de la sortie: {{ sortie.dateHeureDebut.format('d/m/Y H:i:s') }}</li>
+        <li>Campus: {{ sortie.idCampus.nom }}</li>
+        <li>Lieu: {{ sortie.idLieu.nom }} {{ sortie.idLieu.rue }} {{ sortie.idLieu.idVille.codePostal }} {{ sortie.idLieu.idVille.nom }}</li>
+        <li>{{ form_start(annulationSortieForm) }}{{ form_widget(annulationSortieForm) }}</li>
+    </ul>
+    <button type="submit">Enregistrer</button>
+    <a href="{{ path('sortie_list') }}"><input type="button" value="Archiver"></a>
+    {{ form_end(archiverSortieForm) }}
+
+
+{% endblock %}
+
+{% block title %}
+    Archiver une sortie {{ parent() }}
+{% endblock %}
