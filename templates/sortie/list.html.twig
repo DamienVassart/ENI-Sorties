@@ -15,6 +15,7 @@
       <!-- :affichage des sorties-->
       {% for sortie in sorties %}
          {% set participants = sortie.participants | map(p => p.id) %}
+         {{ sortie.idEtat.id < 2 }}
          <div class="list-sorties">
             <article>
                <ul>
@@ -33,10 +34,12 @@
                   </li>
                   <li><i>Options :</i>
                      <a href="{{ path('sortie_details', {'id': sortie.id}) }}"><button>Afficher</button></a>
-                     {% if app.user.id in participants and sortie.idEtat.id < 3 %}
-                        <a href="{{ path('sortie_desistement', {'id': sortie.id}) }}"><button>Se désister</button></a>
-                     {% else %}
-                        <a href="{{ path('sortie_inscription', {'id': sortie.id}) }}"><button>S'inscrire</button></a>
+                     {% if sortie.idEtat.id < 3 %}
+                        {% if app.user.id in participants %}
+                           <a href="{{ path('sortie_desistement', {'id': sortie.id}) }}"><button>Se désister</button></a>
+                        {% else %}
+                           <a href="{{ path('sortie_inscription', {'id': sortie.id}) }}"><button>S'inscrire</button></a>
+                        {% endif %}
                      {% endif %}
                      {% if sortie.idOrganisateur.id == app.user.id %}
                         <a href="#"><button>Modifier</button></a></li>
