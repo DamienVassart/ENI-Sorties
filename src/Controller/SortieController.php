@@ -356,7 +356,7 @@ class SortieController extends AbstractController
 ////            $sortieDate->set(date_heure_debut)(date_limite_inscription)
 ////				//il nous faudrait une variable 2, qui récupère la date d'aujourd'hui;
 ////
-////				//et là un peu faire la condition: si (variable 1 > (variable 2 + 31 jours)),
+////				//et là on peut faire la condition: si (variable 1 > (variable 2 + 31 jours)),
 ////				//et si user = ROLE_USER, $display = 'none';
 ////            }
 //        }
