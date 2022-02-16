@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Sortie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,15 +20,21 @@ class SortieRepository extends ServiceEntityRepository
         parent::__construct($registry, Sortie::class);
     }
 
-    public function search($nomSortie, $campusSortie) {
+    public function search($nomSortie, $campusSortie, $idUserSession) {
         return $this->createQueryBuilder('s')
             ->andWhere('s.nom LIKE :nomSortie')
             ->andWhere('s.idCampus = :campusSortie')
+            ->andWhere('s.idOrganisateur= :userSession')
+            ->andWhere('s.participants = :userSession')
             ->setParameter('nomSortie', '%'.$nomSortie.'%')
             ->setParameter('campusSortie', $campusSortie)
+            ->setParameter('userSession', $idUserSession)
+            ->setParameter('userSession', $idUserSession)
             ->getQuery()
             ->execute();
     }
+
+
 
     // /**
     //  * @return Sortie[] Returns an array of Sortie objects
