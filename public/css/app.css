@@ -83,6 +83,7 @@ ul {
 
 .tableau-name {
     font-style: italic;
+    width: 200px;
 }
 
 
@@ -196,4 +197,9 @@ input.submit {
     padding-left: 10px;
     width: 40%;
 }
+
+#tableau-details-sortie {
+    padding: 10px;
+}
+
 
