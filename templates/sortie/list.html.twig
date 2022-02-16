@@ -40,8 +40,6 @@
                   </li>
 {#                  <li><i>Options :</i>#}
                   {# todo voir si on écrit Options ou pas - les boutons suivants sont peut-etre assez clairs #}
-                  {# todo modifier la largeur pour que les quatre boutons s'affichent sur une seule ligne #}
-                  <li>
                      <a href="{{ path('sortie_details', {'id': sortie.id}) }}"><button>Afficher</button></a>
                      {% if sortie.idEtat.id < 3 %}
                         {% if app.user.id in participants %}
@@ -51,11 +49,11 @@
                         {% endif %}
                      {% endif %}
                      {% if sortie.idOrganisateur.id == app.user.id %}
-                        <a href="{{ path('sortie_update', {'id': sortie.id}) }}"><button>Modifier</button></a></li>
+                        <a href="{{ path('sortie_update', {'id': sortie.id}) }}"><button>Modifier</button></a>
                      {% endif %}
                      {% if sortie.idOrganisateur.id == app.user.id or is_granted('ROLE_ADMIN') %}
                         {% if sortie.idEtat.id < 4 %}
-                           <a href="{{ path('sortie_annuler', {'id': sortie.id}) }}"><button>Annuler</button></a></li>
+                           <a href="{{ path('sortie_annuler', {'id': sortie.id}) }}"><button>Annuler</button></a>
                         {% endif %}
                      {% endif %}
                </ul>
