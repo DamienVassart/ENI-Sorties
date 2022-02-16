@@ -54,6 +54,7 @@ class UtilisateurType extends AbstractType
             ->add('champ', FileType::class, [
                 "mapped" => false, // désactive mappage avec champ dans l'entité qui attend une chaîne de caractère
                 'attr' => ['onclick' => 'updateValue();'],
+                'required' => false,
                 'constraints' => [new Image( ['mimeTypesMessage' => 'Le format de l\'image n\'est pas autorisé : gif/png/jpeg/bmp/webp uniquement.'])]
             ]);
 
