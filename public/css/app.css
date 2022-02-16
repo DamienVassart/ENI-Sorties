@@ -139,16 +139,6 @@ input.submit {
     background-color: lightsteelblue;
 }
 
-/*Affichage des bordures sur la page /sortie */
-/*.list-sorties {*/
-/*    border-radius: 15px 50px;*/
-/*    border: 2px solid lightsteelblue;*/
-/*    !*background: lightsteelblue;*!*/
-/*    padding: 20px;*/
-/*    width: auto;*/
-/*    height: auto;*/
-/*}*/
-
 #sortie-details section {
     margin-top: 30px;
 }
@@ -226,6 +216,10 @@ input.submit {
     width: 40%;
 }
 
+#tableau-sortie-annulation td {
+    width: 40%;
+}
+
 #tableau-campus td {
     padding-left: 10px;
     /*width: 50%;*/
@@ -237,31 +231,7 @@ input.submit {
     padding: 10px;
 }
 
-/*#tableau-ville thead {*/
-/*    background-color: #aaaaaa;*/
-/*    color: white;*/
-/*    font-weight: bold;*/
-/*}*/
 
-/*#tableau-ville thead td:first-of-type {*/
-/*    border-right: 1px solid #dddddd;*/
-/*}*/
-
-/*#tableau-ville tr:nth-child(2n) {*/
-/*    background-color: #dddddd;*/
-/*}*/
-
-/*#tableau-ville td:first-of-type {*/
-/*    padding: 0 10px;*/
-/*}*/
-
-/*#tableau-ville td:nth-of-type(2) {*/
-/*    padding: 0 5px;*/
-/*}*/
-
-/*#tableau-ville td {*/
-/*    border: 1px solid #aaaaaa;*/
-/*}*/
 
 
 

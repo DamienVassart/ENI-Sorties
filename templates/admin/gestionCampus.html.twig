@@ -10,22 +10,6 @@
         {{ form_end(searchForm) }}
     </div>
 
-    {# todo: si le tableau ci-dessous convient, on peut effacer ce code #}
-{#    <div>#}
-{#        {% for campus in listeCampus %}#}
-{#            <ul>#}
-{#                <li>#}
-{#                    <div class="campus">#}
-{#                        {{ campus.nom }}#}
-{#                        <a href="{{ path('admin_campus_edit', {'id': campus.id}) }}"><button>Modifier</button></a>#}
-{#                        <a href="{{ path('admin_campus_delete', {'id': campus.id}) }}"><button>Supprimer</button></a>#}
-{#                    </div>#}
-{#                </li>#}
-{#            </ul>#}
-{#            <br>#}
-{#        {% endfor %}#}
-{#    </div>#}
-
     <table id="tableau-campus">
             <thead>
                 <tr>
@@ -54,7 +38,7 @@
     <div id="container">
         {{ form_start(campusForm) }}
         {{ form_widget(campusForm) }}
-        <button type="submit" class="btn-secondary btn-block">Ajouter</button>
+        <button type="submit" class="btn-block add-btn btn">Ajouter</button>
         {{ form_end(campusForm) }}
     </div>
     <br>

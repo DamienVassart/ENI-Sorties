@@ -2,17 +2,43 @@
 
 {% block body %}
     <h1>Annuler une sortie</h1>
-    <ul>
-        <li><i>Nom de la sortie :</i> {{ sortie.nom }}</li>
-        <li><i>Date et heure de la sortie :</i> {{ sortie.dateHeureDebut.format('d/m/Y H:i:s') }}</li>
-        <li><i>Campus :</i> {{ sortie.idCampus.nom }}</li>
-        <li><i>Lieu :</i> {{ sortie.idLieu.nom }} {{ sortie.idLieu.rue }} {{ sortie.idLieu.idVille.codePostal }} {{ sortie.idLieu.idVille.nom }}</li>
-        <li>{{ form_start(annulationSortieForm) }}{{ form_widget(annulationSortieForm) }}</li>
-    </ul>
-    <button type="submit" class="btn-secondary btn-block">Enregistrer</button>
-    <br>
-    <a href="{{ path('sortie_list') }}"><input type="button" value="Annuler" class="btn-dark btn-block"></a>
+{#    <ul>#}
+{#        <li><i>Nom de la sortie :</i> {{ sortie.nom }}</li>#}
+{#        <li><i>Date et heure de la sortie :</i> {{ sortie.dateHeureDebut.format('d/m/Y H:i:s') }}</li>#}
+{#        <li><i>Campus :</i> {{ sortie.idCampus.nom }}</li>#}
+{#        <li><i>Lieu :</i> {{ sortie.idLieu.nom }} {{ sortie.idLieu.rue }} {{ sortie.idLieu.idVille.codePostal }} {{ sortie.idLieu.idVille.nom }}</li>#}
+{#        <li>{{ form_start(annulationSortieForm) }}{{ form_widget(annulationSortieForm) }}</li>#}
+{#    </ul>#}
+
+    <table id="tableau-sortie-annulation">
+        <tbody>
+        <tr>
+            <td class="tableau-name">Nom de la sortie</td>
+            <td>{{ sortie.nom }}</td>
+        </tr>
+        <tr>
+            <td class="tableau-name">Date et heure de la sortie</td>
+            <td>{{ sortie.dateHeureDebut.format('d/m/Y H:i:s') }}</td>
+        </tr>
+        <tr>
+            <td class="tableau-name">Campus</td>
+            <td>{{ sortie.idCampus.nom }}</td>
+        </tr>
+        <tr>
+            <td class="tableau-name">Lieu</td>
+            <td>{{ sortie.idLieu.nom }} {{ sortie.idLieu.rue }} {{ sortie.idLieu.idVille.codePostal }} {{ sortie.idLieu.idVille.nom }}</td>
+        </tr>
+
+        </tbody>
+
+    </table>
+
+    {{ form_start(annulationSortieForm) }}{{ form_widget(annulationSortieForm) }}
+
+    <button type="submit" class="btn-block add-btn btn">Enregistrer</button>
+    <a href="{{ path('sortie_list') }}"><input type="button" value="Annuler" class="btn-block add-btn btn"></a>
     {# todo: le bouton annuler ne s'affiche pas de la meême façon que le bouton enregister: lequel est préférable? #}
+
     {{ form_end(annulationSortieForm) }}
 
 

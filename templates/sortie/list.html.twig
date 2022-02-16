@@ -43,16 +43,16 @@
 
                   <table id="tableau-sorties-proposees">
                      <thead>
-                     <tr>
-                        <td>Nom de la sortie</td>
-                        <td>Date de la sortie</td>
-                        <td>Clôture</td>
-                        <td>Inscrits / Places</td>
-                        <td>État</td>
-                        <td>Inscrit</td>
-                        <td>Organisateur</td>
-                        <td>Actions</td>
-                     </tr>
+                         <tr>
+                            <td>Nom de la sortie</td>
+                            <td>Date de la sortie</td>
+                            <td>Clôture</td>
+                            <td>Inscrits / Places</td>
+                            <td>État</td>
+                            <td>Inscrit</td>
+                            <td>Organisateur</td>
+                            <td>Actions</td>
+                         </tr>
                      </thead>
                      <tbody>
                      {% for sortie in sorties %}
@@ -171,7 +171,7 @@
          <br>
 {#      {% endfor %}#}
 
-      <button class="btn-secondary btn-block add-btn"><a href="{{ path('sortie_create') }}">Ajouter une sortie</a></button>
+      <button class="btn-block add-btn btn"><a href="{{ path('sortie_create') }}">Ajouter une sortie</a></button>
 
    </section>
 {% endblock %}
