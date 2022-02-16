@@ -9,7 +9,7 @@
         <li>Lieu: {{ sortie.idLieu.nom }} {{ sortie.idLieu.rue }} {{ sortie.idLieu.idVille.codePostal }} {{ sortie.idLieu.idVille.nom }}</li>
         <li>{{ form_start(archiverSortieForm) }}{{ form_widget(archiverSortieForm) }}</li>
     </ul>
-    <button type="submit">Enregistrer</button>
+    <button type="submit">Archiver</button>
     <a href="{{ path('sortie_list') }}"><input type="button" value="Archiver"></a>
     {{ form_end(archiverSortieForm) }}
 

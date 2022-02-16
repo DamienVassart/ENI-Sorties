@@ -67,7 +67,6 @@ class SortieController extends AbstractController
         }
 
         return $this->render('sortie/list.html.twig', [
-//            "today" => $today,
             "sorties"=> $sorties,
             'searchForm' => $searchForm->createView()
         ]);
@@ -308,6 +307,31 @@ class SortieController extends AbstractController
 //                             EtatRepository $etatRepository,
 //                             SortieRepository $sortieRepository) : Response
 //    {
+//        if ($ticket->getDateArchivage() == null)
+//        {
+//            $ticket->setDateArchivage(new \DateTime());
+//            $ticket->setUser($user);
+//
+//            $user = $this->getUser();
+//            $rolesUser = $user->getRoles();
+//            $sortie = $sortieRepository->find($id);
+//
+//
+//            $idEtatArchiver = $etatRepository->find(7);
+//            $sortie->setIdEtat($idEtatArchiver);
+//            $entityManager->persist($sortie);
+//            $entityManager->flush();
+//            $this->addFlash('success', "Sortie archivée avec succès!");
+//
+//        }else
+//        {
+//            $this->addFlash('success', "Sortie déja archivée !");
+//        }
+//        return $this->redirectToRoute('sortie_list');
+//
+//
+//
+
 //        $user = $this->getUser();
 //        $rolesUser = $user->getRoles();
 //        $pseudoUserCourant = $user->getUserIdentifier();
@@ -340,7 +364,8 @@ class SortieController extends AbstractController
 //                return $this->redirectToRoute('sortie_list');
 //            }
 //
-////            if($role == "ROLE_USER) {
+////            TEST
+///             if($role == "ROLE_USER) {
 ////
 ////            // On crée un objet DateTime sous le format suivant et avec la valeur donnée
 ////            $sortieDate = date_create_from_format("d/m/Y H:i", $sortie->dates[0]->begin);
@@ -364,6 +389,6 @@ class SortieController extends AbstractController
 //            'archiverSortieForm' =>$archiverSortieForm->createview(),
 //            'sortie' => $sortie
 //        ]);
-//    }
+//     }
 
 }
