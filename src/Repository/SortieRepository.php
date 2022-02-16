@@ -24,10 +24,10 @@ class SortieRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('s')
             ->andWhere('s.nom LIKE :nomSortie')
             ->andWhere('s.idCampus = :campusSortie')
-            ->andWhere('s.idOrganisateur = :idUserSession')
+//            ->andWhere('s.idOrganisateur = :idUserSession')
             ->setParameter('nomSortie', '%'.$nomSortie.'%')
             ->setParameter('campusSortie', $campusSortie)
-            ->setParameter('idUserSession', $userEntier)
+//            ->setParameter('idUserSession', $userEntier)
             ->getQuery()
             ->execute();
     }
