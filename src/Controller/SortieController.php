@@ -61,28 +61,31 @@ class SortieController extends AbstractController
         if ($searchForm->isSubmitted() && $searchForm->isValid())
         {
             $nomSortie = $searchForm->get('nom')->getData();
-
             $campus = $searchForm->get('campus')->getData();
             $campusSortie = $campus->getId();
+            $filtre1 = $searchForm->get('filtre1')->getData();
 
-//            $filtre1 = $searchForm->get('filtre1')->getData();
-//
-//            if ($filtre1)
-//            {
-//                $user = $this->getUser();
-//                $userPseudo = $user->getUserIdentifier();
-//                $userProperties = $participantRepository->findOneBy(['pseudo' => $userPseudo], ['pseudo' => 'ASC']);
-//                $idUserSession = $userProperties->getId();
-//
-//                $idUserOrganisateur = $sortie->getIdOrganisateur()->getId();
-//
-//                if($idUserOrganisateur===$idUserSession) {
-//
-//                }
-//            }
+            $userPseudo = $this->getUser()->getUserIdentifier();
+            $userEntier = $participantRepository->findOneBy(['pseudo' => $userPseudo], ['pseudo' => 'ASC']);
 
-            $sorties = $sortieRepository->search($nomSortie,$campusSortie);
+            if($nomSortie)
+            {
+                $sorties = $sortieRepository->search($nomSortie,$campusSortie, $userEntier);
+            }
 
+            if($campusSortie)
+            {
+                $sorties = $sortieRepository->search($nomSortie,$campusSortie, $userEntier);
+            }
+
+            if ($filtre1)
+            {
+                $userOrganisateur = $sortie->getIdOrganisateur();
+
+                if($userOrganisateur===$userEntier) {
+                    $sorties = $sortieRepository->search($nomSortie,$campusSortie, $userEntier);
+                }
+            }
 
             if ($sorties == null) {
                 $this->addFlash('error', 'Aucune sortie contenant ce mot clé dans son nom n\'a été trouvé, essayez en un autre.');
