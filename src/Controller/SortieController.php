@@ -317,14 +317,15 @@ class SortieController extends AbstractController
 //                             EtatRepository $etatRepository,
 //                             SortieRepository $sortieRepository) : Response
 //    {
-//        if ($ticket->getDateArchivage() == null)
+//        $sortie = $sortieRepository->find($id);
+//
+//        if ($sortie->getDateArchivage() == null)
 //        {
-//            $ticket->setDateArchivage(new \DateTime());
-//            $ticket->setUser($user);
+//            $sortie->setDateArchivage(new \DateTime());
 //
 //            $user = $this->getUser();
 //            $rolesUser = $user->getRoles();
-//            $sortie = $sortieRepository->find($id);
+//
 //
 //
 //            $idEtatArchiver = $etatRepository->find(7);
@@ -338,7 +339,7 @@ class SortieController extends AbstractController
 //            $this->addFlash('success', "Sortie déja archivée !");
 //        }
 //        return $this->redirectToRoute('sortie_list');
-//
+
 //
 //
 
