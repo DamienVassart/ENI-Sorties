@@ -203,6 +203,12 @@ input.submit {
     width: auto;
 }
 
+#tableau-ville,
+#tableau-sorties-proposées,
+#tableau-campus {
+    text-align: center;
+}
+
 #tableau-ville td {
     padding: 10px;
     width: 33%;
@@ -221,7 +227,7 @@ input.submit {
 
 #tableau-campus td {
     padding-left: 10px;
-    width: 50%;
+    /*width: 50%;*/
 }
 
 #tableau-details-sortie,

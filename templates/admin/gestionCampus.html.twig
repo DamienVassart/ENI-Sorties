@@ -38,14 +38,18 @@
                 <tr>
                     <td>{{ campus.nom }}</td>
                     <td>
-                        <a href="{{ path('admin_campus_edit', {'id': campus.id}) }}"><button>Modifier</button></a>
-                        <a href="{{ path('admin_campus_delete', {'id': campus.id}) }}"><button>Supprimer</button></a>
+{#                        <a href="{{ path('admin_campus_edit', {'id': campus.id}) }}"><button>Modifier</button></a>#}
+{#                        <a href="{{ path('admin_campus_delete', {'id': campus.id}) }}"><button>Supprimer</button></a>#}
+                        <a href="{{ path('admin_campus_edit', {'id': campus.id}) }}">Modifier</a>
+                        | <a href="{{ path('admin_campus_delete', {'id': campus.id}) }}">Supprimer</a>
+                    </td>
                     </td>
                 </tr>
         </tbody>
         {% endfor %}
 
     </table>
+    <br>
 
     <div id="container">
         {{ form_start(campusForm) }}
