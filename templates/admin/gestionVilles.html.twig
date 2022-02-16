@@ -20,13 +20,22 @@
 
     <table id="tableau-ville">
 
+        <thead>
+        <tr>
+            <td>Ville</td>
+            <td>Code postal</td>
+            <td>Actions</td>
+        </tr>
+        </thead>
         {% for ville in listeVilles %}
             <tbody>
             <tr>
                 <td>{{ ville.nom }}</td>
                 <td>{{ ville.codePostal }}</td>
-                <td><a href="{{ path('admin_villes_edit', {'id': ville.id}) }}"><button>Modifier</button></a></td>
-                <td><a href="{{ path('admin_villes_delete', {'id': ville.id}) }}"><button>Supprimer</button></a></td>
+                <td>
+                    <a href="{{ path('admin_villes_edit', {'id': ville.id}) }}"><button>Modifier</button></a>
+                    <a href="{{ path('admin_villes_delete', {'id': ville.id}) }}"><button>Supprimer</button></a>
+                </td>
             </tr>
             </tbody>
         {% endfor %}
