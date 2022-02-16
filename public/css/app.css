@@ -198,8 +198,10 @@ input.submit {
     width: 40%;
 }
 
-#tableau-details-sortie {
+#tableau-details-sortie,
+#tableau-sorties-proposees {
     padding: 10px;
 }
+
 
 
