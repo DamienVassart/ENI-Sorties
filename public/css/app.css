@@ -185,7 +185,6 @@ input.submit {
     width: auto;
 }
 
-#tableau-campus td,
 #tableau-ville td,
 #tableau-profil td {
     padding: 10px;
@@ -199,8 +198,14 @@ input.submit {
 }
 
 #tableau-details-sortie,
-#tableau-sorties-proposees {
+#tableau-sorties-proposees,
+#tableau-campus {
     padding: 10px;
+}
+
+#tableau-campus {
+    padding-left: 10px;
+    width: 100%;
 }
 
 

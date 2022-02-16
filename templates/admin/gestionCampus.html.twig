@@ -27,14 +27,21 @@
 {#    </div>#}
 
     <table id="tableau-campus">
-
+            <thead>
+                <tr>
+                    <td>Campus</td>
+                    <td>Actions</td>
+                </tr>
+            </thead>
         {% for campus in listeCampus %}
-        <tbody>
-            <tr>
-                <td>{{ campus.nom }}</td>
-                <td><a href="{{ path('admin_campus_edit', {'id': campus.id}) }}"><button>Modifier</button></a></td>
-                <td><a href="{{ path('admin_campus_delete', {'id': campus.id}) }}"><button>Supprimer</button></a></td>
-            </tr>
+            <tbody>
+                <tr>
+                    <td>{{ campus.nom }}</td>
+                    <td>
+                        <a href="{{ path('admin_campus_edit', {'id': campus.id}) }}"><button>Modifier</button></a>
+                        <a href="{{ path('admin_campus_delete', {'id': campus.id}) }}"><button>Supprimer</button></a>
+                    </td>
+                </tr>
         </tbody>
         {% endfor %}
 
