@@ -92,6 +92,10 @@ class SortieType extends AbstractType
             function(FormEvent $event) {
                 $form = $event->getForm();
                 $data = $event->getData();
+
+                $campus = $data->getIdCampus();
+                $form->get('Campus')->setData($campus);
+
                 $lieu = $data->getIdLieu();
                 if($lieu) {
                     $ville = $lieu->getIdVille();
