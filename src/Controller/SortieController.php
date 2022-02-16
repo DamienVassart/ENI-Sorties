@@ -71,6 +71,9 @@ class SortieController extends AbstractController
             'searchForm' => $searchForm->createView()
         ]);
     }
+    /*
+     * Auteur: Damien Vassart
+     */
     /**
      * @Route("/details/{id}", name="details")
      */
@@ -95,6 +98,10 @@ class SortieController extends AbstractController
             "participants" => $participants
         ]);
     }
+
+    /*
+     * Auteur: Damien Vassart
+     */
     /**
      * @Route("/create", name="create")
      */
@@ -143,6 +150,9 @@ class SortieController extends AbstractController
         ]);
     }
 
+    /*
+     * Auteur: Damien Vassart
+     */
     /**
      * @Route("/update{id}", name="update")
      */
@@ -153,7 +163,7 @@ class SortieController extends AbstractController
         LieuRepository $lieuRepository
     ): Response
     {
-        $sortieForm = $this->createForm(UpdateSortieType::class, $sortie);
+        $sortieForm = $this->createForm(SortieType::class, $sortie);
 
         $sortieForm->handleRequest($request);
 
