@@ -52,7 +52,6 @@ class SortieController extends AbstractController
             $sortieStateSetter->updateState($sortie, $etatRepository);
             $entityManager->persist($sortie);
         }
-
         $entityManager->flush();
 
         $searchForm =$this->createForm(SearchSortieType::class);
@@ -66,37 +65,24 @@ class SortieController extends AbstractController
             $campus = $searchForm->get('campus')->getData();
             $campusSortie = $campus->getId();
 
-            $filtre1 = $searchForm->get('filtre1')->getData();
+//            $filtre1 = $searchForm->get('filtre1')->getData();
+//
+//            if ($filtre1)
+//            {
+//                $user = $this->getUser();
+//                $userPseudo = $user->getUserIdentifier();
+//                $userProperties = $participantRepository->findOneBy(['pseudo' => $userPseudo], ['pseudo' => 'ASC']);
+//                $idUserSession = $userProperties->getId();
+//
+//                $idUserOrganisateur = $sortie->getIdOrganisateur()->getId();
+//
+//                if($idUserOrganisateur===$idUserSession) {
+//
+//                }
+//            }
 
-            if ($filtre1)
-            {
-                $user = $this->getUser();
-                $userPseudo = $user->getUserIdentifier();
-                $userProperties = $participantRepository->findOneBy(['pseudo' => $userPseudo], ['pseudo' => 'ASC']);
-                $idUserSession = $userProperties->getId();
+            $sorties = $sortieRepository->search($nomSortie,$campusSortie);
 
-                $idUserOrganisateur = $sortie->getIdOrganisateur()->getId();
-
-                if($idUserOrganisateur===$idUserSession) {
-                    $sorties = $sortieRepository->search($nomSortie,$campusSortie, $idUserSession);
-
-                }
-            }
-
-            $filtre2 = $searchForm->get('filtre2')->getData();
-
-            if ($filtre2)
-            {
-                foreach ($sortieUser as $sortie) {
-                    foreach ($sortie->getParticipants() as $participant)
-                    {
-                        if ($participant->getId() === $idUserSession)
-                        {
-                            $sorties = $sortieRepository->search($nomSortie, $campusSortie, $idUserSession);
-                        }
-                    }
-                }
-            }
 
             if ($sorties == null) {
                 $this->addFlash('error', 'Aucune sortie contenant ce mot clé dans son nom n\'a été trouvé, essayez en un autre.');
