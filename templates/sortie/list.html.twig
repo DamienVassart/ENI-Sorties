@@ -56,6 +56,7 @@
                      </thead>
                      <tbody>
                      {% for sortie in sorties %}
+                        {% if sortie.idOrganisateur.id == app.user.id %}
                         {% set participants = sortie.participants | map(p => p.id) %}
                         <tr>
                            <td>{{ sortie.nom }}</td>
@@ -81,6 +82,9 @@
                                  {% endif %}
                               {% endif %}
                               {% if sortie.idOrganisateur.id == app.user.id %}
+                                 {% if sortie.idEtat.id == 1 %}
+                                    <a href="{{ path('sortie_publish', {'id': sortie.id}) }}"><button>Publier</button></a>
+                                 {% endif %}
                                  <a href="{{ path('sortie_update', {'id': sortie.id}) }}"><button>Modifier</button></a>
                               {% endif %}
                               {% if sortie.idOrganisateur.id == app.user.id or is_granted('ROLE_ADMIN') %}

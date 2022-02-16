@@ -52,7 +52,8 @@ class SortieController extends AbstractController
             $sortieStateSetter->updateState($sortie, $etatRepository);
             $entityManager->persist($sortie);
         }
-            $entityManager->flush();
+
+        $entityManager->flush();
 
         $searchForm =$this->createForm(SearchSortieType::class);
 
@@ -227,6 +228,27 @@ class SortieController extends AbstractController
         ]);
     }
 
+    /*
+     * Auteur: Damien Vassart
+     */
+    /**
+     * @Route("/publish/{id}", name="publish")
+     */
+    public function publier(
+        Sortie $sortie,
+        EtatRepository $etatRepository,
+        EntityManagerInterface $entityManager
+        ):Response
+    {
+        $etatPubliee = $etatRepository->find(2);
+        $sortie->setIdEtat($etatPubliee);
+
+        $entityManager->persist($sortie);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('sortie_list');
+    }
+
     /**
      * @Route("/delete{id}", name="delete")
      */
@@ -299,7 +321,7 @@ class SortieController extends AbstractController
 
         $participant = $participantRepository->findOneBy(['pseudo' => $userPseudo], ['pseudo' => 'ASC']);
 
-        if ($sortie->getIdEtat()->getId() < 3) {
+        if ($sortie->getIdEtat()->getId() == 2) {
             $sortie->addParticipant($participant);
 
             $this->addFlash('success', 'Vous vous êtes bien inscrit à cette sortie !');
@@ -331,7 +353,7 @@ class SortieController extends AbstractController
 
         $participant = $participantRepository->findOneBy(['pseudo' => $userPseudo], ['pseudo' => 'ASC']);
 
-        if($sortie->getIdEtat()->getId() < 4) {
+        if($sortie->getIdEtat()->getId() > 1 && $sortie->getIdEtat()->getId() < 4) {
             $sortie->removeParticipant($participant);
 
             $this->addFlash('success', 'Vous vous êtes bien désisté !');
