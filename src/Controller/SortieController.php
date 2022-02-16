@@ -42,7 +42,6 @@ class SortieController extends AbstractController
         Request $request): Response
     {
         $sorties = $sortieRepository->findAll();
-//        $today = new \DateTime('now');
 
         foreach ($sorties as $sortie) {
             $sortieStateSetter->updateState($sortie, $etatRepository);
