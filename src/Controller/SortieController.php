@@ -62,6 +62,7 @@ class SortieController extends AbstractController
 
             $sorties = $sortieRepository->search($nomSortie,$campusSortie);
 
+
             if ($sorties == null) {
                 $this->addFlash('error', 'Aucune sortie contenant ce mot clé dans son nom n\'a été trouvé, essayez en un autre.');
             }
