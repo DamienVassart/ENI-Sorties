@@ -22,22 +22,70 @@
       {% for sortie in sorties %}
          {% set participants = sortie.participants | map(p => p.id) %}
          <div class="list-sorties">
-            {# todo on pourrait mettre les infos sous forme de tableau pour que ce soit plus lisible #}
-            <article>
-               <ul>
-                  <li><i>Nom de la sortie :</i> {{ sortie.nom }}</li>
-                  <li><i>Date de la sortie :</i> {{ sortie.dateHeureDebut.format('d/m/Y H:i:s') }} </li>
-                  <li><i>Clôture :</i> {{ sortie.dateLimiteInscription.format('d/m/Y') }}</li>
-                  <li><i>Inscrits</i> -> {{ sortie.participants.count }} / <i>places</i> -> {{ sortie.nbInscriptionsMax }}</li>
-                  <li><i>État :</i> {{ sortie.idEtat.libelle }}</li>
-                  <li><i>Organisateur :</i> <a href="{{ path('app_profilAutre', {'id': sortie.idOrganisateur.id}) }}" title="{{ sortie.idOrganisateur.nom }}">{{ sortie.idOrganisateur.nom }}</a></li>
-                  <li><i>Inscrit :</i>
-                     {% if app.user.id in participants %}
-                        Oui
-                     {% else %}
-                        Non
-                     {% endif %}
-                  </li>
+{#            #}{# todo on pourrait mettre les infos sous forme de tableau pour que ce soit plus lisible #}
+{#            <article>#}
+{#               <ul>#}
+{#                  <li><i>Nom de la sortie :</i> {{ sortie.nom }}</li>#}
+{#                  <li><i>Date de la sortie :</i> {{ sortie.dateHeureDebut.format('d/m/Y H:i:s') }} </li>#}
+{#                  <li><i>Clôture :</i> {{ sortie.dateLimiteInscription.format('d/m/Y') }}</li>#}
+{#                  <li><i>Inscrits</i> -> {{ sortie.participants.count }} / <i>places</i> -> {{ sortie.nbInscriptionsMax }}</li>#}
+{#                  <li><i>État :</i> {{ sortie.idEtat.libelle }}</li>#}
+{#                  <li><i>Organisateur :</i> <a href="{{ path('app_profilAutre', {'id': sortie.idOrganisateur.id}) }}" title="{{ sortie.idOrganisateur.nom }}">{{ sortie.idOrganisateur.nom }}</a></li>#}
+{#                  <li><i>Inscrit :</i>#}
+{#                     {% if app.user.id in participants %}#}
+{#                        Oui#}
+{#                     {% else %}#}
+{#                        Non#}
+{#                     {% endif %}#}
+{#                  </li>#}
+
+{#                  todo: le tableau est une suggestion si on ne peut pas faire comme indiqué dans la maquette#}
+                  <div class="tableau-sortie">
+                     <table id="tableau-sortie">
+                        <tbody>
+                           <tr>
+                              <td class="tableau-name">Nom de la sortie</td>
+                              <td>{{ sortie.nom }}</td>
+                           </tr>
+                           <tr>
+                              <td class="tableau-name">Date de la sortie</td>
+                              <td>{{ sortie.dateHeureDebut.format('d/m/Y H:i:s') }}</td>
+                           </tr>
+                           <tr>
+                              <td class="tableau-name">Clôture</td>
+                              <td>{{ sortie.dateLimiteInscription.format('d/m/Y') }}</td>
+                           </tr>
+                           <tr>
+                              <td class="tableau-name">Inscrits</td>
+                              <td>{{ sortie.participants.count }}</td>
+                           </tr>
+                           <tr>
+                              <td class="tableau-name">Places</td>
+                              <td>{{ sortie.nbInscriptionsMax }}</td>
+                           </tr>
+                           <tr>
+                              <td class="tableau-name">État</td>
+                              <td>{{ sortie.idEtat.libelle }}</td>
+                           </tr>
+                           <tr>
+                              <td class="tableau-name">Organisateur</td>
+                              <td><a href="{{ path('app_profilAutre', {'id': sortie.idOrganisateur.id}) }}" title="{{ sortie.idOrganisateur.nom }}">{{ sortie.idOrganisateur.nom }}</a></td>
+                           </tr>
+                           <tr>
+                              <td class="tableau-name">Inscrit</td>
+                              <td>
+                                 {% if app.user.id in participants %}
+                                    Oui
+                                 {% else %}
+                                    Non
+                                 {% endif %}
+                              </td>
+                           </tr>
+
+                        </tbody>
+                     </table>
+                  </div>
+
 {#                  <li><i>Options :</i>#}
                   {# todo voir si on écrit Options ou pas - les boutons suivants sont peut-etre assez clairs #}
                      <a href="{{ path('sortie_details', {'id': sortie.id}) }}"><button>Afficher</button></a>
@@ -59,6 +107,7 @@
                </ul>
             </article>
          </div>
+
          <br>
       {% endfor %}
 
