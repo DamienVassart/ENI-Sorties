@@ -57,12 +57,13 @@ class SortieController extends AbstractController
             $nomSortie = $searchForm->get('nom')->getData();
 
             $campus = $searchForm->get('campus')->getData();
+
             $campusSortie = $campus->getId();
 
             $sorties = $sortieRepository->search($nomSortie,$campusSortie);
 
             if ($sorties == null) {
-                $this->addFlash('error', 'Aucune ville contenant ce mot clé dans son nom n\'a été trouvé, essayez en un autre.');
+                $this->addFlash('error', 'Aucune sortie contenant ce mot clé dans son nom n\'a été trouvé, essayez en un autre.');
             }
         }
 
