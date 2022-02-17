@@ -22,7 +22,7 @@ class Sortie
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Vueillez préciser un nom pour la sortie")
+     * @Assert\NotBlank(message="Veuillez préciser un nom pour la sortie")
      */
     private $nom;
 

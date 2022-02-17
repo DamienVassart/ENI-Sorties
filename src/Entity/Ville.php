@@ -6,6 +6,7 @@ use App\Repository\VilleRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=VilleRepository::class)
@@ -26,6 +27,9 @@ class Ville
     private $nom;
 
     /**
+     * @Assert\Regex(pattern="/^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$/",
+     *     match=true,
+     *     message="Le code postal n'est pas valide!")
      * @ORM\Column(type="string", length=5)
      */
     private $codePostal;
