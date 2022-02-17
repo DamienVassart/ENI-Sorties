@@ -21,7 +21,9 @@
             <a href="{{ path('lieu_createWhenUpdate', {'id': sortie.id}) }}">Ajouter un lieu</a>
         </button>
         <p>Ou sélectionner un lieu existant: </p>
-        {{ form_row(sortieForm.Ville) }}
+        {% if sortieForm.Ville is defined %}
+            {{ form_row(sortieForm.Ville) }}
+        {% endif %}
         {% if sortieForm.select is defined %}
             {{ form_row(sortieForm.select) }}
         {% endif %}

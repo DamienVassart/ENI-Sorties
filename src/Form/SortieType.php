@@ -99,19 +99,20 @@ class SortieType extends AbstractType
                 $campus = $data->getIdCampus();
                 $form->get('Campus')->setData($campus);
 
+                $form->remove('select');
+                $form->remove('Ville');
+                $form->remove('Lieu');
+
+                $form->add('Lieu', EntityType::class, [
+                   'class' => Lieu::class,
+                   'choice_label' => 'nom',
+                   'placeholder' => '---Choisir un lieu---',
+                    'mapped' => false
+                ]);
+
                 $lieu = $data->getIdLieu();
-                if($lieu) {
-                    $ville = $lieu->getIdVille();
-                    $form->remove('select');
-                    $form->get('Ville')->setData($ville);
-                    $form->add('Lieu', EntityType::class, [
-                        'class' => Lieu::class,
-                        'choice_label' => 'nom',
-                        'placeholder' => '---Choisir un lieu---',
-                        'mapped' => false
-                    ]);
-                    $form->get('Lieu')->setData($lieu);
-                }
+                $form->get('Lieu')->setData($lieu);
+
             }
         );
     }
