@@ -97,7 +97,7 @@ class SortieType extends AbstractType
                 $data = $event->getData();
                 $lieu = $data->getIdLieu();
                 if($lieu) {
-                    $ville = $lieu->getIdVille();
+                    $form->remove('Ville');
                     $form->remove('select');
                     $form->add('Lieu', EntityType::class, [
                         'class' => Lieu::class,
@@ -105,7 +105,6 @@ class SortieType extends AbstractType
                         'placeholder' => '---Choisir un lieu---',
                         'mapped' => false
                     ]);
-                    $form->get('Ville')->setData($ville);
                     $form->get('Lieu')->setData($lieu);
                 }
             }
