@@ -22,7 +22,6 @@ footer {
     text-align: center;
 }
 
-/*essayons*/
 /* || Header and main navigation*/
 
 header {
@@ -137,6 +136,8 @@ input.submit {
 .add-btn {
     margin: 20px 0;
     background-color: lightsteelblue;
+    color: black;
+    border: lightsteelblue;
 }
 
 #sortie-details section {
