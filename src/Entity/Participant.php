@@ -82,7 +82,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     private $campus;
 
     /**
-     * @ORM\OneToMany(targetEntity=Sortie::class, mappedBy="idOrganisateur")
+     * @ORM\OneToMany(targetEntity=Sortie::class, mappedBy="idOrganisateur", cascade={"remove"})
      */
     private $sortiesOrganisateur;
 
