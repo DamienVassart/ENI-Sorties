@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ParticipantRepository::class)
@@ -24,6 +25,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     private $id;
 
     /**
+     * @Assert\Length(min=2, max=180)
      * @ORM\Column(type="string", length=180, unique=true)
      */
     private $pseudo;
@@ -40,21 +42,35 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     private $password;
 
     /**
+     * @Assert\Length(max=100)
+     * @Assert\Regex(pattern="/\d/",
+     *     match=false,
+     *     message="Votre nom ne peut pas contenir de chiffre!")
      * @ORM\Column(type="string", length=100)
      */
     private $nom;
 
     /**
+     * @Assert\Length(max=100)
+     * @Assert\Regex(pattern="/\d/",
+     *     match=false,
+     *     message="Votre prénom ne peut pas contenir de chiffre!")
      * @ORM\Column(type="string", length=100)
      */
     private $prenom;
 
     /**
+     * @Assert\Length(max=10)
+     * @Assert\Regex(pattern="/^(0|\+33)[1-9]([0-9]{2}){4}$/",
+     *     match=true,
+     *     message="Votre téléphone n'est pas valide ! Il doit commencer soit par 0 soit +33. Le chiffre suivant va de 1 à 9.")
      * @ORM\Column(type="string", length=10)
      */
     private $telephone;
 
     /**
+     * @Assert\Length(max=50)
+     * @Assert\Email(message="L'email '{{ value }}' n'est pas un email valide.")
      * @ORM\Column(type="string", length=50)
      */
     private $email;

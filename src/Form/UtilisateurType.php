@@ -21,11 +21,21 @@ class UtilisateurType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('pseudo', TextType::class)
-            ->add('nom', TextType::class)
-            ->add('prenom', TextType::class)
-            ->add('telephone', TextType::class)
-            ->add('email', TextType::class)
+            ->add('pseudo', TextType::class, [
+                'label' => 'Pseudo: '
+            ])
+            ->add('nom', TextType::class, [
+                'label' => 'Nom: '
+            ])
+            ->add('prenom', TextType::class, [
+                'label' => 'Prénom: '
+            ])
+            ->add('telephone', TextType::class, [
+                'label' => 'Téléphone: '
+            ])
+            ->add('email', TextType::class, [
+                'label' => 'Email: '
+            ])
             ->add('campus', EntityType::class, [
                 'label' => 'Campus',
                 'class' => Campus::class,
@@ -36,9 +46,6 @@ class UtilisateurType extends AbstractType
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
-                    new NotBlank([
-                        'message' => 'Veuillez entrer un mot de passe',
-                    ]),
                     new Length([
                         'min' => 6,
                         'minMessage' => 'Votre mot de passe doit faire au moins {{ limit }} caractères',
