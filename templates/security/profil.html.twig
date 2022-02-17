@@ -2,7 +2,8 @@
 
 {% block body %}
     {% if app.user %}
-
+    <h2> {{ app.user.pseudo }}, vous pouvez modifier votre profil ici:</h2>
+<br>
         {{ form_start(profilUpdateForm) }}
         <div id="container">
 
