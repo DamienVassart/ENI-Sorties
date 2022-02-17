@@ -6,6 +6,7 @@ use App\Repository\SortieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=SortieRepository::class)
@@ -21,6 +22,7 @@ class Sortie
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Vueillez préciser un nom pour la sortie")
      */
     private $nom;
 
@@ -31,6 +33,8 @@ class Sortie
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="Veuillez préciser une durée pour la sortie")
+     * @Assert\Positive(message="La durée doit être un nombre entier positif")
      */
     private $duree;
 
@@ -41,6 +45,8 @@ class Sortie
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="Veuillez préciser un nombre de participants pour la sortie")
+     * @Assert\Positive(message="Le nombre de participants doit être un nombre entier positif")
      */
     private $nbInscriptionsMax;
 

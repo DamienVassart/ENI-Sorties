@@ -296,21 +296,19 @@ class SortieController extends AbstractController
      */
     public function inscription(int $id,
                                 EntityManagerInterface $entityManager,
-                                Request $request,
-                                EtatRepository $etatRepository,
                                 ParticipantRepository $participantRepository,
                                 SortieRepository $sortieRepository) : Response
     {
 
         $sortie = $sortieRepository->find($id);
-
         $user = $this->getUser();
-
         $userPseudo = $user->getUserIdentifier();
-
         $participant = $participantRepository->findOneBy(['pseudo' => $userPseudo], ['pseudo' => 'ASC']);
 
-        if ($sortie->getIdEtat()->getId() == 2) {
+        $nbInscrits = $sortie->getParticipants();
+        $nbParticipantsMax = $sortie->getNbInscriptionsMax();
+
+        if ($sortie->getIdEtat()->getId() == 2 && $nbInscrits <= $nbParticipantsMax) {
             $sortie->addParticipant($participant);
 
             $this->addFlash('success', 'Vous vous êtes bien inscrit à cette sortie !');
@@ -329,8 +327,6 @@ class SortieController extends AbstractController
      */
     public function desistement(int $id,
                                 EntityManagerInterface $entityManager,
-                                Request $request,
-                                EtatRepository $etatRepository,
                                 ParticipantRepository $participantRepository,
                                 SortieRepository $sortieRepository) : Response
     {
