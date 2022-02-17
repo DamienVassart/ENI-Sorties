@@ -83,7 +83,8 @@ class SortieType extends AbstractType
                         'choices' => $form->getData()->getLieux()
                     ]);
                     $form->getParent()->add('create', SubmitType::class, [
-                        'label' => 'Ajouter'
+                        'label' => 'Ajouter',
+                        'attr' => ['class' => 'btn-secondary btn-block add-btn']
                     ]);
                 }
             );
