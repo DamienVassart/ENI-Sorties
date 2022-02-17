@@ -360,32 +360,7 @@ class SortieController extends AbstractController
 //                             EtatRepository $etatRepository,
 //                             SortieRepository $sortieRepository) : Response
 //    {
-//        $sortie = $sortieRepository->find($id);
 //
-//        if ($sortie->getDateArchivage() == null)
-//        {
-//            $sortie->setDateArchivage(new \DateTime());
-//
-//            $user = $this->getUser();
-//            $rolesUser = $user->getRoles();
-//
-//
-//
-//            $idEtatArchiver = $etatRepository->find(7);
-//            $sortie->setIdEtat($idEtatArchiver);
-//            $entityManager->persist($sortie);
-//            $entityManager->flush();
-//            $this->addFlash('success', "Sortie archivée avec succès!");
-//
-//        }else
-//        {
-//            $this->addFlash('success', "Sortie déja archivée !");
-//        }
-//        return $this->redirectToRoute('sortie_list');
-
-//
-//
-
 //        $user = $this->getUser();
 //        $rolesUser = $user->getRoles();
 //        $pseudoUserCourant = $user->getUserIdentifier();
