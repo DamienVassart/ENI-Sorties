@@ -6,6 +6,7 @@ use App\Repository\LieuRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=LieuRepository::class)
@@ -30,11 +31,17 @@ class Lieu
     private $rue;
 
     /**
+     * @Assert\Regex(pattern="/^((\-?|\+?)?\d+(\.\d+)?)$/",
+     *     match=true,
+     *     message="La latitude n'est pas valide!")
      * @ORM\Column(type="decimal", precision=7, scale=5)
      */
     private $latitude;
 
     /**
+     * @Assert\Regex(pattern="/^\s*((\-?|\+?)?\d+(\.\d+)?)$/",
+     *     match=true,
+     *     message="La longitude n'est pas valide!")
      * @ORM\Column(type="decimal", precision=8, scale=5)
      */
     private $longitude;
