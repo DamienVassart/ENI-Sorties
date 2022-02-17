@@ -18,7 +18,7 @@
     <fieldset>
         <legend>Sélection du lieu</legend>
         <button>
-            <a href="{{ path('lieu_create') }}">Ajouter un lieu</a>
+            <a href="{{ path('lieu_createWhenUpdate', {'id': sortie.id}) }}">Ajouter un lieu</a>
         </button>
         <p>Ou sélectionner un lieu existant: </p>
         {{ form_row(sortieForm.Ville) }}

@@ -190,6 +190,9 @@ class SortieController extends AbstractController
     {
         $sortieForm = $this->createForm(SortieType::class, $sortie);
 
+        $lieu = $sortie->getIdLieu();
+        $ville = $lieu->getIdVille();
+
         $sortieForm->handleRequest($request);
 
         if($sortieForm->isSubmitted() && $sortieForm->isValid()) {
@@ -203,7 +206,7 @@ class SortieController extends AbstractController
                 $entityManager->persist($sortie);
                 $entityManager->flush();
 
-                $this->addFlash('success', 'Sortie ajoutée!');
+                $this->addFlash('success', 'Sortie modifiée!');
 
                 return $this->redirectToRoute('sortie_details', ['id'=> $sortie->getId()]);
             }

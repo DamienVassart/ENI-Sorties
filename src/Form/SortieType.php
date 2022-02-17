@@ -11,6 +11,7 @@ use App\Entity\Lieu;
 use App\Entity\Sortie;
 use App\Entity\Ville;
 use App\Repository\CampusRepository;
+use App\Repository\LieuRepository;
 use App\Repository\VilleRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -102,13 +103,13 @@ class SortieType extends AbstractType
                 if($lieu) {
                     $ville = $lieu->getIdVille();
                     $form->remove('select');
+                    $form->get('Ville')->setData($ville);
                     $form->add('Lieu', EntityType::class, [
                         'class' => Lieu::class,
                         'choice_label' => 'nom',
                         'placeholder' => '---Choisir un lieu---',
                         'mapped' => false
                     ]);
-                    $form->get('Ville')->setData($ville);
                     $form->get('Lieu')->setData($lieu);
                 }
             }

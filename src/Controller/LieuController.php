@@ -1,8 +1,11 @@
 <?php
-
+/*
+ * Auteur: Damien Vassart
+ */
 namespace App\Controller;
 
 use App\Entity\Lieu;
+use App\Entity\Sortie;
 use App\Form\LieuType;
 use App\Repository\VilleRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -38,6 +41,37 @@ class LieuController extends AbstractController
             $entityManager->flush();
 
             return $this->redirectToRoute('sortie_create');
+        }
+
+        return $this->render('lieu/create.html.twig', [
+            'lieuForm' => $lieuForm->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/createWhenUpdate/{id}", name="createWhenUpdate")
+     */
+    public function createWhenUpdate(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        VilleRepository $villeRepository,
+        Sortie $sortie
+    ): Response
+    {
+        $lieu = new Lieu();
+
+        $lieuForm = $this->createForm(LieuType::class, $lieu);
+
+        $lieuForm->handleRequest($request);
+
+        if($lieuForm->isSubmitted() && $lieuForm->isValid()) {
+            $nomVille = $lieuForm["Ville"]->getData()->getNom();
+            $ville = $villeRepository->findOneBy(['nom' => $nomVille]);
+            $lieu->setIdVille($ville);
+            $entityManager->persist($lieu);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('sortie_update', ['id'=> $sortie->getId()]);
         }
 
         return $this->render('lieu/create.html.twig', [
