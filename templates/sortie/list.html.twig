@@ -81,11 +81,9 @@
                                        | <a href="{{ path('sortie_inscription', {'id': sortie.id}) }}">S'inscrire</a>
                                     {% endif %}
                                  {% endif %}
-                                 {% if sortie.idOrganisateur.id == app.user.id %}
-                                    {% if sortie.idEtat.id == 1 %}
-                                       | <a href="{{ path('sortie_publish', {'id': sortie.id}) }}">Publier</a>
-                                    {% endif %}
-                                    | <a href="{{ path('sortie_update', {'id': sortie.id}) }}">Modifier</a>
+                                 {% if sortie.idOrganisateur.id == app.user.id and sortie.idEtat.id == 1 %}
+                                     | <a href="{{ path('sortie_publish', {'id': sortie.id}) }}">Publier</a>
+                                     | <a href="{{ path('sortie_update', {'id': sortie.id}) }}">Modifier</a>
                                  {% endif %}
                                  {% if sortie.idOrganisateur.id == app.user.id or is_granted('ROLE_ADMIN') %}
                                     {% if sortie.idEtat.id < 4 %}
