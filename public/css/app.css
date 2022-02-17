@@ -73,7 +73,8 @@ a {
 }
 
 a:hover {
-    color: #BC956B;
+    /*color: #BC956B;*/
+    color: steelblue;
 }
 
 ul {
