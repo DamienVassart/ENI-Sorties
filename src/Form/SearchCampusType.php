@@ -14,7 +14,9 @@ class SearchCampusType extends AbstractType
     {
         $builder
             ->add('nom')
-            ->add('search', SubmitType::class);
+            ->add('rechercher', SubmitType::class, [
+            'attr' => ['class' => 'btn-secondary btn-block add-btn'],
+            ]);
 
     }
 

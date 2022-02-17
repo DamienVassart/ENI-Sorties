@@ -65,7 +65,8 @@ class SortieType extends AbstractType
                 'required' => false
             ])
             ->add('select', SubmitType::class, [
-                'label' =>  'Valider'
+                'label' =>  'Valider',
+                'attr' => ['class' => 'btn-secondary btn-block add-btn']
             ])
         ;
         $builder
