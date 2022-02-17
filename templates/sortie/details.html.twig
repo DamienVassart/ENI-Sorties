@@ -9,15 +9,7 @@
         <h1>{{ sortie.nom }}</h1>
         <section id="infos-sortie">
             <h2>Infos</h2>
-            {# todo on pourrait mettre les infos sous forme de tableau pour que ce soit plus lisible #}
-{#            <div><i>Date et heure de sortie :</i> le {{ sortie.dateHeureDebut.format('d/m/Y') }} à {{ sortie.dateHeureDebut.format('h:m') }}</div>#}
-{#            <div><i>Durée :</i> {{ sortie.duree }} minutes</div>#}
-{#            <div><i>Date limite d'inscription :</i> {{ sortie.dateLimiteInscription.format('d/m/Y') }}</div>#}
-{#            <div><i>Nombre maximum de participants :</i> {{ sortie.nbInscriptionsMax }}</div>#}
-{#            <div><i>Informations sortie :</i> {{ sortie.infosSortie }}</div>#}
-{#            <div><i>Campus :</i> {{ campus.nom }}</div>#}
 
-{#            todo voir si la suggestion du tableau vous convient #}
             <table id="tableau-details-sortie">
                 <tbody>
                     <tr>
@@ -51,43 +43,35 @@
 
         <section id="lieu">
             <h2>Lieu</h2>
-{#            <div><i>Nom du lieu :</i> {{ lieu.nom }}</div>#}
-{#            <div><i>Rue :</i> {{ lieu.rue }}</div>#}
-{#            <div><i>Code Postal :</i> {{ ville.codePostal }}</div>#}
-{#            <div><i>Ville :</i> {{ ville.nom }}</div>#}
-{#            <div><i>Latitude :</i> {{ lieu.latitude }}</div>#}
-{#            <div><i>Longitude :</i> {{ lieu.longitude }}</div>#}
-{#        </section>#}
 
-        {#            todo voir si la suggestion du tableau vous convient #}
-        <table id="tableau-details-sortie">
-            <tbody>
-                <tr>
-                    <td class="tableau-name">Nom du lieu</td>
-                    <td>{{ lieu.nom }}</td>
-                </tr>
-                <tr>
-                    <td class="tableau-name">Rue</td>
-                    <td>{{ lieu.rue }}</td>
-                </tr>
-                <tr>
-                    <td class="tableau-name">Code Postal</td>
-                    <td>{{ ville.codePostal }}</td>
-                </tr>
-                <tr>
-                    <td class="tableau-name">Ville</td>
-                    <td>{{ ville.nom }}</td>
-                </tr>
-                <tr>
-                    <td class="tableau-name">Latitude</td>
-                    <td>{{ lieu.latitude }}</td>
-                </tr>
-                <tr>
-                    <td class="tableau-name">Longitude</td>
-                    <td>{{ lieu.longitude }}</td>
-                </tr>
-            </tbody>
-        </table>
+                <table id="tableau-details-sortie">
+                    <tbody>
+                        <tr>
+                            <td class="tableau-name">Nom du lieu</td>
+                            <td>{{ lieu.nom }}</td>
+                        </tr>
+                        <tr>
+                            <td class="tableau-name">Rue</td>
+                            <td>{{ lieu.rue }}</td>
+                        </tr>
+                        <tr>
+                            <td class="tableau-name">Code Postal</td>
+                            <td>{{ ville.codePostal }}</td>
+                        </tr>
+                        <tr>
+                            <td class="tableau-name">Ville</td>
+                            <td>{{ ville.nom }}</td>
+                        </tr>
+                        <tr>
+                            <td class="tableau-name">Latitude</td>
+                            <td>{{ lieu.latitude }}</td>
+                        </tr>
+                        <tr>
+                            <td class="tableau-name">Longitude</td>
+                            <td>{{ lieu.longitude }}</td>
+                        </tr>
+                    </tbody>
+                </table>
 
         {# Auteur de la section "Participants": Damien Vassart #}
         <section id="participants">

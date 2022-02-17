@@ -2,13 +2,6 @@
 
 {% block body %}
     <h1>Annuler une sortie</h1>
-{#    <ul>#}
-{#        <li><i>Nom de la sortie :</i> {{ sortie.nom }}</li>#}
-{#        <li><i>Date et heure de la sortie :</i> {{ sortie.dateHeureDebut.format('d/m/Y H:i:s') }}</li>#}
-{#        <li><i>Campus :</i> {{ sortie.idCampus.nom }}</li>#}
-{#        <li><i>Lieu :</i> {{ sortie.idLieu.nom }} {{ sortie.idLieu.rue }} {{ sortie.idLieu.idVille.codePostal }} {{ sortie.idLieu.idVille.nom }}</li>#}
-{#        <li>{{ form_start(annulationSortieForm) }}{{ form_widget(annulationSortieForm) }}</li>#}
-{#    </ul>#}
 
     <table id="tableau-sortie-annulation">
         <tbody>
@@ -37,7 +30,7 @@
 
     <button type="submit" class="btn-block add-btn btn">Enregistrer</button>
     <a href="{{ path('sortie_list') }}"><input type="button" value="Annuler" class="btn-block add-btn btn"></a>
-    {# todo: le bouton annuler ne s'affiche pas de la meême façon que le bouton enregister: lequel est préférable? #}
+    {# todo: le bouton annuler ne s'affiche pas de la même façon que le bouton enregister: lequel est préférable? #}
 
     {{ form_end(annulationSortieForm) }}
 
