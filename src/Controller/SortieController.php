@@ -305,7 +305,7 @@ class SortieController extends AbstractController
         $userPseudo = $user->getUserIdentifier();
         $participant = $participantRepository->findOneBy(['pseudo' => $userPseudo], ['pseudo' => 'ASC']);
 
-        $nbInscrits = $sortie->getParticipants();
+        $nbInscrits = count($sortie->getParticipants());
         $nbParticipantsMax = $sortie->getNbInscriptionsMax();
 
         if ($sortie->getIdEtat()->getId() == 2 && $nbInscrits <= $nbParticipantsMax) {
