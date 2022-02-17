@@ -9,7 +9,6 @@ use App\Entity\Participant;
 use App\Form\LieuType;
 use App\Form\SearchSortieType;
 use App\Form\SortieAnnulerType;
-use App\Form\SortieArchiverType;
 use App\Form\SortieType;
 use App\Form\UpdateSortieType;
 use App\Repository\CampusRepository;
@@ -351,73 +350,5 @@ class SortieController extends AbstractController
 
         return $this->redirectToRoute('sortie_list');
     }
-
-//    /**
-//     * @Route("/archiver{id}", name="archiver")
-//     */
-//
-//    public function archiver(int $id, EntityManagerInterface $entityManager, Request $request,
-//                             EtatRepository $etatRepository,
-//                             SortieRepository $sortieRepository) : Response
-//    {
-//
-//        $user = $this->getUser();
-//        $rolesUser = $user->getRoles();
-//        $pseudoUserCourant = $user->getUserIdentifier();
-//        $sortie = $sortieRepository->find($id);
-//        $sortieOrganisateur = $sortie->getIdOrganisateur();
-//        $pseudoOrganisateur = $sortieOrganisateur->getPseudo();
-//        $archiverSortieForm = $this->createForm(SortieArchiverType::class, $sortie);
-//        $archiverSortieForm->handleRequest($request);
-//
-//        if($archiverSortieForm->isSubmitted() && $archiverSortieForm->isValid())
-//        {
-//            foreach ($rolesUser as $role)
-//            {
-//                if($role == "ROLE_ADMIN") {
-//                    $idEtatArchiver = $etatRepository->find(7);
-//                    $sortie->setIdEtat($idEtatArchiver);
-//                    $this->addFlash('success', 'La sortie a bien été archivée !');
-//                    $entityManager->persist($sortie);
-//                    $entityManager->flush();
-//                    return $this->redirectToRoute('sortie_list');
-//                }
-//            }
-//
-//            if($pseudoOrganisateur == $pseudoUserCourant) {
-//                $idEtatArchiver = $etatRepository->find(7);
-//                $sortie->setIdEtat($idEtatArchiver);
-//                $this->addFlash('success', 'La sortie a bien été archivée !');
-//                $entityManager->persist($sortie);
-//                $entityManager->flush();
-//                return $this->redirectToRoute('sortie_list');
-//            }
-//
-////            TEST
-///             if($role == "ROLE_USER) {
-////
-////            // On crée un objet DateTime sous le format suivant et avec la valeur donnée
-////            $sortieDate = date_create_from_format("d/m/Y H:i", $sortie->dates[0]->begin);
-////
-////            $dateDayMonth = date_format($date, 'd/m');
-////            $sortie->dates[0]->begin = $dateDayMonth;
-////
-////            // Met la ligne de la sortie dans un tableau sorties
-////            $sortie[$date] = $sortie;
-////
-////            //Il nous faudrait une variable 1, qui récupère la date de la sortie;
-////            $sortieDate->set(date_heure_debut)(date_limite_inscription)
-////				//il nous faudrait une variable 2, qui récupère la date d'aujourd'hui;
-////
-////				//et là on peut faire la condition: si (variable 1 > (variable 2 + 31 jours)),
-////				//et si user = ROLE_USER, $display = 'none';
-////            }
-//        }
-//
-//        return $this->render('sortie/archiverSortie.html.twig', [
-//            'archiverSortieForm' =>$archiverSortieForm->createview(),
-//            'sortie' => $sortie
-//        ]);
-//     }
 
 }
