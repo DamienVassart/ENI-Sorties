@@ -11,6 +11,5 @@ Herebelow are listed the main features:
 - An outing is available for enrollement/disclaimer once it is published by its organizer, until the enrollment deadline is reached
 - An outing can be cancelled at any time by its organizer ot an admin until its start datetime
 - Outings are displayed in the user homepage and can be filtered by campus and by name; some other filters still have to be implemented
-<br>
 ### Live demo
-A live demo can be seen [here](https://damienvassart.dev/portfolio/sorties/livedemo/public/)
+A live demo can be seen [here](https://damienvassart.dev/portfolio/sorties/livedemo/public)
