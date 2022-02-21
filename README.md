@@ -12,4 +12,5 @@ Herebelow are listed the main features:
 - An outing can be cancelled at any time by its organizer ot an admin until its start datetime
 - Outings are displayed in the user homepage and can be filtered by campus and by name; some other filters still have to be implemented
 ### Live demo
-A live demo can be seen [here](https://damienvassart.dev/portfolio/sorties/livedemo/public)
+A live demo can be seen [here](https://damienvassart.dev/portfolio/sorties/livedemo/public)<br>
+You can log in as an admin by using the pseudo `admin` and as an user by using the pseudo `user`. In both cases, the password is `password`
