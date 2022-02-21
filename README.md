@@ -1,6 +1,6 @@
 # ENI Sorties
 ### About 
-Educational project realized as part of my professionnal training at [ENI Ecole Informatique](https://www.eni-ecole.fr/), in collaboration with [LydieAlt](https://github.com/LydieAlt), [dorolib](https://github.com/dorolib) and [lwyn](https://github.com/EugenieFuchs) <br>
+Educational project realized as part of my professional training at [ENI Ecole Informatique](https://www.eni-ecole.fr/), in collaboration with [LydieAlt](https://github.com/LydieAlt), [dorolib](https://github.com/dorolib) and [lwyn](https://github.com/EugenieFuchs) <br>
 This web-app made in Symfony allows students to arrange outings between them. <br>
 ### Specifications
 Herebelow are listed the main features:
